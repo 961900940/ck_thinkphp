@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>权限管理-后台管理-ck RBAC权限管理</title>
+        <!--公共头文件-->
+        <include file="Public:head" />
+    </head>
+    <body>
+        <div class="wrap">
+            <div id="Top">
+                <!--顶部导航菜单-->
+                <div id="Top">
+        			<include file="Public:wrap_top" />
+    			</div>
+    			<!--Tags标签-->
+    			<div id="Tags">
+                    <include file="Public:wrap_tags" />
+                        <div class="nav">
+                            <font id="today"></font>您的位置：网站管理 > 修改密码
+                        </div>
+                    </div>
+    			</div>
+            <div class="clear"></div>
+            <div class="mainBody">
+                <!--子菜单列表-->
+                <div id="Left">
+    				<include file="Public:main_left" />
+    			</div>
+                <!--content内容主体-->
+                <div id="Right">
+                    <div class="contentArea">
+                        <div class="Item hr">
+                            <div class="current">修改账号密码</div></div>
+                        <form action="" method="post">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+                                <tr>
+                                    <th width="120">当前账号：</th>
+                                    <td>
+                                        <input disabled="disabled" name="email" type="text" class="input" size="40" value="a@a.com" /></td>
+                                </tr>
+                                <tr>
+                                    <th>现密码：</th>
+                                    <td>
+                                        <input class="input" name="pwd0" type="password" size="40" value="" /></td>
+                                </tr>
+                                <tr>
+                                    <th>新密码：</th>
+                                    <td>
+                                        <input class="input" name="pwd" type="password" size="40" value="" /></td>
+                                </tr>
+                                <tr>
+                                    <th>确认密码：</th>
+                                    <td>
+                                        <input class="input" name="pwd1" type="password" size="40" value="" /></td>
+                                </tr>
+                            </table>
+                        </form>
+                        <div class="commonBtnArea">
+                            <button class="btn submit">提交</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <!--尾部js css-->
+	    <include file="Public:footer" />
+        <script type="text/javascript">$(".submit").click(function() {
+                if ($.trim($("input[name='pwd0']").val()) == '') {
+                    popup.alert("旧密码不能为空");
+                    return false;
+                }
+                if ($.trim($("input[name='pwd']").val()) == '') {
+                    popup.alert("新密码不能为空");
+                    return false;
+                }
+                if ($.trim($("input[name='pwd1']").val()) == '') {
+                    popup.alert("请再次输入确认你的密码");
+                    return false;
+                }
+                commonAjaxSubmit();
+            });
+        </script>
+    </body>
+</html>

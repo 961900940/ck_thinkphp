@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!--公共头-->
+    <block name="header"><include file="Public:header" /></block>
+</head>
+<body>
+    <div class="mini-layout" style="width:100%;height:100%;">
+        <!-- <div title="north" region="north" class="header" bodyStyle="overflow:hidden;" height="80" showHeader="false" allowResize="false">
+            <div>jQuery MiniUI Api Documentation</div>
+            <div class="topNav">
+                <a href="{:U('Index/versioninfo')}">首页</a>|
+                <a href="{:U('Index/versioninfo')}">在线示例</a>|
+                <a href="{:U('Index/versioninfo')}">Api手册</a>|
+                <a href="{:U('Index/versioninfo')}">开发教程</a>|
+                <a href="{:U('Index/versioninfo')}">快速入门</a></div>
+        </div>
+        <div showHeader="false" region="south" style="border:0;text-align:center;" height="25" showSplit="false">Copyright © 上海普加软件有限公司版权所有</div> -->
+        <div region="west" title="Api Documentation" showHeader="true" bodyStyle="padding-left:1px;" width="230" minWidth="100" maxWidth="350">
+            <!--菜单-->
+            <block name="menu"><include file="Public:menu" /></block>
+        </div>
+        <div title="center" region="center" bodyStyle="overflow:hidden;">
+            <iframe onload="onIFrameLoad(this)" src="{:U('Index/versioninfo')}" id="mainframe" frameborder="0" name="main" style="width:100%;height:100%;" border="0"></iframe>
+        </div>  
+    </div>  
+    <!--公共尾-->
+    <block name="footer"><include file="Public:footer" /></block>
+</body>
+</html>

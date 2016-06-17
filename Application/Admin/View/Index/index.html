@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>权限管理-后台管理-ck RBAC权限管理</title>
+        <!--公共头文件-->
+        <include file="Public:head" />
+    </head>
+    <body>
+        <div class="wrap">
+            <!--顶部导航菜单-->
+	        <div id="Top">
+                <include file="Public:wrap_top" />
+	        </div>
+            <!--Tags标签-->
+	        <div id="Tags">
+                <include file="Public:wrap_tags" />
+                    <div class="nav">
+                        <font id="today"></font>您的位置：网站管理 > 系统信息
+                    </div>
+                </div>
+	        </div>
+	        <div class="clear"></div>
+	        <div class="mainBody">
+                <!--子菜单列表-->
+	            <div id="Left">
+                    <include file="Public:main_left" />
+	            </div>
+                <!--content内容主体-->
+	            <div id="Right">
+                    <div class="Item hr">
+                        <div class="current">系统信息</div></div>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab">
+                        <tr>
+                            <td width="120" align="right">操作系统：</td>
+                            <td>WINNT</td>
+                            <td width="120" align="right">主机名IP端口：</td>
+                            <td>localhost (127.0.0.1:80)</td></tr>
+                        <tr>
+                            <td width="120" align="right">运行环境：</td>
+                            <td>Apache/2.4.9 (Win64) PHP/5.5.12</td>
+                            <td width="120" align="right">PHP运行方式：</td>
+                            <td>apache2handler</td></tr>
+                        <tr>
+                            <td width="120" align="right">程序目录：</td>
+                            <td>F:\software\wamp\www\Tprbac/Application/</td>
+                            <td width="120" align="right">MYSQL版本：</td>
+                            <td>mysqlnd 5.0.11-dev - 20120503 - $Id: bf9ad53b11c9a57efdb1057292d73b928b8c5c77 $</td></tr>
+                        <tr>
+                            <td width="120" align="right">GD库版本：</td>
+                            <td>bundled (2.1.0 compatible)</td>
+                            <td width="120" align="right">上传附件限制：</td>
+                            <td>64M</td></tr>
+                        <tr>
+                            <td width="120" align="right">执行时间限制：</td>
+                            <td>120秒</td>
+                            <td width="120" align="right">剩余空间：</td>
+                            <td>110253.68M</td></tr>
+                        <tr>
+                            <td width="120" align="right">服务器时间：</td>
+                            <td>2016年6月6日 18:19:23</td>
+                            <td width="120" align="right">北京时间：</td>
+                            <td>2016年6月6日 18:19:23</td></tr>
+                        <tr>
+                            <td width="120" align="right">采集函数检测：</td>
+                            <td>支持</td>
+                            <td width="120" align="right">register_globals：</td>
+                            <td>OFF</td></tr>
+                        <tr>
+                            <td width="120" align="right">magic_quotes_gpc：</td>
+                            <td>NO</td>
+                            <td width="120" align="right">magic_quotes_runtime：</td>
+                            <td>NO</td></tr>
+                    </table>
+                </div>
+	    	</div>
+    	<div class="clear"></div>
+    <!--尾部js css-->
+    <include file="Public:footer" />
+    </body>
+</html>

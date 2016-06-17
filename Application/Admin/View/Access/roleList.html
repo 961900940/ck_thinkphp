@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>权限管理-后台管理-ck RBAC权限管理</title>
+        <!--公共头文件-->
+        <include file="Public:head" />
+    </head>
+    <body>
+        <div class="wrap">
+			<!--顶部导航菜单-->
+	        <div id="Top">
+                <include file="Public:wrap_top" />
+	        </div>
+            <!--Tags标签-->
+            <div id="Tags">
+				<include file="Public:wrap_tags" />
+                    <div class="nav">
+                        <font id="today"></font>您的位置：权限管理 > 角色管理
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="mainBody">
+				<!--子菜单列表-->
+	            <div id="Left">
+                    <include file="Public:main_left" />
+	            </div>
+				<!--content内容主体-->
+                <div id="Right">
+                    <div class="Item hr">
+                        <div class="current">角色管理</div></div>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab">
+                        <thead>
+                            <tr>
+                                <td>序号</td>
+                                <td>组ID</td>
+                                <td>组名</td>
+                                <td>描述</td>
+                                <td>状态</td>
+                                <td>操作</td></tr>
+                        </thead>
+                        <volist name="role_list" id="vo" key="k">
+                            <tr align="center" id="{$vo.role_id}">
+                                <td>{$k}</td>
+                                <td>{$vo.role_id}</td>
+                                <td>{$vo.role_name}</td>
+                                <td align="left">{$vo.remark}</td>
+                                <td data_status="{$vo.status}">
+                                    <eq name="vo.status" value="0">禁用
+                                    <else/>启用
+                                    </eq>
+                                </td>
+                                <td>
+                                    <if condition="($vo.role_id eq 1) or ($vo.role_id eq 2) ">
+                                        ---
+                                    <else />
+                                        [<a href="javascript:void(0);" class="opStatus" val="{$vo.role_id}">
+                                            <eq name="vo.status" value="0">启用
+                                            <else/>禁用
+                                            </eq>
+                                        </a>]
+                                        [<a href="__MODULE__/Access/editRole?id={$vo.role_id}" class="edit">编辑</a>]
+                                        [<a href="__MODULE__/Access/changeRole?id={$vo.role_id}" class="edit">权限分配</a>]
+                                    </if>
+                                </td>
+                            </tr>
+                        </volist>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+		<!--尾部js css-->
+	    <include file="Public:footer" />
+        <script type="text/javascript">$(function() {
+                //快捷启用禁用操作
+                $(".opStatus").click(function() {
+                    var id = $(this).parents("tr").attr("id");
+                    var status = $(this).parent().prev().attr("data_status");
+                    $.ajax({
+                        type:"post",
+                        data:{"id":id,"status":status},
+                        url:"__MODULE__/Access/roleStatus",
+                        dataType:"json",
+                        success:function(res){
+                            if(res.status =='success'){
+                                if(res.data === 0){
+                                    $(this).html("禁用");
+                                    $(this).parent().prev().html("启用");
+                                    $(this).parent().prev().attr("data_status",1);
+                                }else{
+                                    $(this).html("启用");
+                                    $(this).parent().prev().html("禁用");
+                                    $(this).parent().prev().attr("data_status",0);
+                                }
+                                window.location.reload();
+                            }else{
+                                alert(res.data);
+                            }
+                        }
+                    });
+                });
+            });
+		</script>
+    </body>
+</html>

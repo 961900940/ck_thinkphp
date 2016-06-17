@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>权限管理-后台管理-ck RBAC权限管理</title>
+        <!--公共头文件-->
+        <include file="Public:head" />
+    </head>
+    <body>
+        <div class="wrap">
+            <!--顶部导航菜单-->
+	        <div id="Top">
+                <include file="Public:wrap_top" />
+	        </div>
+            <!--Tags标签-->
+            <div id="Tags">
+				<include file="Public:wrap_tags" />
+                    <div class="nav">
+                        <font id="today"></font>您的位置：权限管理 > 编辑管理员
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="mainBody">
+                <!--子菜单列表-->
+	            <div id="Left">
+                    <include file="Public:main_left" />
+	            </div>
+                <!--content内容主体-->
+                <div id="Right">
+                    <div class="contentArea">
+                        <div class="Item hr">
+                            <div class="current">编辑管理员</div></div>
+                        <form action="__MODULE__/Access/editAdmin" method="post">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+                                <tr>
+                                    <th width="120">登陆账号：</th>
+                                    <td>
+                                        <input name="email" type="text" class="input" size="40" value="{$admin_info.username}" disabled="disabled"/></td>
+                                </tr>
+                                <!-- <tr>
+                                    <th>新密码：</th>
+                                    <td>
+                                        <input class="input" name="pwd" type="password" size="40" value="" /></td>
+                                </tr> -->
+                                <tr>
+                                    <th>状态：</th>
+                                    <td>
+                                        <select name="status" style="width: 80px;">
+                                            <option value="1" <if condition="$admin_info.status eq 1">selected="selected"</if>>启用</option>
+                                            <option value="0" <if condition="$admin_info.status eq 0">selected="selected"</if>>禁用</option></select>如果禁用了将无法登陆本系统</td>
+                                </tr>
+                                <tr>
+                                    <th>所属用户组</th>
+                                    <td>
+                                        <select name="role_id" style="min-width: 80px;">
+                                            <option value="1" disabled="disabled">超级管理员</option>
+                                            <volist name="role_list" id="data">
+                                                <option value="{$data.role_id}" <if condition="$data.role_id eq $admin_info['role_id']">selected="selected"</if> >
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;├ {$data.role_name}
+                                                </option>
+                                            </volist>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>备注：</th>
+                                    <td>
+                                        <textarea name="remark" rows="5" cols="57">{$admin_info.remark}</textarea>
+                                    </td>
+                                </tr>
+                            </table>
+                            <input type="hidden" name="aid" value="{$admin_info.aid}" /></form>
+                        <div class="commonBtnArea">
+                            <button class="btn submit" type="button">提交</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <!--尾部js css-->
+	    <include file="Public:footer" />
+        <script type="text/javascript">
+            $(".submit").click(function() {
+                $("form").submit();
+            });
+        </script>
+    </body>
+
+</html>

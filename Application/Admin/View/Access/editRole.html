@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>权限管理-后台管理-ck RBAC权限管理</title>
+        <!--公共头文件-->
+        <include file="Public:head" /></head>
+    <body>
+        <div class="wrap">
+            <!--顶部导航菜单-->
+            <div id="Top">
+                <include file="Public:wrap_top" /></div>
+            <!--Tags标签-->
+            <div id="Tags">
+                <include file="Public:wrap_tags" />
+                <div class="nav">
+                    <font id="today"></font>您的位置：权限管理 > 添加编辑角色</div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="mainBody">
+            <!--子菜单列表-->
+            <div id="Left">
+                <include file="Public:main_left" /></div>
+            <!--content内容主体-->
+            <div id="Right">
+                <div class="contentArea">
+                    <div class="Item hr">
+                        <div class="current">添加编辑角色</div></div>
+                    <form action="__SELF__" method="post">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+                            <tr>
+                                <th width="120">角色组名称：</th>
+                                <td>
+                                    <input name="role_name" type="text" class="input" size="40" value="{$role_info['role_name']}" /></td>
+                            </tr>
+                            <tr>
+                                <th>状态：</th>
+                                <td>
+                                    <select name="status" style="width: 80px;">
+                                        <option value="1" <if condition="$role_info.status eq 1">selected="selected"</if> >启用</option>
+                                        <option value="0" <if condition="$role_info.status eq 0">selected="selected"</if> >禁用</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>描 述：</th>
+                                <td>
+                                    <textarea name="remark" style="width: 400px;">{$role_info.remark}</textarea></td>
+                            </tr>
+                        </table>
+                        <input type="hidden" name="id" value="{$role_info.role_id}" />
+                    </form>
+                    <div class="commonBtnArea">
+                        <button class="btn submit">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="clear"></div>
+        <!--尾部js css-->
+	    <include file="Public:footer" />
+        <script type="text/javascript">
+            $(function() {
+                $(".submit").click(function() {
+                    $("form").submit();
+                });
+            });
+        </script>
+    </body>
+</html>

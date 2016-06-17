@@ -1,0 +1,15 @@
+<div id="control" class=""></div>
+<div class="subMenuList">
+    <div class="itemTitle">常用操作 </div>
+    <ul>
+        <!-- <li><a href="__CONTROLLER__/index">后台用户</a></li>
+        <li><a href="__CONTROLLER__/nodeList">节点管理</a></li>
+        <li><a href="__CONTROLLER__/roleList">角色管理</a></li>
+        <li><a href="__CONTROLLER__/addAdmin">添加管理员</a></li>
+        <li><a href="__CONTROLLER__/index">添加节点</a></li>
+        <li><a href="__CONTROLLER__/addNode">添加角色</a></li> -->
+        <foreach name="MenuItem" item="vo">
+            <li><a href="__MODULE__/{$vo.auth_c}/{$vo.auth_a}">{$vo.auth_name}</a></li>
+        </foreach>
+    </ul>
+</div>

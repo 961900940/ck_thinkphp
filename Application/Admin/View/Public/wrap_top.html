@@ -1,0 +1,26 @@
+<div class="logo"><a target="_blank" href="http://localhost/Tprbac/"><img src="__Admin_IMG__/logo.png" /></a></div>
+<div class="help"><a href="http://www.uc22.net/bbs" target="_blank">使用帮助</a><span><a href="http://www.uc22.net" target="_blank">关于</a></span></div>
+<div class="menu">
+    <ul class="moudle">
+        <li class="fisrt controller_name" data_name="Index"><span><a href="__MODULE__/Index/index">首页</a></span></li>
+        <li class="controller_name" data_name="Member"><span><a href="__MODULE__/Member/index">内容管理</a></span></li>
+        <li class="controller_name" data_name="News"><span><a href="__MODULE__/News/index">资讯管理</a></span></li>
+        <li class="controller_name" data_name="Product"><span><a href="__MODULE__/Product/index">产品管理</a></span></li>
+        <li class="controller_name" data_name="Siteinfo"><span><a href="__MODULE__/Siteinfo/index">网站功能</a></span></li>
+        <li class="controller_name" data_name="Models"><span><a href="__MODULE__/Models/index">模型管理</a></span></li>
+        <li class="controller_name" data_name="SysData"><span><a href="__MODULE__/SysData/index">数据管理</a></span></li>
+        <li class="end controller_name" data_name="Access"><span><a href="__MODULE__/Access/index">权限管理</a></span></li>
+    </ul>
+    <script>
+    	$(function(){
+    		var controller_name = "<?php echo $controller_name; ?>";
+    		$('.controller_name').each(function(i){
+    			controller_name2 = $(this).attr("data_name");
+    			if(controller_name == controller_name2){
+    				$(this).addClass("current");
+                    $(this).siblings().removeClass("current");
+    			}
+    		})
+    	});
+    </script>
+</div>

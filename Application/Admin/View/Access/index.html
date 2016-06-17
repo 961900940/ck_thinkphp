@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>权限管理-后台管理-ck RBAC权限管理</title>
+        <!--公共头文件-->
+        <include file="Public:head" />
+    </head>
+    <body>
+        <div class="wrap">
+            <!--顶部导航菜单-->
+	        <div id="Top">
+                <include file="Public:wrap_top" />
+	        </div>
+            <!--Tags标签-->
+	        <div id="Tags">
+                <include file="Public:wrap_tags" />
+                    <div class="nav">
+                        <font id="today"></font>您的位置：权限管理 > 管理员列表
+                    </div>
+                </div>
+	        </div>
+	        <div class="clear"></div>
+	        <div class="mainBody">
+                <!--子菜单列表-->
+	            <div id="Left">
+    	            <include file="Public:main_left" />
+	            </div>
+                <!--content内容主体-->
+	            <div id="Right">
+                    <div class="Item hr">
+                        <div class="current">管理员列表</div>
+                    </div>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab">
+                        <thead>
+                            <tr>
+                                <td>序号</td>
+                                <td>账号</td>
+                                <td>状态</td>
+                                <td>备注</td>
+                                <td>开通时间</td>
+                                <td width="150">操作</td>
+                            </tr>
+                        </thead>
+                        <!-- <foreach name="admin_list" item="vo" >
+                            <tr align="center" aid="{$vo.aid}">
+                                <td>{$key+1}</td>
+                                <td>{$vo.username}</td>
+                                <td>{$vo.status}</td>
+                                <td>{$vo.remark}</td>
+                                <td>{$vo.create_time}</td>
+                                <td><a href=''>修改</a></td>
+                            </tr>
+                        </foreach> -->
+                        <volist name="admin_list" id="vo" key="k">
+                            <tr align="center" aid="{$vo.aid}">
+                                <td>{$k}</td>
+                                <td>{$vo.username}</td>
+                                <td>
+                                     <!----1、框架 内置标签-------------------------------------->
+                                    <eq name="vo.status" value="0">禁用
+                                    <else/>启用
+                                    </eq>
+
+                                    <!----2、框架原生 php处理-------------------------------------->
+                                   <!--  <php>
+                                        if($vo['status'] == 0){
+                                            echo '禁用';
+                                        }else{
+                                            echo '启用';
+                                        }
+                                    </php> -->
+
+                                    <!----3、原生 php-------------------------------------->
+                                    <!-- <?php if ($vo['status'] == 0): ?>
+                                        禁用
+                                    <?php else: ?>
+                                        启用
+                                    <?php endif ?> -->
+                                </td>
+                                <td>{$vo.remark}</td>
+                                <td>{$vo.create_time}</td>
+                                <td>
+                                    <!-- {$vo.aid} -->
+                                    <php>
+                                        if($vo['username'] == 'admin'){
+                                            echo '---';
+                                        }else{
+                                            //echo "[<a href='__MODULE__/Access/editAdmin?aid=".$vo['aid']."'>编辑</a>]";
+                                            echo '[<a href="__MODULE__/Access/editAdmin?aid='.$vo['aid'].'">编辑</a>]';
+                                        }
+                                    </php>
+                                </td>
+                            </tr>
+                         </volist>
+                        <!-- <tr align="center" aid="1">
+                            <td>1</td>
+                            <td>a@a.com</td>
+                            <td>启用</td>
+                            <td>我是超级管理员 哈哈~~</td>
+                            <td>2016-06-01 11:14:25</td>
+                            <td>--</td>
+                        </tr>
+                        <tr align="center" aid="2">
+                            <td>2</td>
+                            <td>b@b.com</td>
+                            <td>启用</td>
+                            <td></td>
+                            <td>2016-06-01 11:19:56</td>
+                            <td>[<a href="/Tprbac/index.php/conist/Access/editAdmin?aid=2">编辑</a>]</td>
+                        </tr> -->
+                    </table>
+                </div>
+	    	</div>
+    	<div class="clear"></div>
+    <!--尾部js css-->
+    <include file="Public:footer" />
+    </body>
+</html>
