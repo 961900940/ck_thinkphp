@@ -111,20 +111,38 @@ class AccessController extends CommonController {
             if(empty(I('data'))){
                 $this->error("请添加权限...");
             }
-             D("Auth_role")->change_role(I('data'));
+            $res = D("Auth_role")->change_role(I('data'),$role_id);
+            if($res){
+                $this->success("权限分配成功,权限列表跳转中...",U("Access/roleList"),3);
+            }else{
+                $this->error("权限分配失败，请重试...");
+            }
         }else{
             // 核查、并查询当前用户组信息
             $role_info = D("Auth_role")->role_group_check($role_id);
+
             $this->assign("role_info_roleName",$role_info['role_name']);//角色名称
             $this->assign("role_id",$role_id);//角色id
-
+            //获得当前角色的权限列表信息
+            $role_auth_ids =explode(',', $role_info['role_auth_ids']);
+            $role_auth_ids_list = '[';
+            if (!empty($role_auth_ids)) {
+                $role_auth_ids_list .='{"val":"0"},';
+                foreach ($role_auth_ids as $key => $value) {
+                    // $role_auth_ids_list .="{'val':'".$value."'},";
+                    $role_auth_ids_list .='{"val":"'.$value.'"},';
+                }
+            }
+            $role_auth_ids_list =rtrim($role_auth_ids_list,','). ']';
+            $this->assign("role_auth_ids_list",$role_auth_ids_list);  //当前角色的权限
+            
             //模块
             $Prole_list = M("Auth_access")->where("auth_level = 0")->order("sort asc")->select();
             $this->assign('Prole_list',$Prole_list);
             //方法
             $Srole_list = M("Auth_access")->where("auth_level != 0")->order("sort asc")->select();
             $this->assign('Srole_list',$Srole_list);
-            // var_dump($Prole_list);exit;
+
             $this->display();
         }
 	}

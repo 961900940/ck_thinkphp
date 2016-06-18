@@ -134,7 +134,8 @@
                 //节点ID：node_id；1，项目；2，模块；3，操作
                 //节点级别：level；
                 //父级节点ID：pid
-                var access = $.parseJSON('[{"val":"1:1:0"},{"val":"1:0:0"},{"val":"10:1:1"},{"val":"11:1:1"},{"val":"3:0:0"},{"val":"4:1:3"},{"val":"5:1:3"},{"val":"6:1:3"},{"val":"7:1:3"}]');
+                // var access = $.parseJSON('[{"val":"1:1:0"},{"val":"1:0:0"},{"val":"10:1:1"},{"val":"11:1:1"},{"val":"3:0:0"},{"val":"4:1:3"},{"val":"5:1:3"},{"val":"6:1:3"},{"val":"7:1:3"}]');
+                var access = $.parseJSON('{$role_auth_ids_list}');
                 var access_length = access.length;
                 if (access_length > 0) {
                     for (var i = 0; i < access_length; i++) {

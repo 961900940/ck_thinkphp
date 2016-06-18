@@ -64,10 +64,12 @@ class CommonController extends Controller {
 			$sql .= " and auth_id in ($auth_ids)";
 		}
 		$res = M()->query($sql);
+		$auth_list =array();
 		foreach ($res as $key => $value) {
 			$auth_list[$key] = $value['auth_c'].'-'.$value['auth_a'];
 		}
 
+		// var_dump($auth_list);exit;
 		array_push($auth_list,'Index-index');		//默认允许访问,无需进行权限认证
 		//访问权限认证
 		if(!in_array($now_ac,$auth_list)){

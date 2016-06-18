@@ -89,7 +89,7 @@ class AuthRoleModel extends Model{
     * return array
     */
     public function role_group_check($role_id){
-        $role_info = $this->field("role_id,role_name")->where("role_id ='%s'",array($role_id))->find();
+        $role_info = $this->field("role_id,role_name,role_auth_ids")->where("role_id ='%s'",array($role_id))->find();
         if(!$role_info){
             $this->error("不存在该用户组", U('Access/roleList'));exit;
         }
@@ -98,10 +98,22 @@ class AuthRoleModel extends Model{
 
     /**
     * 给当前角色分配权限
-    * @param    data     角色组id
+    * @param    data     分配的权限 数组
+    * @param    role_id  当前角色 role_id
     * return array
     */
-    public function change_role($data){
-        var_dump($data);
+    public function change_role($data,$role_id){
+        foreach ($data as $key => $value) {
+            if($value =='0'){
+                array_splice($data,$key,1);
+                break;
+            }
+        }
+        $role_auth_ids = implode(',',$data);
+        $role_auth_ac = D("Auth_access")->access_list($role_auth_ids);
+        $map['role_auth_ids'] =$role_auth_ids;
+        $map['role_auth_ac'] =$role_auth_ac;
+        $res = $this->where("role_id= '%s'",array($role_id))->save($map); // 根据条件更新记录
+        return $res;
     }
 }
