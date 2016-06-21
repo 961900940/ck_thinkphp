@@ -54,6 +54,23 @@ class AccessController extends CommonController {
 
 	/*************************************************节点管理***********************************/
 	public function nodeList(){
+        // $Auth_access = M("Auth_access")->select();
+        // $access_list_data = $this->access_list_data($Auth_access);
+
+        //模块
+        $Prole_list = D("Auth_access")->Prole_list();
+        //方法
+        $Srole_list = D("Auth_access")->Srole_list();
+        $arr = array();
+        foreach ($Prole_list as $key => $value) {
+            $arr[] = $value;
+            foreach ($Srole_list as $k => $v) {
+                if ($value['auth_id'] == $v['auth_pid']) {
+                    $arr[] =$v;
+                }
+            }
+        }
+        $this->assign('access_list',$arr);
 		$this->display();
 	}
 
@@ -61,10 +78,35 @@ class AccessController extends CommonController {
     public function nodeStatus(){
 
     }
-    
+
     //编辑节点
 	public function editNode(){
-        $this->assign();
+        $auth_id = intval(I('auth_id'));
+        if(empty($auth_id)){
+            $this->error("没有找到该节点");
+        }
+        if(IS_POST){
+            D("Auth_access")->edit_node();
+        }else{
+            $auth_id_info = D("Auth_access")->auth_id_info($auth_id);
+            $this->assign('auth_id_info',$auth_id_info);//单个节点的信息
+
+            //模块
+            $Prole_list = D("Auth_access")->Prole_list();
+            //方法
+            $Srole_list = D("Auth_access")->Srole_list();
+            $arr = array();
+            foreach ($Prole_list as $key => $value) {
+                $arr[] = $value;
+                foreach ($Srole_list as $k => $v) {
+                    if ($value['auth_id'] == $v['auth_pid']) {
+                        $arr[] =$v;
+                    }
+                }
+            }
+            $this->assign("group",$arr);
+            $this->display();
+        }
 	}
 
 	//添加节点
@@ -142,26 +184,15 @@ class AccessController extends CommonController {
             $this->assign("role_auth_ids_list",$role_auth_ids_list);  //当前角色的权限
 
             //模块
-            $Prole_list = M("Auth_access")->where("auth_level = 0")->order("sort asc")->select();
+            $Prole_list = D("Auth_access")->Prole_list();
             $this->assign('Prole_list',$Prole_list);
             //方法
-            $Srole_list = M("Auth_access")->where("auth_level != 0")->order("sort asc")->select();
+            $Srole_list = D("Auth_access")->Srole_list();
             $this->assign('Srole_list',$Srole_list);
 
             $this->display();
         }
 	}
-
-    //递归
-    public function access_list_data($data){
-        $arr = array();
-        foreach ($data as $key => $value) {
-            if ($value['auth_level'] == 0) {
-                $arr[] = $value;
-            }
-        }
-        var_dump($arr);exit;
-    }
 
     //添加角色
 	public function addRole(){

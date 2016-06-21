@@ -121,8 +121,8 @@
                                 <td><?php echo ($vo["username"]); ?></td>
                                 <td>
                                      <!----1、框架 内置标签-------------------------------------->
-                                    <?php if(($vo["status"]) == "0"): ?>禁用
-                                    <?php else: ?>启用<?php endif; ?>
+                                    <?php if(($vo["status"]) == "0"): ?><span style="color:red;">禁用</span>
+                                    <?php else: ?><span style="color:green;">启用</span><?php endif; ?>
 
                                     <!----2、框架原生 php处理-------------------------------------->
                                    <!--  <?php if($vo['status'] == 0){ echo '禁用'; }else{ echo '启用'; } ?> -->

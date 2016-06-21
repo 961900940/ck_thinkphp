@@ -111,19 +111,31 @@
 					            <td>状态</td>
 					            <td width="150">操作</td></tr>
 					    </thead>
-					    <tr align="center" id="1" pid="0">
-					        <td>1</td>
-					        <td align="left" class="tree" style="cursor: pointer;">后台管理</td>
-					        <td>1</td>
-					        <td>Admin</td>
-					        <td>后台管理</td>
-					        <td edit="0" fd="sort">10</td>
-					        <td>项目（GROUP_NAME）</td>
-					        <td>启用</td>
-					        <td>[
-					            <a href="javascript:void(0);" class="opStatus" val="1">禁用</a>] [
-					            <a href="/Tprbac/index.php/conist/Access/editNode?id=1" class="edit">编辑</a>]</td></tr>
-					    <tr align="center" id="2" pid="1">
+
+                        <?php if(is_array($access_list)): $k = 0; $__LIST__ = $access_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($k % 2 );++$k;?><tr align="center" id="<?php echo ($vo["auth_id"]); ?>" pid="<?php echo ($vo["auth_pid"]); ?>">
+    					        <td><?php echo ($k); ?></td>
+    					        <td align="left" class="tree" style="cursor: pointer;">
+                                    <?php if($vo['auth_level'] ==0 ): echo ($vo["auth_name"]); ?>
+                                        <?php else: ?> &nbsp;&nbsp;&nbsp;&nbsp;├ <?php echo ($vo["auth_name"]); endif; ?>
+                                </td>
+    					        <td><?php echo ($vo["auth_id"]); ?></td>
+    					        <td>
+                                    <?php if($vo['auth_level'] ==0 ): echo ($vo["auth_c"]); ?>
+                                        <?php else: ?> <?php echo ($vo["auth_a"]); endif; ?>
+    					        </td>
+    					        <td><?php echo ($vo["auth_name"]); ?></td>
+    					        <td edit="0" fd="sort"><?php echo ($vo["sort"]); ?></td>
+    					        <td>
+                                    <?php if($vo['auth_level'] ==0 ): ?>模块(MODEL_NAME)
+                                    <?php elseif($vo['auth_level'] ==1): ?>操作(ACTION_NAME)
+                                    <?php else: ?> 具体操作(ACTION_NAME)<?php endif; ?>
+                                </td>
+    					        <td>启用</td>
+    					        <td>[<a href="javascript:void(0);" class="opStatus" val="1">禁用</a>]
+                                    [<a href="/ck_thinkphp/index.php/Admin/Access/editNode?auth_id=<?php echo ($vo["auth_id"]); ?>" class="edit">编辑</a>]
+                                </td>
+                            </tr><?php endforeach; endif; else: echo "" ;endif; ?>
+					    <!-- <tr align="center" id="2" pid="1">
 					        <td>2</td>
 					        <td align="left" class="tree" style="cursor: pointer;">&nbsp;&nbsp;&nbsp;&nbsp;├ 管理首页</td>
 					        <td>2</td>
@@ -134,283 +146,7 @@
 					        <td>启用</td>
 					        <td>[
 					            <a href="javascript:void(0);" class="opStatus" val="1">禁用</a>] [
-					            <a href="/Tprbac/index.php/conist/Access/editNode?id=2" class="edit">编辑</a>]</td></tr>
-					    <tr align="center" id="5" pid="2">
-					        <td>3</td>
-					        <td align="left" class="tree" style="cursor: pointer;">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 默认页</td>
-					        <td>5</td>
-					        <td>index</td>
-					        <td>默认页</td>
-					        <td edit="0" fd="sort">5</td>
-					        <td>操作（ACTION_NAME）</td>
-					        <td>启用</td>
-					        <td>[
-					            <a href="javascript:void(0);" class="opStatus" val="1">禁用</a>] [
-					            <a href="/Tprbac/index.php/conist/Access/editNode?id=5" class="edit">编辑</a>]</td></tr>
-					    <tr align="center" id="6" pid="2">
-					        <td>4</td>
-					        <td align="left" class="tree" style="cursor: pointer;">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;└ 我的个人信息</td>
-					        <td>6</td>
-					        <td>myInfo</td>
-					        <td>我的个人信息</td>
-					        <td edit="0" fd="sort">6</td>
-					        <td>操作（ACTION_NAME）</td>
-					        <td>启用</td>
-					        <td>[
-					            <a href="javascript:void(0);" class="opStatus" val="1">禁用</a>] [
-					            <a href="/Tprbac/index.php/conist/Access/editNode?id=6" class="edit">编辑</a>]</td></tr>
-					    <tr align="center" id="3" pid="1">
-					        <td>5</td>
-					        <td align="left" class="tree" style="cursor: pointer;">&nbsp;&nbsp;&nbsp;&nbsp;├ 注册会员管理</td>
-					        <td>3</td>
-					        <td>Member</td>
-					        <td>注册会员管理</td>
-					        <td edit="0" fd="sort">3</td>
-					        <td>模块(MODEL_NAME)</td>
-					        <td>启用</td>
-					        <td>[
-					            <a href="javascript:void(0);" class="opStatus" val="1">禁用</a>] [
-					            <a href="/Tprbac/index.php/conist/Access/editNode?id=3" class="edit">编辑</a>]</td></tr>
-					    <tr align="center" id="7" pid="3">
-					        <td>6</td>
-					        <td align="left" class="tree" style="cursor: pointer;">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;└ 会员首页</td>
-					        <td>7</td>
-					        <td>index</td>
-					        <td>会员首页</td>
-					        <td edit="0" fd="sort">7</td>
-					        <td>操作（ACTION_NAME）</td>
-					        <td>启用</td>
-					        <td>[
-					            <a href="javascript:void(0);" class="opStatus" val="1">禁用</a>] [
-					            <a href="/Tprbac/index.php/conist/Access/editNode?id=7" class="edit">编辑</a>]</td></tr>
-					    <tr align="center" id="4" pid="1">
-					        <td>7</td>
-					        <td align="left" class="tree" style="cursor: pointer;">&nbsp;&nbsp;&nbsp;&nbsp;├ 系统管理</td>
-					        <td>4</td>
-					        <td>Webinfo</td>
-					        <td>系统管理</td>
-					        <td edit="0" fd="sort">4</td>
-					        <td>模块(MODEL_NAME)</td>
-					        <td>启用</td>
-					        <td>[
-					            <a href="javascript:void(0);" class="opStatus" val="1">禁用</a>] [
-					            <a href="/Tprbac/index.php/conist/Access/editNode?id=4" class="edit">编辑</a>]</td></tr>
-					    <tr align="center" id="10" pid="4">
-					        <td>8</td>
-					        <td align="left" class="tree" style="cursor: pointer;">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 系统设置首页</td>
-					        <td>10</td>
-					        <td>index</td>
-					        <td>系统设置首页</td>
-					        <td edit="0" fd="sort">10</td>
-					        <td>操作（ACTION_NAME）</td>
-					        <td>启用</td>
-					        <td>[
-					            <a href="javascript:void(0);" class="opStatus" val="1">禁用</a>] [
-					            <a href="/Tprbac/index.php/conist/Access/editNode?id=10" class="edit">编辑</a>]</td></tr>
-					    <tr align="center" id="11" pid="4">
-					        <td>9</td>
-					        <td align="left" class="tree" style="cursor: pointer;">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 设置系统邮件</td>
-					        <td>11</td>
-					        <td>setEmailConfig</td>
-					        <td>设置系统邮件</td>
-					        <td edit="0" fd="sort">12</td>
-					        <td>操作（ACTION_NAME）</td>
-					        <td>启用</td>
-					        <td>[
-					            <a href="javascript:void(0);" class="opStatus" val="1">禁用</a>] [
-					            <a href="/Tprbac/index.php/conist/Access/editNode?id=11" class="edit">编辑</a>]</td></tr>
-					    <tr align="center" id="12" pid="4">
-					        <td>10</td>
-					        <td align="left" class="tree" style="cursor: pointer;">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 发送测试邮件</td>
-					        <td>12</td>
-					        <td>testEmailConfig</td>
-					        <td>发送测试邮件</td>
-					        <td edit="0" fd="sort">0</td>
-					        <td>操作（ACTION_NAME）</td>
-					        <td>启用</td>
-					        <td>[
-					            <a href="javascript:void(0);" class="opStatus" val="1">禁用</a>] [
-					            <a href="/Tprbac/index.php/conist/Access/editNode?id=12" class="edit">编辑</a>]</td></tr>
-					    <tr align="center" id="13" pid="4">
-					        <td>11</td>
-					        <td align="left" class="tree" style="cursor: pointer;">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;└ 系统安全设置</td>
-					        <td>13</td>
-					        <td>setSafeConfig</td>
-					        <td>系统安全设置</td>
-					        <td edit="0" fd="sort">0</td>
-					        <td>操作（ACTION_NAME）</td>
-					        <td>启用</td>
-					        <td>[
-					            <a href="javascript:void(0);" class="opStatus" val="1">禁用</a>] [
-					            <a href="/Tprbac/index.php/conist/Access/editNode?id=13" class="edit">编辑</a>]</td></tr>
-					    <tr align="center" id="14" pid="1">
-					        <td>12</td>
-					        <td align="left" class="tree" style="cursor: pointer;">&nbsp;&nbsp;&nbsp;&nbsp;├ 权限管理</td>
-					        <td>14</td>
-					        <td>Access</td>
-					        <td>权限管理</td>
-					        <td edit="0" fd="sort">0</td>
-					        <td>模块(MODEL_NAME)</td>
-					        <td>启用</td>
-					        <td>[
-					            <a href="javascript:void(0);" class="opStatus" val="1">禁用</a>] [
-					            <a href="/Tprbac/index.php/conist/Access/editNode?id=14" class="edit">编辑</a>]</td></tr>
-					    <tr align="center" id="8" pid="14">
-					        <td>13</td>
-					        <td align="left" class="tree" style="cursor: pointer;">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 管理员列表</td>
-					        <td>8</td>
-					        <td>index</td>
-					        <td>管理员列表</td>
-					        <td edit="0" fd="sort">8</td>
-					        <td>操作（ACTION_NAME）</td>
-					        <td>启用</td>
-					        <td>[
-					            <a href="javascript:void(0);" class="opStatus" val="1">禁用</a>] [
-					            <a href="/Tprbac/index.php/conist/Access/editNode?id=8" class="edit">编辑</a>]</td></tr>
-					    <tr align="center" id="9" pid="14">
-					        <td>14</td>
-					        <td align="left" class="tree" style="cursor: pointer;">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 添加管理员</td>
-					        <td>9</td>
-					        <td>addAdmin</td>
-					        <td>添加管理员</td>
-					        <td edit="0" fd="sort">9</td>
-					        <td>操作（ACTION_NAME）</td>
-					        <td>启用</td>
-					        <td>[
-					            <a href="javascript:void(0);" class="opStatus" val="1">禁用</a>] [
-					            <a href="/Tprbac/index.php/conist/Access/editNode?id=9" class="edit">编辑</a>]</td></tr>
-					    <tr align="center" id="15" pid="14">
-					        <td>15</td>
-					        <td align="left" class="tree" style="cursor: pointer;">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 查看节点</td>
-					        <td>15</td>
-					        <td>nodeList</td>
-					        <td>查看节点</td>
-					        <td edit="0" fd="sort">0</td>
-					        <td>操作（ACTION_NAME）</td>
-					        <td>启用</td>
-					        <td>[
-					            <a href="javascript:void(0);" class="opStatus" val="1">禁用</a>] [
-					            <a href="/Tprbac/index.php/conist/Access/editNode?id=15" class="edit">编辑</a>]</td></tr>
-					    <tr align="center" id="16" pid="14">
-					        <td>16</td>
-					        <td align="left" class="tree" style="cursor: pointer;">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 角色列表查看</td>
-					        <td>16</td>
-					        <td>roleList</td>
-					        <td>角色列表查看</td>
-					        <td edit="0" fd="sort">0</td>
-					        <td>操作（ACTION_NAME）</td>
-					        <td>启用</td>
-					        <td>[
-					            <a href="javascript:void(0);" class="opStatus" val="1">禁用</a>] [
-					            <a href="/Tprbac/index.php/conist/Access/editNode?id=16" class="edit">编辑</a>]</td></tr>
-					    <tr align="center" id="17" pid="14">
-					        <td>17</td>
-					        <td align="left" class="tree" style="cursor: pointer;">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 添加角色</td>
-					        <td>17</td>
-					        <td>addRole</td>
-					        <td>添加角色</td>
-					        <td edit="0" fd="sort">0</td>
-					        <td>操作（ACTION_NAME）</td>
-					        <td>启用</td>
-					        <td>[
-					            <a href="javascript:void(0);" class="opStatus" val="1">禁用</a>] [
-					            <a href="/Tprbac/index.php/conist/Access/editNode?id=17" class="edit">编辑</a>]</td></tr>
-					    <tr align="center" id="18" pid="14">
-					        <td>18</td>
-					        <td align="left" class="tree" style="cursor: pointer;">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 编辑角色</td>
-					        <td>18</td>
-					        <td>editRole</td>
-					        <td>编辑角色</td>
-					        <td edit="0" fd="sort">0</td>
-					        <td>操作（ACTION_NAME）</td>
-					        <td>启用</td>
-					        <td>[
-					            <a href="javascript:void(0);" class="opStatus" val="1">禁用</a>] [
-					            <a href="/Tprbac/index.php/conist/Access/editNode?id=18" class="edit">编辑</a>]</td></tr>
-					    <tr align="center" id="19" pid="14">
-					        <td>19</td>
-					        <td align="left" class="tree" style="cursor: pointer;">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 便捷开启禁用节点</td>
-					        <td>19</td>
-					        <td>opNodeStatus</td>
-					        <td>便捷开启禁用节点</td>
-					        <td edit="0" fd="sort">0</td>
-					        <td>操作（ACTION_NAME）</td>
-					        <td>启用</td>
-					        <td>[
-					            <a href="javascript:void(0);" class="opStatus" val="1">禁用</a>] [
-					            <a href="/Tprbac/index.php/conist/Access/editNode?id=19" class="edit">编辑</a>]</td></tr>
-					    <tr align="center" id="20" pid="14">
-					        <td>20</td>
-					        <td align="left" class="tree" style="cursor: pointer;">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 便捷开启禁用角色</td>
-					        <td>20</td>
-					        <td>opRoleStatus</td>
-					        <td>便捷开启禁用角色</td>
-					        <td edit="0" fd="sort">0</td>
-					        <td>操作（ACTION_NAME）</td>
-					        <td>启用</td>
-					        <td>[
-					            <a href="javascript:void(0);" class="opStatus" val="1">禁用</a>] [
-					            <a href="/Tprbac/index.php/conist/Access/editNode?id=20" class="edit">编辑</a>]</td></tr>
-					    <tr align="center" id="21" pid="14">
-					        <td>21</td>
-					        <td align="left" class="tree" style="cursor: pointer;">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 编辑节点</td>
-					        <td>21</td>
-					        <td>editNode</td>
-					        <td>编辑节点</td>
-					        <td edit="0" fd="sort">0</td>
-					        <td>操作（ACTION_NAME）</td>
-					        <td>启用</td>
-					        <td>[
-					            <a href="javascript:void(0);" class="opStatus" val="1">禁用</a>] [
-					            <a href="/Tprbac/index.php/conist/Access/editNode?id=21" class="edit">编辑</a>]</td></tr>
-					    <tr align="center" id="22" pid="14">
-					        <td>22</td>
-					        <td align="left" class="tree" style="cursor: pointer;">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 添加节点</td>
-					        <td>22</td>
-					        <td>addNode</td>
-					        <td>添加节点</td>
-					        <td edit="0" fd="sort">0</td>
-					        <td>操作（ACTION_NAME）</td>
-					        <td>启用</td>
-					        <td>[
-					            <a href="javascript:void(0);" class="opStatus" val="1">禁用</a>] [
-					            <a href="/Tprbac/index.php/conist/Access/editNode?id=22" class="edit">编辑</a>]</td></tr>
-					    <tr align="center" id="23" pid="14">
-					        <td>23</td>
-					        <td align="left" class="tree" style="cursor: pointer;">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 添加管理员</td>
-					        <td>23</td>
-					        <td>addAdmin</td>
-					        <td>添加管理员</td>
-					        <td edit="0" fd="sort">0</td>
-					        <td>操作（ACTION_NAME）</td>
-					        <td>启用</td>
-					        <td>[
-					            <a href="javascript:void(0);" class="opStatus" val="1">禁用</a>] [
-					            <a href="/Tprbac/index.php/conist/Access/editNode?id=23" class="edit">编辑</a>]</td></tr>
-					    <tr align="center" id="24" pid="14">
-					        <td>24</td>
-					        <td align="left" class="tree" style="cursor: pointer;">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 编辑管理员信息</td>
-					        <td>24</td>
-					        <td>editAdmin</td>
-					        <td>编辑管理员信息</td>
-					        <td edit="0" fd="sort">0</td>
-					        <td>操作（ACTION_NAME）</td>
-					        <td>启用</td>
-					        <td>[
-					            <a href="javascript:void(0);" class="opStatus" val="1">禁用</a>] [
-					            <a href="/Tprbac/index.php/conist/Access/editNode?id=24" class="edit">编辑</a>]</td></tr>
-					    <tr align="center" id="25" pid="14">
-					        <td>25</td>
-					        <td align="left" class="tree" style="cursor: pointer;">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;└ 权限分配</td>
-					        <td>25</td>
-					        <td>changeRole</td>
-					        <td>权限分配</td>
-					        <td edit="0" fd="sort">0</td>
-					        <td>操作（ACTION_NAME）</td>
-					        <td>启用</td>
-					        <td>[
-					            <a href="javascript:void(0);" class="opStatus" val="1">禁用</a>] [
-					            <a href="/Tprbac/index.php/conist/Access/editNode?id=25" class="edit">编辑</a>]</td></tr>
+					            <a href="/Tprbac/index.php/conist/Access/editNode?id=2" class="edit">编辑</a>]</td></tr>-->
 					</table>
                 </div>
             </div>

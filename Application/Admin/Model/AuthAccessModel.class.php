@@ -24,4 +24,39 @@ class AuthAccessModel extends Model{
         $role_auth_ac = rtrim($role_auth_ac,',');
         return $role_auth_ac;
     }
+
+    /**
+    * 查询当前 节点id的详细信息
+    *  @param   $auth_id
+    *  return array
+    */
+    public function auth_id_info($auth_id){
+        $map['auth_id'] = $auth_id;
+        $res = $this->where($map)->find();
+        return $res;
+    }
+
+    //模块
+    public function Prole_list(){
+        return $this->where("auth_level = 0")->order("sort asc")->select();
+    }
+
+    //方法
+    public function Srole_list(){
+        return $this->where("auth_level != 0")->order("auth_id asc,sort asc")->select();
+    }
+
+    //节点编辑
+    public function edit_node(){
+        $where['auth_name'] = I("auth_name");
+        $auth_ac = I("auth_ac");
+        $where['status'] = intval(I("status"));
+        $where['auth_level'] = intval(I('auth_level'));
+        $map['auth_id'] = intval(I("auth_pid"));
+        $where['sort'] = intval(I("sort"));
+        $where['auth_id'] = intval(I("auth_id"));
+        $auth_id_infos =$this->where($map)->find();
+        var_dump(I());
+        var_dump($auth_id_infos);exit;
+    }
 }

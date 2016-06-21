@@ -47,8 +47,8 @@
                                 <td>{$vo.role_name}</td>
                                 <td align="left">{$vo.remark}</td>
                                 <td data_status="{$vo.status}">
-                                    <eq name="vo.status" value="0">禁用
-                                    <else/>启用
+                                    <eq name="vo.status" value="0"><span style="color:red;">禁用</span>
+                                    <else/><span style="color:green;">启用</span>
                                     </eq>
                                 </td>
                                 <td>
@@ -87,11 +87,11 @@
                             if(res.status =='success'){
                                 if(res.data === 0){
                                     $(this).html("禁用");
-                                    $(this).parent().prev().html("启用");
+                                    $(this).parent().prev().html('<span style="color:green;">启用</span>');
                                     $(this).parent().prev().attr("data_status",1);
                                 }else{
                                     $(this).html("启用");
-                                    $(this).parent().prev().html("禁用");
+                                    $(this).parent().prev().html('<span style="color:red;">禁用</span>');
                                     $(this).parent().prev().attr("data_status",0);
                                 }
                                 window.location.reload();

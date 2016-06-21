@@ -58,8 +58,8 @@
                                 <td>{$vo.username}</td>
                                 <td>
                                      <!----1、框架 内置标签-------------------------------------->
-                                    <eq name="vo.status" value="0">禁用
-                                    <else/>启用
+                                    <eq name="vo.status" value="0"><span style="color:red;">禁用</span>
+                                    <else/><span style="color:green;">启用</span>
                                     </eq>
 
                                     <!----2、框架原生 php处理-------------------------------------->

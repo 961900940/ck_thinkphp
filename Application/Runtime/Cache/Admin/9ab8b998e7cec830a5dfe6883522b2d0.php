@@ -97,7 +97,7 @@
                         <div class="current">权限分配</div></div>
                     <p>你正在为用户组：
                         <b style="color:red;"><?php echo ($role_info_roleName); ?></b>分配权限 。项目和版块有全选和取消全选功能</p>
-                    <form action="/ck_thinkphp/index.php/Admin/Access/changeRole?id=6" method="post">
+                    <form action="/ck_thinkphp/index.php/Admin/Access/changeRole?id=3" method="post">
                         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab">
                             <tr>
                                 <td style="font-size: 14px;">

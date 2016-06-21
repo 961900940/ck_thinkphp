@@ -118,7 +118,7 @@ class AuthRoleModel extends Model{
     }
 
     /**
-    *
+    * 添加角色
     */
     public function add_role(){
         $data['role_name'] =  I('role_name');

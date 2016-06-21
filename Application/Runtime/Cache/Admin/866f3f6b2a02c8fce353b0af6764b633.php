@@ -112,8 +112,8 @@
                                 <td><?php echo ($vo["role_name"]); ?></td>
                                 <td align="left"><?php echo ($vo["remark"]); ?></td>
                                 <td data_status="<?php echo ($vo["status"]); ?>">
-                                    <?php if(($vo["status"]) == "0"): ?>禁用
-                                    <?php else: ?>启用<?php endif; ?>
+                                    <?php if(($vo["status"]) == "0"): ?><span style="color:red;">禁用</span>
+                                    <?php else: ?><span style="color:green;">启用</span><?php endif; ?>
                                 </td>
                                 <td>
                                     <?php if(($vo["role_id"] == 1) or ($vo["role_id"] == 2) ): ?>---
@@ -164,11 +164,11 @@
                             if(res.status =='success'){
                                 if(res.data === 0){
                                     $(this).html("禁用");
-                                    $(this).parent().prev().html("启用");
+                                    $(this).parent().prev().html('<span style="color:green;">启用</span>');
                                     $(this).parent().prev().attr("data_status",1);
                                 }else{
                                     $(this).html("启用");
-                                    $(this).parent().prev().html("禁用");
+                                    $(this).parent().prev().html('<span style="color:red;">禁用</span>');
                                     $(this).parent().prev().attr("data_status",0);
                                 }
                                 window.location.reload();
