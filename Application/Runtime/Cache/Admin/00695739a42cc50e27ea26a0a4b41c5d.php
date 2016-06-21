@@ -7,12 +7,14 @@
 		<link rel="stylesheet" type="text/css" href="/ck_thinkphp/Public/Admin/css/base.css" />
 <link rel="stylesheet" type="text/css" href="/ck_thinkphp/Public/Admin/css/layout.css" />
 <link rel="stylesheet" type="text/css" href="/ck_thinkphp/Public/static/asyncbox/skins/default.css" />
+<link rel="stylesheet" type="text/css" href="/ck_thinkphp/Public/static/layer-v2.3/layer/skin/layer.css" />
 <script type="text/javascript" src="/ck_thinkphp/Public/static/jquery-1.9.0.min.js"></script>
 <script type="text/javascript" src="/ck_thinkphp/Public/static/jquery.lazyload.js"></script>
 <script type="text/javascript" src="/ck_thinkphp/Public/Admin/js/functions.js"></script>
 <script type="text/javascript" src="/ck_thinkphp/Public/Admin/js/base.js"></script>
 <script type="text/javascript" src="/ck_thinkphp/Public/static/jquery.form.js"></script>
 <script type="text/javascript" src="/ck_thinkphp/Public/static/asyncbox/asyncbox.js"></script>
+<script type="text/javascript" src="/ck_thinkphp/Public/static/layer-v2.3/layer/layer.js"></script>
 <style media="screen">
     .logo img{margin: 5px 0 0 10px;vertical-align:bottom;}
     #Tags .userPhoto img{height: 45px;margin:8px 0 0 9px;width: 45px;}
@@ -95,22 +97,22 @@
                     <div class="contentArea">
                         <div class="Item hr">
                             <div class="current">添加编辑角色</div></div>
-                        <form action="" method="post">
+                        <form action="/ck_thinkphp/index.php/Admin/Access/addRole" method="post">
                             <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
                                 <tr>
                                     <th width="120">角色组名称：</th>
                                     <td>
-                                        <input name="name" type="text" class="input" size="40" value="" /></td>
+                                        <input name="role_name" type="text" class="input" size="40" value="" /></td>
                                 </tr>
                                 <tr>
                                     <th>状态：</th>
                                     <td>
                                         <select name="status" style="width: 80px;">
-                                            <option value="1">启用</option>
-                                            <option value="0" selected>禁用</option></select>
+                                            <option value="1" selected>启用</option>
+                                            <option value="0" >禁用</option></select>
                                     </td>
                                 </tr>
-                                <tr>
+                                <!-- <tr>
                                     <th>父级组ID：</th>
                                     <td>
                                         <select name="pid" style="min-width: 80px;">
@@ -124,7 +126,7 @@
                                     <th>显示排序：</th>
                                     <td>
                                         <input class="input" name="sort" type="text" size="40" value="" /></td>
-                                </tr>
+                                </tr>-->
                                 <tr>
                                     <th>描 述：</th>
                                     <td>
@@ -132,7 +134,7 @@
                                     </td>
                                 </tr>
                             </table>
-                            <input type="hidden" name="id" value="" /></form>
+                        </form>
                         <div class="commonBtnArea">
                             <button class="btn submit">提交</button></div>
                     </div>
@@ -161,7 +163,7 @@
 
         <script type="text/javascript">$(function() {
                 $(".submit").click(function() {
-                    commonAjaxSubmit();
+                    $("form").submit();
                 });
             });
 		</script>

@@ -57,9 +57,14 @@ class AccessController extends CommonController {
 		$this->display();
 	}
 
+    //快捷开启禁用节点
+    public function nodeStatus(){
+
+    }
+    
     //编辑节点
 	public function editNode(){
-
+        $this->assign();
 	}
 
 	//添加节点
@@ -75,7 +80,7 @@ class AccessController extends CommonController {
         $this->display();
 	}
 
-    //便捷开启禁用节点
+    //便捷开启禁用用户
 	public function roleStatus(){
         $role_id = intval( I("id") );
         $status = intval( I("status") );
@@ -135,7 +140,7 @@ class AccessController extends CommonController {
             }
             $role_auth_ids_list =rtrim($role_auth_ids_list,','). ']';
             $this->assign("role_auth_ids_list",$role_auth_ids_list);  //当前角色的权限
-            
+
             //模块
             $Prole_list = M("Auth_access")->where("auth_level = 0")->order("sort asc")->select();
             $this->assign('Prole_list',$Prole_list);
@@ -147,6 +152,7 @@ class AccessController extends CommonController {
         }
 	}
 
+    //递归
     public function access_list_data($data){
         $arr = array();
         foreach ($data as $key => $value) {
@@ -154,19 +160,20 @@ class AccessController extends CommonController {
                 $arr[] = $value;
             }
         }
-        // var_dump($arr);exit;
-        foreach ($arr as $key => $value) {
-            foreach ($data as $k => $v) {
-                if($v['auth_pid'] == $value['auth_id']){
-                    $arr[$key]['children'][] =$v;
-                }
-            }
-        }
         var_dump($arr);exit;
     }
 
     //添加角色
 	public function addRole(){
-		$this->display();
+        if(IS_POST){
+            $res = D("Auth_role")->add_role();
+            if($res){
+                $this->success("添加成功,用户列表跳转中...",U("Access/roleList"),3);
+            }else{
+                $this->error("添加失败,请重试....");
+            }
+        }else{
+            $this->display();
+        }
 	}
 }

@@ -7,12 +7,14 @@
         <link rel="stylesheet" type="text/css" href="/ck_thinkphp/Public/Admin/css/base.css" />
 <link rel="stylesheet" type="text/css" href="/ck_thinkphp/Public/Admin/css/layout.css" />
 <link rel="stylesheet" type="text/css" href="/ck_thinkphp/Public/static/asyncbox/skins/default.css" />
+<link rel="stylesheet" type="text/css" href="/ck_thinkphp/Public/static/layer-v2.3/layer/skin/layer.css" />
 <script type="text/javascript" src="/ck_thinkphp/Public/static/jquery-1.9.0.min.js"></script>
 <script type="text/javascript" src="/ck_thinkphp/Public/static/jquery.lazyload.js"></script>
 <script type="text/javascript" src="/ck_thinkphp/Public/Admin/js/functions.js"></script>
 <script type="text/javascript" src="/ck_thinkphp/Public/Admin/js/base.js"></script>
 <script type="text/javascript" src="/ck_thinkphp/Public/static/jquery.form.js"></script>
 <script type="text/javascript" src="/ck_thinkphp/Public/static/asyncbox/asyncbox.js"></script>
+<script type="text/javascript" src="/ck_thinkphp/Public/static/layer-v2.3/layer/layer.js"></script>
 <style media="screen">
     .logo img{margin: 5px 0 0 10px;vertical-align:bottom;}
     #Tags .userPhoto img{height: 45px;margin:8px 0 0 9px;width: 45px;}

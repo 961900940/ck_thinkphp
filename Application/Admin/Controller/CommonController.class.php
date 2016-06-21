@@ -44,7 +44,6 @@ class CommonController extends Controller {
 		$Auth_admin = M('Auth_admin');
 		$userinfo = $Auth_admin ->where("aid='%s' ",array($aid))->find();
 		$role_id = $userinfo['role_id'];
-
 		//根据角色id,获取 权限列表ids的信息
 		$Auth_role = M("Auth_role");
 		if(!in_array($role_id,array('1','2'))){
@@ -69,15 +68,13 @@ class CommonController extends Controller {
 			$auth_list[$key] = $value['auth_c'].'-'.$value['auth_a'];
 		}
 
-		// var_dump($auth_list);exit;
 		array_push($auth_list,'Index-index');		//默认允许访问,无需进行权限认证
 		//访问权限认证
 		if(!in_array($now_ac,$auth_list)){
 			// $this -> error('没有权限访问',U("Index/index"));
-			$this -> error('没有权限访问',$_SERVER["HTTP_REFERER"]);
+			$this->error('没有权限访问',$_SERVER["HTTP_REFERER"]);exit;
 		}
-
-
+		
 		//顶部导航菜单
 
 		//左侧子菜单

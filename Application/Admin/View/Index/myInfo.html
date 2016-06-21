@@ -8,26 +8,25 @@
     </head>
     <body>
         <div class="wrap">
-            <div id="Top">
-                <!--顶部导航菜单-->
-                <div id="Top">
-        			<include file="Public:wrap_top" />
-    			</div>
-    			<!--Tags标签-->
-    			<div id="Tags">
-                    <include file="Public:wrap_tags" />
-                        <div class="nav">
-                            <font id="today"></font>您的位置：网站管理 > 修改密码
-                        </div>
+            <!--顶部导航菜单-->
+	        <div id="Top">
+                <include file="Public:wrap_top" />
+	        </div>
+            <!--Tags标签-->
+            <div id="Tags">
+				<include file="Public:wrap_tags" />
+                    <div class="nav">
+                        <font id="today"></font>您的位置：网站管理 > 修改密码
                     </div>
-    			</div>
+                </div>
+            </div>
             <div class="clear"></div>
             <div class="mainBody">
                 <!--子菜单列表-->
-                <div id="Left">
-    				<include file="Public:main_left" />
-    			</div>
-                <!--content内容主体-->
+	            <div id="Left">
+                    <include file="Public:main_left" />
+	            </div>
+				<!--content内容主体-->
                 <div id="Right">
                     <div class="contentArea">
                         <div class="Item hr">
@@ -65,7 +64,8 @@
         <div class="clear"></div>
         <!--尾部js css-->
 	    <include file="Public:footer" />
-        <script type="text/javascript">$(".submit").click(function() {
+        <script type="text/javascript">
+            $(".submit").click(function() {
                 if ($.trim($("input[name='pwd0']").val()) == '') {
                     popup.alert("旧密码不能为空");
                     return false;

@@ -66,6 +66,7 @@ class PublicController extends Controller {
         $this->redirect("Admin/Index/index");
     }
 
+
     /**
 	*后台空操作处理
 	*/

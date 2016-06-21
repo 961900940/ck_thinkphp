@@ -96,7 +96,16 @@
                                 }
                                 window.location.reload();
                             }else{
-                                alert(res.data);
+                                if(res.status == 0){        //ajax 操作权限
+                                    var url =res.url;
+                                    var info =res.info;
+                                    // if(confirm(info)){
+                                    //     window.location.href=res.url;
+                                    // }
+                                    layer.msg(info);
+                                }else{
+                                    alert(res.data);
+                                }
                             }
                         }
                     });

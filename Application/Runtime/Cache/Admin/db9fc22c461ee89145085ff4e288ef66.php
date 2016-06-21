@@ -7,12 +7,14 @@
         <link rel="stylesheet" type="text/css" href="/ck_thinkphp/Public/Admin/css/base.css" />
 <link rel="stylesheet" type="text/css" href="/ck_thinkphp/Public/Admin/css/layout.css" />
 <link rel="stylesheet" type="text/css" href="/ck_thinkphp/Public/static/asyncbox/skins/default.css" />
+<link rel="stylesheet" type="text/css" href="/ck_thinkphp/Public/static/layer-v2.3/layer/skin/layer.css" />
 <script type="text/javascript" src="/ck_thinkphp/Public/static/jquery-1.9.0.min.js"></script>
 <script type="text/javascript" src="/ck_thinkphp/Public/static/jquery.lazyload.js"></script>
 <script type="text/javascript" src="/ck_thinkphp/Public/Admin/js/functions.js"></script>
 <script type="text/javascript" src="/ck_thinkphp/Public/Admin/js/base.js"></script>
 <script type="text/javascript" src="/ck_thinkphp/Public/static/jquery.form.js"></script>
 <script type="text/javascript" src="/ck_thinkphp/Public/static/asyncbox/asyncbox.js"></script>
+<script type="text/javascript" src="/ck_thinkphp/Public/static/layer-v2.3/layer/layer.js"></script>
 <style media="screen">
     .logo img{margin: 5px 0 0 10px;vertical-align:bottom;}
     #Tags .userPhoto img{height: 45px;margin:8px 0 0 9px;width: 45px;}
@@ -21,10 +23,9 @@
     </head>
     <body>
         <div class="wrap">
-            <div id="Top">
-                <!--顶部导航菜单-->
-                <div id="Top">
-        			<div class="logo"><a target="_blank" href="http://localhost/Tprbac/"><img src="/ck_thinkphp/Public/Admin/images/logo.png" /></a></div>
+            <!--顶部导航菜单-->
+	        <div id="Top">
+                <div class="logo"><a target="_blank" href="http://localhost/Tprbac/"><img src="/ck_thinkphp/Public/Admin/images/logo.png" /></a></div>
 <div class="help"><a href="http://www.uc22.net/bbs" target="_blank">使用帮助</a><span><a href="http://www.uc22.net" target="_blank">关于</a></span></div>
 <div class="menu">
     <ul class="moudle">
@@ -51,10 +52,10 @@
     </script>
 </div>
 
-    			</div>
-    			<!--Tags标签-->
-    			<div id="Tags">
-                    <div class="userPhoto">
+	        </div>
+            <!--Tags标签-->
+            <div id="Tags">
+				<div class="userPhoto">
     <img src="/ck_thinkphp/Public/Admin/images/userPhoto.jpg" />
 </div>
 <div class="navArea">
@@ -67,16 +68,16 @@
     </div>
 </div>
 
-                        <div class="nav">
-                            <font id="today"></font>您的位置：网站管理 > 修改密码
-                        </div>
+                    <div class="nav">
+                        <font id="today"></font>您的位置：网站管理 > 修改密码
                     </div>
-    			</div>
+                </div>
+            </div>
             <div class="clear"></div>
             <div class="mainBody">
                 <!--子菜单列表-->
-                <div id="Left">
-    				<div id="control" class=""></div>
+	            <div id="Left">
+                    <div id="control" class=""></div>
 <div class="subMenuList">
     <div class="itemTitle">常用操作 </div>
     <ul>
@@ -90,8 +91,8 @@
     </ul>
 </div>
 
-    			</div>
-                <!--content内容主体-->
+	            </div>
+				<!--content内容主体-->
                 <div id="Right">
                     <div class="contentArea">
                         <div class="Item hr">
@@ -146,7 +147,8 @@
     });
 </script>
 
-        <script type="text/javascript">$(".submit").click(function() {
+        <script type="text/javascript">
+            $(".submit").click(function() {
                 if ($.trim($("input[name='pwd0']").val()) == '') {
                     popup.alert("旧密码不能为空");
                     return false;

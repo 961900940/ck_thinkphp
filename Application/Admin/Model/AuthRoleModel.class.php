@@ -116,4 +116,15 @@ class AuthRoleModel extends Model{
         $res = $this->where("role_id= '%s'",array($role_id))->save($map); // 根据条件更新记录
         return $res;
     }
+
+    /**
+    *
+    */
+    public function add_role(){
+        $data['role_name'] =  I('role_name');
+        $data['status'] = intval(I('status'));
+        $data['remark'] = I('remark');
+        $res = $this->data($data)->add();
+        return $res;
+    }
 }
