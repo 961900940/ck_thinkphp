@@ -7,6 +7,11 @@ class IndexController extends Controller {
 		$this->display();
     }
 
+	/***mysql、mysqli、pdo操作数据库**************************************************/
+	public function database_statement(){
+		$this->display("Index/database_statement/database_statement_1");
+	}
+
     /**默认显示页面**/
 	public function versioninfo(){
 		$this->show('<style type="text/css">*{ padding: 0; margin: 0; } div{ padding: 4px 48px;} body{ background: #fff; font-family: "微软雅黑"; color: #333;font-size:24px} h1{ font-size: 100px; font-weight: normal; margin-bottom: 12px; } p{ line-height: 1.8em; font-size: 36px } a,a:hover{color:blue;}</style><div style="padding: 24px 48px;"> <p>当前框架为: <b>ThinkPHP</b>V{$Think.version}完整版</p></div>');
@@ -36,7 +41,7 @@ class IndexController extends Controller {
 	public function apache_2(){		//配置虚拟域名
 		$this->display("Index/apache/apache_2");
 	}
-	/*******************************************************/
+
 	/***Thinkphp框架****************************************/
 	public function thinkphp_1(){	// URL访问
 		$this->display("Index/thinkphp/thinkphp_1");
@@ -55,7 +60,7 @@ class IndexController extends Controller {
 	public function thinkphp_5(){	// 预定义常量、系统常量、路径常量
 		$this->display("Index/thinkphp/thinkphp_5");
 	}
-	/*******************************************************/
+
 	/***CodeIgniter框架*************************************/
 	public function codeigniter_1(){	// URL访问
 		$this->display("Index/codeigniter/codeigniter_1");
@@ -74,7 +79,8 @@ class IndexController extends Controller {
 	public function codeigniter_5(){	// 预定义常量、系统常量、路径常量
 		$this->display("Index/codeigniter/codeigniter_5");
 	}
-	/*******************************************************/
+
+	/***测试方法****************************************************/
 	public function test(){
 		header("Content-Type:text/html;   charset=utf-8");
 		$Action = M('Action');
@@ -89,23 +95,12 @@ class IndexController extends Controller {
 
 	}
 
-	public function demo(){
-		if(IS_POST){
-			$username = I('post.username');
 
-			// $username = $_POST['username'];
-			$Auth_admin = M('Auth_admin');
-			$data['username'] =array('eq',$username);
-			$info = $Auth_admin ->where($data)->select();//价格大于1000元的商品
-			// $info = $Auth_admin ->where("username = '%s'",$username) ->select();//价格大于1000元的商品
-			var_dump($username);
-			var_dump($Auth_admin->getLastSql());
-			var_dump($info);exit;
-		}else{
-			$this->display();
-		}
-
+	/***快捷键**************************************************************/
+	public function Shortcut_key(){
+		$this->display("Index/shortcut_key/shortcut_key_1");
 	}
+
 
 	/**
 	*空操作单独处理

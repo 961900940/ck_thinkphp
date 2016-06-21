@@ -32,7 +32,15 @@
             
     <ul id="apiTree" class="mini-tree" showTreeIcon="true" style="width:100%;height:100%;" enableHotTrack="false" onbeforeexpand="onBeforeExpand">
         <li>
-            <a href="<?php echo U('Index/versioninfo');?>" target="main">Overview</a></li>
+            <a href="<?php echo U('Index/versioninfo');?>" target="main">Overview</a>
+        </li>
+        <li>
+            <span expanded="false">mysql、mysqli、pdo<span style="color:Red;">New!</span></span>
+            <ul>
+                <li>
+                    <a href="<?php echo U('Index/database_statement');?>" target="main">数据库操作的三种连接方式</a></li>
+            </ul>
+        </li>
         <li>
             <span expanded="true">Apache配置<span style="color:Red;">New!</span></span>
             <ul>
@@ -99,26 +107,10 @@
             </ul>
         </li>
         <li>
-            <span expanded="false">Navigations</span>
+            <span expanded="false">快捷键</span>
             <ul>
                 <li>
-                    <a href="<?php echo U('Index/versioninfo');?>" target="main">Pager</a></li>
-                <li>
-                    <a href="<?php echo U('Index/versioninfo');?>" target="main">OutlookBar</a></li>
-                <li>
-                    <a href="<?php echo U('Index/versioninfo');?>" target="main">OutlookMenu</a></li>
-                <li>
-                    <a href="<?php echo U('Index/versioninfo');?>" target="main">OutlookTree</a></li>
-                <li>
-                    <a href="<?php echo U('Index/versioninfo');?>" target="main">Tree</a></li>
-                <li>
-                    <a href="<?php echo U('Index/versioninfo');?>" target="main">Tabs</a></li>
-                <li>
-                    <a href="<?php echo U('Index/versioninfo');?>" target="main">Menu</a></li>
-                <li>
-                    <a href="<?php echo U('Index/versioninfo');?>" target="main">MenuItem</a></li>
-                <li>
-                    <a href="<?php echo U('Index/versioninfo');?>l" target="main">Toolbar</a></li>
+                    <a href="<?php echo U('Index/Shortcut_key');?>" target="main">常用工具快捷键</a></li>
             </ul>
         </li>
     </ul>
