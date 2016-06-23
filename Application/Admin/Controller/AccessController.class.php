@@ -86,7 +86,9 @@ class AccessController extends CommonController {
             $this->error("没有找到该节点");
         }
         if(IS_POST){
-            D("Auth_access")->edit_node();
+            $res = D("Auth_access")->edit_node();
+            var_dump(M("Auth_access")->getLastSql());
+            var_dump($res);exit;
         }else{
             $auth_id_info = D("Auth_access")->auth_id_info($auth_id);
             $this->assign('auth_id_info',$auth_id_info);//单个节点的信息

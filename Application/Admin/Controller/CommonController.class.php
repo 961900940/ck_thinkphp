@@ -74,12 +74,12 @@ class CommonController extends Controller {
 			// $this -> error('没有权限访问',U("Index/index"));
 			$this->error('没有权限访问',$_SERVER["HTTP_REFERER"]);exit;
 		}
-		
+
 		//顶部导航菜单
 
 		//左侧子菜单
 		$Auth_access = M('Auth_access');
-		$MenuItem = $Auth_access ->where("auth_c='%s' and auth_level ='%s' ",array(CONTROLLER_NAME,1))->order("sort asc")->select();	//二级菜单所有列表
+		$MenuItem = $Auth_access ->where("auth_c='%s' and auth_level ='%s' and is_display=1",array(CONTROLLER_NAME,1))->order("sort asc")->select();	//二级菜单所有列表
 		$this->assign('MenuItem',$MenuItem);
 
 	    $this->assign('controller_name',CONTROLLER_NAME);

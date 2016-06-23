@@ -63,9 +63,8 @@
     					        <td>{$vo.auth_name}</td>
     					        <td edit="0" fd="sort">{$vo.sort}</td>
     					        <td>
-                                    <if condition="$vo['auth_level'] ==0 ">模块(MODEL_NAME)
-                                    <elseif condition="$vo['auth_level'] ==1"/>操作(ACTION_NAME)
-                                    <else /> 具体操作(ACTION_NAME)
+                                    <if condition="$vo['auth_level'] ==0 "><span style="color:#00bfff;">模块(MODEL_NAME)</span>
+                                    <else />操作(ACTION_NAME)
                                     </if>
                                 </td>
     					        <td>启用</td>

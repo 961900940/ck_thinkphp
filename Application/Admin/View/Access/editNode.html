@@ -62,8 +62,8 @@
                                     <td>
                                         <select name="auth_level" style="min-width: 80px;">
                                             <option value="0" <?php if($auth_id_info['auth_level'] ==0) echo selected; ?>>模块</option>
-                                            <option value="1" <?php if($auth_id_info['auth_level'] ==1) echo selected; ?>>操作</option>
-                                            <option value="2" <?php if($auth_id_info['auth_level'] ==2) echo selected; ?>>具体操作</option>
+                                            <option value="1" <?php if($auth_id_info['auth_level'] ==1 && $auth_id_info['is_display'] ==1) echo selected; ?>>操作</option>
+                                            <option value="2" <?php if($auth_id_info['auth_level'] ==2 && $auth_id_info['is_display'] ==0) echo selected; ?>>具体操作</option>
                                         </select>模块(MODEL_NAME); 操作(ACTION_NAME);右侧具体操作(ACTION_NAME);若为右侧具体操作，则不显示
                                     </td>
                                 </tr>
@@ -73,7 +73,7 @@
                                         <select name="auth_pid" style="min-width: 80px;">
                                             <option value="0" level="-1">根节点(后台管理)</option>
                                             <volist name="group" id="vo">
-                                                <option value="{$vo.auth_pid}" level="{$vo.auth_level}" <?php if($auth_id_info['auth_id'] ==$vo['auth_id']) echo selected;?>>
+                                                <option value="{$vo.auth_id}" level="{$vo.auth_level}" <?php if($auth_id_info['auth_id'] ==$vo['auth_id']) echo selected;?>>
 
                                                     <if condition="$vo['auth_level'] == 0 ">&nbsp;&nbsp;&nbsp;&nbsp;├ {$vo.auth_name}
                                                         <else /> &nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;└ {$vo.auth_name}
