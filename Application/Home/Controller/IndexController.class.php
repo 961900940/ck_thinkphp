@@ -7,14 +7,10 @@ class IndexController extends Controller {
 		$this->display();
     }
 
-	/***mysql、mysqli、pdo操作数据库**************************************************/
-	public function database_statement(){
-		$this->display("Index/database_statement/database_statement_1");
-	}
-
     /**默认显示页面**/
 	public function versioninfo(){
-		$this->show('<style type="text/css">*{ padding: 0; margin: 0; } div{ padding: 4px 48px;} body{ background: #fff; font-family: "微软雅黑"; color: #333;font-size:24px} h1{ font-size: 100px; font-weight: normal; margin-bottom: 12px; } p{ line-height: 1.8em; font-size: 36px } a,a:hover{color:blue;}</style><div style="padding: 24px 48px;"> <p>当前框架为: <b>ThinkPHP</b>V{$Think.version}完整版</p></div>');
+//		$this->show('<style type="text/css">*{ padding: 0; margin: 0; } div{ padding: 4px 48px;} body{ background: #ff91a7; font-family: "微软雅黑"; color: #333;font-size:24px} h1{ font-size: 100px; font-weight: normal; margin-bottom: 12px; } p{ line-height: 1.8em; font-size: 36px } a,a:hover{color:blue;}</style><div style="padding: 24px 48px;"> <p>当前框架为: <b>ThinkPHP</b>V{$Think.version}完整版</p></div>');
+		echo "<p>当前框架为: <b>ThinkPHP</b>V3.2.3完整版</p>";
 		echo '操作系统：'.PHP_OS."<br>";
 		echo 'php版本：'.phpversion()."<br>";
 		echo 'Apache版本：'.apache_get_version()."<br>";
@@ -32,6 +28,20 @@ class IndexController extends Controller {
 		}
 		echo "<br>"."本地测试采用wamp集成环境：php(5.5.12) + apache(2.4.9) + mysql(5.6.17)"."<br>";
 		$this->display();
+	}
+
+	/***mysql、mysqli、pdo操作数据库**************************************************/
+	public function database_statement_1(){
+		$this->display("Index/database_statement/database_statement_1");
+	}
+	public function database_statement_2(){
+		$this->display("Index/database_statement/database_statement_2");
+	}
+	public function database_statement_3(){
+		$this->display("Index/database_statement/database_statement_3");
+	}
+	public function database_statement_4(){
+		$this->display("Index/database_statement/database_statement_4");
 	}
 
 	/***Apache配置******************************************/

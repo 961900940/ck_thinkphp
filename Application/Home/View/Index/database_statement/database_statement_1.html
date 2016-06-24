@@ -18,98 +18,24 @@
     假定查询成功，可以调用 mysql_num_rows() 来查看对应于 SELECT 语句返回了多少行，或者调用 mysql_affected_rows()来查看对应于 DELETE，INSERT，REPLACE 或 UPDATE语句影响到了多少行。
     如果没有权限访问查询语句中引用的表时，mysql_query() 也会返回 false。
     </pre>
-    1、mysql
-    <xmp></xmp>
-    2、mysqli
-    <pre style='color:#000020;background:#f1f0f0;'>
-面向过程：
-    <span style="color:red;">mysqli链接：</span>
-    //1.连接
-    $link=mysqli_connect('localhost','root','root','test') or die('Connect Error:'.mysqli_connect_errno().":".mysqli_connect_error());
 
-    //2.设置编码方式
-    mysqli_set_charset($link,'UTF8');
+    <xmp>mysqli扩展相对于MySQL的优势：</xmp>
+    <pre style='color:#000020;background:#f6f8ff;'>
+    --- 基于面向过程和面向对象的优势
+    --- 支持预处理语句
+    ---支持事务
 
-    //3.执行SQL查询
-    $sql="INSERT user(username,password,age) VALUES('imooc1','imooc1',22);";
-    $res=mysqli_query($link, $sql);
-    if($res){
-    	echo 'AUTO_INCREMENT:'.mysqli_insert_id($link);
-    	echo 'AFFECTED ROWS:'.mysqli_affected_rows($link);
-    }else{
-    	echo 'ERROR:';
-    	echo mysqli_errno($link).':'.mysqli_error($link);
-    }
+    MySQLi扩展的安装：(widows环境下)
+    ---配置php配置文件，开启php_mysqli.dll扩展
+    ---配置extension_dir= 'F:/software/wamp/bin/php/php5.5.12/ext/'   (‘ext目录所在位置’)
+    ---重新启动服务器
 
-    $sql="UPDATE user SET age=age+10 WHERE id=41;";
-    $sql.="DELETE FROM user WHERE id=40";
-    $res=mysqli_multi_query($link, $sql);	//执行多条语句查询
-    var_dump($res);
-
-    //4.关闭连接
-    mysqli_close($link);
-    ============================================================================
-    //执行SQL查询
-    $sql="SELECT id,username,password,age FROM user";
-    $result=mysqli_query($link,$sql);
-    if($result && mysqli_num_rows($result)>0){
-    	while($row=mysqli_fetch_array($result, MYSQLI_ASSOC)){
-    		//print_r($row);
-    		$rows[]=$row;
-    	}
-    }
-    //print_r($rows);
-    //释放结果集
-    mysqli_free_result($result);
-    mysqli_close($link);
-    <span style="color:red;">预处理：</span>
-    $sql="INSERT user(username,password,age) VALUES(?,?,?);";
-    $stmt=mysqli_prepare($link, $sql);
-    $username='test123';
-    $password='test123';
-    $age=123;
-    mysqli_stmt_bind_param($stmt, 'ssi',$username,$password,$age);
-    $res=mysqli_stmt_execute($stmt);
+    验证MySQLi扩展是否开启：
+    1、phpinfo();
+    2、var_dump(extension_loaded('mysqli'));     //检测扩展是否已经加载
+    3、print_r(get_loaded_extensions());      //得到当前已经开启的扩展
     </pre>
-    <pre style='color:#000020;background:#f1f0f0;'>
-面向对象：
-    <span style="color:red;">mysqli链接：</span>
-    //1.连接
-    $link=mysqli_connect('localhost','root','root','test') or die('Connect Error:'.mysqli_connect_errno().":".mysqli_connect_error());
 
-    //2.设置编码方式
-    mysqli_set_charset($link,'UTF8');
-
-    //3.执行SQL查询
-    $sql="INSERT user(username,password,age) VALUES('imooc1','imooc1',22);";
-    $res=mysqli_query($link, $sql);
-    if($res){
-    	echo 'AUTO_INCREMENT:'.mysqli_insert_id($link);
-    	echo 'AFFECTED ROWS:'.mysqli_affected_rows($link);
-    }else{
-    	echo 'ERROR:';
-    	echo mysqli_errno($link).':'.mysqli_error($link);
-    }
-
-    $sql="UPDATE user SET age=age+10 WHERE id=41;";
-    $sql.="DELETE FROM user WHERE id=40";
-    $res=mysqli_multi_query($link, $sql);	//执行多条语句查询
-    var_dump($res);
-
-    //4.关闭连接
-    mysqli_close($link);
-
-    <span style="color:red;">预处理：</span>
-    $sql="INSERT user(username,password,age) VALUES(?,?,?);";
-    $stmt=mysqli_prepare($link, $sql);
-    $username='test123';
-    $password='test123';
-    $age=123;
-    mysqli_stmt_bind_param($stmt, 'ssi',$username,$password,$age);
-    $res=mysqli_stmt_execute($stmt);
-    </pre>
-    3、pdo
-    <xmp></xmp>
 </pre>
 </body>
 </html>
