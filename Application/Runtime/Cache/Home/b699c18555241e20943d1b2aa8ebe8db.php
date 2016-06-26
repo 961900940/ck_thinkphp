@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -122,10 +122,6 @@ EOF;
         对于其他 sql 语句的执行，执行成功返回 true,否则返回 false
     **/
     $mysqli->close();//关闭连接
-    $mysqli->insert_id();//得到上一插入操作产生的 auto_increment 的值
-    $mysqli->affected_rows();//得到上一步操作产生的受影响的记录条数
-    $mysqli->errno();//得到上一步操作产生的错误号
-    $mysqli->error();//得到上一步操作产生的错误信息
 
 
     </pre>
