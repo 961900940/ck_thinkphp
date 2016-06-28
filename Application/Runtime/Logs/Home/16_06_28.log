@@ -1,0 +1,147 @@
+[ 2016-06-28T22:08:15+08:00 ] 127.0.0.1 /ck_thinkphp/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.045002s ]
+
+[ 2016-06-28T22:08:16+08:00 ] 127.0.0.1 /ck_thinkphp/Public/static/miniui/docs/core.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+ERR: 非法操作:static
+
+[ 2016-06-28T22:08:17+08:00 ] 127.0.0.1 /ck_thinkphp/index.php/Index/versioninfo.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-06-28T22:08:44+08:00 ] 127.0.0.1 /ck_thinkphp/index.php/Index/database_statement_1.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-06-28T22:08:50+08:00 ] 127.0.0.1 /ck_thinkphp/index.php/Index/database_statement_3.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-06-28T22:08:52+08:00 ] 127.0.0.1 /ck_thinkphp/index.php/Index/database_statement_2.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-06-28T22:08:53+08:00 ] 127.0.0.1 /ck_thinkphp/index.php/Index/database_statement_3.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-06-28T22:08:54+08:00 ] 127.0.0.1 /ck_thinkphp/index.php/Index/database_statement_2.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-06-28T22:09:02+08:00 ] 127.0.0.1 /ck_thinkphp/index.php/Index/database_statement_3.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-06-28T22:19:17+08:00 ] 127.0.0.1 /ck_thinkphp/index.php/Index/database_statement_3.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-06-28T22:32:28+08:00 ] 127.0.0.1 /ck_thinkphp/index.php/Index/database_statement_3.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002001s ]
+
+[ 2016-06-28T22:36:00+08:00 ] 127.0.0.1 /ck_thinkphp/index.php/Index/database_statement_3.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+
+[ 2016-06-28T22:36:23+08:00 ] 127.0.0.1 /ck_thinkphp/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-06-28T22:36:23+08:00 ] 127.0.0.1 /ck_thinkphp/Public/static/miniui/docs/core.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+ERR: 非法操作:static
+
+[ 2016-06-28T22:36:24+08:00 ] 127.0.0.1 /ck_thinkphp/index.php/Index/versioninfo.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+
+[ 2016-06-28T22:36:24+08:00 ] 127.0.0.1 /ck_thinkphp/index.php/Index/database_statement_3.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-06-28T22:36:40+08:00 ] 127.0.0.1 /ck_thinkphp/index.php/Index/database_statement_3.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-06-28T22:43:21+08:00 ] 127.0.0.1 /ck_thinkphp/index.php/Index/database_statement_3.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-06-28T23:01:35+08:00 ] 127.0.0.1 /ck_thinkphp/index.php/Index/database_statement_3.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+
+[ 2016-06-28T23:43:18+08:00 ] 127.0.0.1 /ck_thinkphp/index.php/Index/database_statement_2.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.022001s ]
+
+[ 2016-06-28T23:43:18+08:00 ] 127.0.0.1 /ck_thinkphp/index.php/Index/database_statement_3.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-06-28T23:43:18+08:00 ] 127.0.0.1 /ck_thinkphp/index.php/Index/database_statement_4.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+
+[ 2016-06-28T23:43:19+08:00 ] 127.0.0.1 /ck_thinkphp/index.php/Index/database_statement_2.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-06-28T23:43:20+08:00 ] 127.0.0.1 /ck_thinkphp/index.php/Index/database_statement_3.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-06-28T23:43:20+08:00 ] 127.0.0.1 /ck_thinkphp/index.php/Index/database_statement_2.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-06-28T23:43:20+08:00 ] 127.0.0.1 /ck_thinkphp/index.php/Index/database_statement_3.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-06-28T23:45:28+08:00 ] 127.0.0.1 /ck_thinkphp/index.php/Index/thinkphp_5.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+
+[ 2016-06-28T23:45:30+08:00 ] 127.0.0.1 /ck_thinkphp/index.php/Index/thinkphp_4.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-06-28T23:45:32+08:00 ] 127.0.0.1 /ck_thinkphp/index.php/Index/thinkphp_3.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001001s ]
+INFO: [ app_init ] --END-- [ RunTime:0.003001s ]
+

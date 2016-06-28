@@ -31,16 +31,16 @@ class IndexController extends Controller {
 	}
 
 	/***mysql、mysqli、pdo操作数据库**************************************************/
-	public function database_statement_1(){
+	public function database_statement_1(){		//tip
 		$this->display("Index/database_statement/database_statement_1");
 	}
-	public function database_statement_2(){
+	public function database_statement_2(){		//mysql
 		$this->display("Index/database_statement/database_statement_2");
 	}
-	public function database_statement_3(){
+	public function database_statement_3(){		//mysqli
 		$this->display("Index/database_statement/database_statement_3");
 	}
-	public function database_statement_4(){
+	public function database_statement_4(){		//pdo
 		$this->display("Index/database_statement/database_statement_4");
 	}
 
