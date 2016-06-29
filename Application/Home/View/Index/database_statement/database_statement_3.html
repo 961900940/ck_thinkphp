@@ -12,7 +12,6 @@
     <pre style='color:#000000;background:#f1f0f0;'></pre>
     1、mysqli面向过程：
     <pre style='color:#000020;background:#f1f0f0;'>
-
     <span style="color:red;">mysqli连接：</span>
     //1.连接
     $link=mysqli_connect('localhost','root','root','test') or die('Connect Error:'.mysqli_connect_errno().":".mysqli_connect_error());
@@ -39,6 +38,17 @@
     //4.关闭连接
     mysqli_close($link);
     ============================================================================
+    <span style="color:red;">预处理：</span>
+    $sql="INSERT user(username,password,age) VALUES(?,?,?);";
+    $stmt=mysqli_prepare($link, $sql);
+    $username='test123';
+    $password='test123';
+    $age=123;
+    mysqli_stmt_bind_param($stmt, 'ssi',$username,$password,$age);
+    $res=mysqli_stmt_execute($stmt);
+    </pre>
+
+    <pre style='color:#000020;background:#f1f0f0;'>
     //执行SQL查询
     $sql="SELECT id,username,password,age FROM user";
     $result=mysqli_query($link,$sql);
@@ -52,14 +62,6 @@
     //释放结果集
     mysqli_free_result($result);
     mysqli_close($link);
-    <span style="color:red;">预处理：</span>
-    $sql="INSERT user(username,password,age) VALUES(?,?,?);";
-    $stmt=mysqli_prepare($link, $sql);
-    $username='test123';
-    $password='test123';
-    $age=123;
-    mysqli_stmt_bind_param($stmt, 'ssi',$username,$password,$age);
-    $res=mysqli_stmt_execute($stmt);
     </pre>
 
     2、mysqli面向对象：
@@ -88,22 +90,26 @@
         //	$row=$mysqli_result->fetch_assoc();
         //}
 
-        //针对多条SQL语句的查询
-        //$sql="INSERT user(username,password,age) VALUES('imooc3','imooc3',32);";
-        //$sql.="UPDATE1 user SET age=5 WHERE id=28;";
-        //$sql.="DELETE FROM user WHERE id=25;";
-        //$mysqli->query($sql);
-        //$res=$mysqli->multi_query($sql);
 
+        <span style="color:red">预处理:</span>
         $sql="SELECT * FROM user WHERE username=? AND password=?";
-        $mysqli_stmt=$mysqli->prepare($sql);
-        $mysqli_stmt->bind_param('ss',$username,$password);
-        if($mysqli_stmt->execute()){
-        	$mysqli_stmt->store_result();
-        	if($mysqli_stmt->num_rows>0){
-        		echo '登陆成功';
-        	}else{
-        		echo '登陆失败';
+        $mysqli_stmt=$mysqli->prepare($sql);                    //准备预处理语句
+        $mysqli_stmt->bind_param('ss',$username,$password);     //绑定参数   s,i,d
+        if($mysqli_stmt->execute()){                            //执行预处理语句
+        	//$mysqli_stmt->store_result();
+        	//if($mysqli_stmt->num_rows>0){
+        	//	echo '登陆成功';
+        	//}else{
+        	//	echo '登陆失败';
+        	//}
+
+
+        	$mysqli_stmt->bind_result($id,$username,$age);    //bind_result():绑定结果集中的值到变量
+        	//遍历结果集
+        	while($mysqli_stmt->fetch()){
+        		echo '编号：'.$id;
+        		echo '用户名：'.$username;
+        		echo '年龄：'.$age;
         	}
         }
         //释放结果集
@@ -113,8 +119,28 @@
         $mysqli->close();
 
 
+    3、mysqli 事务：
+    <pre style='color:#000020;background:#f1f0f0;'>
+        //先关闭自动提交功能
+        $mysqli->autocommit(FALSE);
+        $sql="UPDATE account SET money=money-200 WHERE username='king'";
+        $res=$mysqli->query($sql);
+        $res_affect=$mysqli->affected_rows;
 
-    3、mysqli -------------- tip：
+        $sql1='UPDATE1 account SET money=money+200 WHERE username="queen"';
+        $res1=$mysqli->query($sql1);
+        $res1_affect=$mysqli->affected_rows;
+        if($res &&$res_affect>0 && $res1 && $res1_affect>0){
+        	$mysqli->commit();
+        	echo '转账成功';
+        	$mysqli->autocommit(TRUE);
+        }else{
+        	$mysqli->rollback();
+        	echo '转账失败';
+        }
+    </pre>
+
+    4、mysqli -------------- tip：
     <pre style='color:#000020;background:#f1f0f0;'>
     $mysqli = new mysqli('localhost','root','root');    //建立到MySQL数据库的连接
     $mysqli->select_db('test');    //打开指定的数据库
@@ -148,15 +174,41 @@ EOF;
     //4、关闭连接
     $mysqli->close();//关闭连接
 
+    //针对多条SQL语句的查询
+    //$sql="INSERT user(username,password,age) VALUES('imooc3','imooc3',32);";
+    //$sql.="UPDATE1 user SET age=5 WHERE id=28;";
+    //$sql.="DELETE FROM user WHERE id=25;";
+        //use_result()/store_result():获取第一条查询产生的结果集
+        //more_results():检测是否有更多的结果集
+        //next_result():将结果集指针向下移动一位
+    //if($mysqli->multi_query($sql)){
+    //	do{
+    //		if($mysqli_result=$mysqli->store_result()){
+    //			$rows[]=$mysqli_result->fetch_all(MYSQLI_ASSOC);
+    //		}
+    //	}while($mysqli->more_results() && $mysqli->next_result());
+    //}else{
+    //	echo $mysqli->error;
+    //}
+    //print_r($rows);
 
-    $mysqli->errno();//得到上一步操作产生的错误号
-    $mysqli->error();//得到上一步操作产生的错误信息
 
-    $mysqli->insert_id();//得到上一插入操作产生的 auto_increment 的值
-    $mysqli->affected_rows();//得到上一步操作产生的受影响的记录条数，affected_rows值为3种：1. 受影响的记录条数; 2. -1,代表SQL语句有问题 ;3. 0，代表没有受影响记录的条数
 
+
+
+
+    $mysqli->connect_errno;//得到连接产生的错误编号
+    $mysqli->connect_error;//得到连接产生的错误信息
+    $mysqli->errno;//得到上一步操作产生的错误号
+    $mysqli->error;//得到上一步操作产生的错误信息
+
+    $mysqli->insert_id;//得到上一插入操作产生的 auto_increment 的值
+    $mysqli->affected_rows;//得到上一步操作产生的受影响的记录条数，affected_rows值为3种：1. 受影响的记录条数; 2. -1,代表SQL语句有问题 ;3. 0，代表没有受影响记录的条数
+
+    $mysqli_result=$mysqli->query($sql);
+    $mysqli_result->num_rows;
     //获取结果集中所有记录，默认返回的是二维的(索引+索引的形式)
-    $rows = $mysqli_result->fetch_all();    //可选参数 MYSQLI_NUM、MYSQLI_ASSOC、 MYSQLI_BOTH
+    $rows = $mysqli_result->fetch_all(MYSQLI_NUM|MYSQLI_ASSOC| MYSQLI_BOTH);    //可选参数 MYSQLI_NUM、MYSQLI_ASSOC、 MYSQLI_BOTH
 
     $row=$mysqli_result->fetch_row();      //取得结果集中一条记录作为索引数组返回
     $row=$mysqli_result->fetch_assoc();    //取得结果集中的一条记录作为关联数组返回

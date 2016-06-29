@@ -27,6 +27,4 @@ return array(
 	/* 日志设置 */
 	'LOG_RECORD' => true,		// 开启日志记录
     'LOG_LEVEL'  =>'INFO,EMERG,ALERT,CRIT,ERR', // 只记录EMERG ALERT CRIT ERR 错误
-    ),
-
 );
