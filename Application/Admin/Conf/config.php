@@ -27,65 +27,6 @@ return array(
 	/* 日志设置 */
 	'LOG_RECORD' => true,		// 开启日志记录
     'LOG_LEVEL'  =>'INFO,EMERG,ALERT,CRIT,ERR', // 只记录EMERG ALERT CRIT ERR 错误
-
-	'admin_sub_menu' => array(
-        'Common' => array(
-            'Index/myInfo' => '修改密码',
-            'Index/cache' => '缓存清理',
-            'News/add' => '新闻发布'
-        ),
-        'Webinfo' => array(
-            'index' => '站点配置',
-            'setEmailConfig' => '邮箱配置',
-            'setSafeConfig' => '安全配置',
-            'setWeixin'=>'微信配置',
-            'setListNum'=>'显示配置',
-        ),
-        'Models'=>array(
-            'index'=>'模型列表',
-            'add'=>'添加模型',
-            ),
-        'Fields'=>array(
-            'conist/Models/index'=>'模型列表',
-            'conist/Models/add'=>'添加模型',
-            ),
-        'Member' => array(
-            'index' => '注册用户列表',
-        ),
-        'News' => array(
-            'index' => '新闻列表',
-            'category' => '新闻分类管理',
-            'add' => '发布新闻',
-        ),
-        'Product'=>array(
-            'index' => '产品列表',
-            'category' => '产品分类管理',
-            'add' => '发布产品',
-        ),
-        'Siteinfo'=>array(
-            'index'=>'导航菜单',
-            'adindex'=>'轮播管理',
-            'page'=>'单页管理',
-            'tag_index'=>'标签管理',
-            'create_tag'=>'模版标签',
-            'file_index'=>'文件管理',
-            'link_index'=>'友情链接',
-            'message'=>'留言信息'
-        ),
-        'SysData' => array(
-            'index' => '数据库备份',
-            'restore' => '数据库导入',
-            'zipList' => '数据库压缩包',
-            'repair' => '数据库优化修复'
-        ),
-        'Access' => array(
-            'index' => '后台用户',
-            'nodeList' => '节点管理',
-            'roleList' => '角色管理',
-            'addAdmin' => '添加管理员',
-            'addNode' => '添加节点',
-            'addRole' => '添加角色',
-        ),
     ),
 
 );

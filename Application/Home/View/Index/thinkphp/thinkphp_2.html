@@ -9,9 +9,15 @@
     1、入口文件配置：
     </xmp>
     <pre style='color:#55cc66;background:#001800;'>
-    define('APP_DEBUG',true);// 开启调试模式 建议开发阶段开启 True ,部署阶段注释或者设为 false
-    define('APP_NAME','Application');// 定义应用目录名称
-    define('APP_PATH','./Application/');// 定义应用目录
+    //define('COMMON_PATH','./Common/');        // 公共模块的位置可以通过COMMON_PATH常量改变
+    define('APP_DEBUG',true);                   // 开启调试模式 建议开发阶段开启 True ,部署阶段注释或者设为 false
+    //define('BIND_MODULE','Admin');            // 绑定Admin模块到当前入口文件
+    //define('BIND_CONTROLLER','Index');        // 绑定Index控制器到当前入口文件
+        //define('BUILD_CONTROLLER_LIST','Index,User,Menu');    //生成更多的控制器类
+        //define('BUILD_MODEL_LIST','User,Menu');               //支持生成多个模型类
+    define('APP_NAME','Application');           // 定义应用目录名称
+    define('APP_PATH','./Application/');        // 定义应用目录
+    //define ( 'RUNTIME_PATH', './Runtime/' );    // 定义运行时目录
     require './ThinkPHP/ThinkPHP<span style='color:#778c77; '>.</span>php';// 引入ThinkPHP入口文件
     </pre>
 

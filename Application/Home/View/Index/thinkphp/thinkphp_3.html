@@ -76,11 +76,38 @@
     $map['status'] = 1;
     // 把查询条件传入查询方法
     $User->where($map)->select();
-    【表达式查询,数组条件】：
-    $username = I('post.username');
-    $Auth_admin = M('Auth_admin');
-    $data['username'] =array('eq',$username);
-    $info = $Auth_admin ->where($data)->select();
+        【表达式查询,数组条件】：
+        $username = I('post.username');
+        $Auth_admin = M('Auth_admin');
+        $data['username'] =array('eq',$username);
+        $info = $Auth_admin ->where($data)->select();
+    </pre>
+
+     3、切换数据库
+    <xmp>
+        config 添加 数据库配置
+        'DB_CONFIG2' => 'mysql://root:1234@localhost:3306/thinkphp#utf8';       //数据库配置2
+    </xmp>
+    <pre style='color:#000000;background:#f1f0f0;'>
+        1、如果采用的是M方法实例化模型的话，也可以支持传入不同的数据库连接信息
+        $User = M('User','other_','mysql://root:1234@localhost/demo#utf8');     //实例化定义
+
+        表示实例化User模型，连接的是demo数据库的other_user表，采用的连接信息是第三个参数配置的。如果我们在项目配置文件中已经配置了DB_CONFIG2的话，也可以采用：
+        $User = M('User','other_','DB_CONFIG2'); 
+
+
+
+
+        2、
+        'ot' => 'mysql://root:123456@localhost/onthink#utf8',  config配置文件添加
+
+        $kf_model = M('','','ot');
+        $re         = $kf_model->query("select * from agent_enterprise");
+        var_dump($re);exit;
+
+        3、
+        $model = M("onethink_user",null,"ot");
+        $info  = $model->field('name,age')->where($map)->find();
     </pre>
 </body>
 </html>
