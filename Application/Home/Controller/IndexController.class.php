@@ -90,6 +90,23 @@ class IndexController extends Controller {
 		$this->display("Index/codeigniter/codeigniter_5");
 	}
 
+	/***Yii框架*************************************/
+	public function yii_1(){
+		$this->display("Index/yii/yii_1");	//安装及URL访问
+	}
+	public function yii_2(){
+		$this->display("Index/yii/yii_2");	//Yii配置文件
+	}
+	public function yii_3(){
+		$this->display("Index/yii/yii_3");	// 数据库操作
+	}
+	public function yii_4(){
+		$this->display("Index/yii/yii_4");	// 视图、控制器、模型交互
+	}
+	public function yii_5(){
+		$this->display("Index/yii/yii_5");	// 预定义常量、系统常量、路径常量
+	}
+
 	/***测试方法****************************************************/
 	public function test(){
 		header("Content-Type:text/html;   charset=utf-8");
