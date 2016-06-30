@@ -40,36 +40,13 @@
 	<pre style='background:#e6e6e6;'>
 	<span style="color:red">添加控制器</span>：yii-basic-app-2.0.8\basic\controllers\IndexController.php
 	控制器方法名  前必须加 action;
-	<!-- <?php
-	namespace app\controllers;
-	use yii\web\Controller;
-	class IndexController extends Controller{
-	    // ...其它代码...
-	    public function actionIndex($message = 'Hello'){
-			return $this->render('index', ['message' => '123']);
-	    }
-	}
-	?> -->
-
 
 	<span style="color:red">创建视图页面</span>：yii-basic-app-2.0.8\basic\views\index\index.php
-	<!-- <?php
-		use yii\helpers\Html;
-	?>
-	<div class="site-about">
-	    <h1><?= Html::encode($message) ?></h1>
-		<h1><?php echo $message; ?></h1>
-	    <p>
-	        This is the About page. You may modify the following file to customize its content:
-	    </p>
-	</div> -->
-
 
 	创建完操作和视图后，你就可以通过下面的 URL 访问新页面了：
 	http://hostname/index.php?r=site/say&message=Hello+World
 	
 	http://localhost/yii-basic-app-2.0.8/basic/web/index.php?r=index/index
-
 	</pre>
 </body>
 </html>	
