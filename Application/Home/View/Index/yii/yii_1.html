@@ -5,6 +5,71 @@
 	<title>Document</title>
 </head>
 <body>
-	yii
+	<xmp></xmp>
+	<pre style='color:#55cc66;background:#001800;'></pre>
+	1、下载及安装
+	<pre style='background:#e6e6e6;'>
+	Yii2的基本应用程序模板(2.0.8) 归档文件下载地址: http://file.dreamshuo.com/web/yii-basic-app-2.0.8.tgz
+
+	安装  Yii2  修改 yii-basic-app-2.0.8/basic/config/web.php 文件(否则会报错)，给 cookieValidationKey 配置项添加一个密钥：
+	// !!! 在下面插入一段密钥（若为空） - 以供 cookie validation 的需要
+	'cookieValidationKey' => '在此处输入你的密钥', 
+	</pre>
+
+	2、应用结构
+	<xmp>
+	应用中最重要的目录和文件（假设应用根目录是 basic）：
+	basic/                  应用根目录
+	    composer.json       Composer 配置文件, 描述包信息
+	    config/             包含应用配置及其它配置
+	        console.php     控制台应用配置信息
+	        web.php         Web 应用配置信息
+	    commands/           包含控制台命令类
+	    controllers/        包含控制器类
+	    models/             包含模型类
+	    runtime/            包含 Yii 在运行时生成的文件，例如日志和缓存文件
+	    vendor/             包含已经安装的 Composer 包，包括 Yii 框架自身
+	    views/              包含视图文件
+	    web/                Web 应用根目录，包含 Web 入口文件
+	        assets/         包含 Yii 发布的资源文件（javascript 和 css）
+	        index.php       应用入口文件
+	    yii                 Yii 控制台命令执行脚本	
+	</xmp>
+
+	3、URL访问 
+	<pre style='background:#e6e6e6;'>
+	<span style="color:red">添加控制器</span>：yii-basic-app-2.0.8\basic\controllers\IndexController.php
+	控制器方法名  前必须加 action;
+	<!-- <?php
+	namespace app\controllers;
+	use yii\web\Controller;
+	class IndexController extends Controller{
+	    // ...其它代码...
+	    public function actionIndex($message = 'Hello'){
+			return $this->render('index', ['message' => '123']);
+	    }
+	}
+	?> -->
+
+
+	<span style="color:red">创建视图页面</span>：yii-basic-app-2.0.8\basic\views\index\index.php
+	<!-- <?php
+		use yii\helpers\Html;
+	?>
+	<div class="site-about">
+	    <h1><?= Html::encode($message) ?></h1>
+		<h1><?php echo $message; ?></h1>
+	    <p>
+	        This is the About page. You may modify the following file to customize its content:
+	    </p>
+	</div> -->
+
+
+	创建完操作和视图后，你就可以通过下面的 URL 访问新页面了：
+	http://hostname/index.php?r=site/say&message=Hello+World
+	
+	http://localhost/yii-basic-app-2.0.8/basic/web/index.php?r=index/index
+
+	</pre>
 </body>
 </html>	
