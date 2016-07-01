@@ -90,7 +90,7 @@ class CommonController extends Controller {
 		if(empty( session('aid') )){
 			$this->redirect('Public/index');
 			//redirect('Public/index', 3, '登录已超时，请重新登录,页面跳转中...');
-			$this->error('请重新登录,页面跳转中...', U('Public/index'),3);exit;
+			//$this->error('请重新登录,页面跳转中...', U('Public/index'),3);exit;
 		}else{
 			if( empty(cookie('loginmark')) ){
 				$_SESSION = array(); //清除SESSION值.

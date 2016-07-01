@@ -29,6 +29,9 @@ class IndexController extends Controller {
 		echo "<br>"."本地测试采用wamp集成环境：php(5.5.12) + apache(2.4.9) + mysql(5.6.17)"."<br>";
 		$this->display();
 	}
+	public function library(){
+		$this->display();
+	}
 
 	/***mysql、mysqli、pdo操作数据库**************************************************/
 	public function database_statement_1(){		//tip

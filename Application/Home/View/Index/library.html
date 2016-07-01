@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义函数库</title>
+</head>
+<body>
+
+    <pre>
+    // 不区分大小写的in_array实现
+    function in_array_case($value,$array){
+        return in_array(strtolower($value),array_map('strtolower',$array));
+    }
+    </pre>
+</body>
+</html>
