@@ -125,6 +125,10 @@ class IndexController extends Controller {
 
 	}
 
+	/***快捷键**************************************************************/
+	public function event_1(){
+		$this->display("Index/event/event_1");
+	}
 
 	/***快捷键**************************************************************/
 	public function Shortcut_key(){
