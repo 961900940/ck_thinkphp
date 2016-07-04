@@ -48,8 +48,17 @@
 	http://hostname/index.php?r=site/say&message=Hello+World
 	
 	http://localhost/yii-basic-app-2.0.81/web/index.php?r=index/index
-
-
 	</pre>
+
+	4、跳转 
+	<xmp>
+	$res = \YII::$app->response;
+
+    //第一种跳转
+    $res->statusCode = 302;
+    $res->headers->add('Location', 'http://www.baidu.com');
+    //第二种跳转
+    $this->redirect('http://www.baidu.com');
+	</xmp>
 </body>
 </html>	
