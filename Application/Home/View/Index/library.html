@@ -11,6 +11,29 @@
     function in_array_case($value,$array){
         return in_array(strtolower($value),array_map('strtolower',$array));
     }
+
+
+    /**
+     * curl post方式模拟提交数据
+     * @param string $url      接口URL
+     * @param array $params    post数组
+     * @return mixed
+     */
+    private function curl_post($url,$params){
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url );
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch,CURLOPT_POST,1); //post数据
+        curl_setopt($ch,CURLOPT_POSTFIELDS,$params);//post变量
+        $output = curl_exec($ch);
+        curl_close($ch);
+        
+        return $output;
+    }
+    $request = http_build_query($data);
+    $output = $this->curl_post($this->RegisterCertificate ,$request);
+
+
     </pre>
 </body>
 </html>
