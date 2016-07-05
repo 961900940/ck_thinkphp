@@ -18,9 +18,9 @@
     <pre style='color:#000000;background:#f1f0f0;'>
     $Model = new Model(); // 实例化一个空模型 $Model = M();
     $sql = "select * from mk_user";
-    $res = $Model->query($sql);      //读取  select
+    $res = $Model->query($sql);      <span style="color:red;">//读取  select</span>
     $sql = "insert into onethink_action (name,title) values ('12121212','111'),('1212121222','222')";
-    $res = $Model->execute($sql);    //写入 update insert delete
+    $res = $Model->execute($sql);    <span style="color:red;">//写入 update insert delete</span>
 
     获取最新插入的id(两种方法):
     var_dump(mysql_insert_id());    // 第一种
