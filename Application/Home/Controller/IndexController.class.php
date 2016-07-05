@@ -29,7 +29,14 @@ class IndexController extends Controller {
 		echo "<br>"."本地测试采用wamp集成环境：php(5.5.12) + apache(2.4.9) + mysql(5.6.17)"."<br>";
 		$this->display();
 	}
+
+	/**自定义函数库******************************************************************/
 	public function library(){
+		$this->display();
+	}
+
+	/**php常用函数总结******************************************************************/
+	public function comfunc(){
 		$this->display();
 	}
 
