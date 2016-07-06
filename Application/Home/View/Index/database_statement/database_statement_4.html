@@ -10,6 +10,86 @@
     <pre style='color:#d1d1d1;background:#000000;'></pre>
     <pre style='color:#000020;background:#f6f8ff;'></pre>
     <pre style='color:#000000;background:#f1f0f0;'></pre>
-</pre>
+
+
+	1、PDO连接：
+    <pre style='color:#000020;background:#f1f0f0;'>
+    <span style="color:red;">mysqli连接：</span>
+	// 1、通过参数形式连接数据库
+	try{
+		$dsn='mysql:host=localhost;dbname=imooc';
+		$username='root';
+		$passwd='root';
+		$pdo=new PDO($dsn, $username, $passwd);
+		var_dump($pdo);
+	}catch(PDOException $e){
+		echo $e->getMessage();
+	}
+
+	// 2、通过uri的形式连接数据库
+	try{
+		$dsn='uri:file://G:\phpdev\apache\htdocs\imooc\pdo\dsn.txt';	//dsn.txt里面填写 mysql:dbname=imooc;host=localhost
+		$username='root';
+		$passwd='root';
+		$pdo=new PDO($dsn,$username,$passwd);
+		var_dump($pdo);
+	}catch(PDOException $e){
+		echo $e->getMessage();
+	}
+
+	3、<span style="color:red">query主要用于select;可以返回结果集;当把select语句应用到 exec 时，总是返回 0	|| exec用来处理有返回影响行数的（int）</span>
+	header('content-type:text/html;charset=utf-8');
+	try{
+		$pdo=new PDO('mysql:host=localhost;dbname=imooc','root','root');
+		//<span style="color:red">exec():执行一条sql语句并返回其受影响的记录的条数,如果没有受影响的记录，他返回0</span>
+		//<span style="color:red">exec对于select没有作用</span>
+		$sql=<<<EOF
+		CREATE TABLE IF NOT EXISTS user(
+		id INT UNSIGNED AUTO_INCREMENT KEY,
+		username VARCHAR(20) NOT NULL UNIQUE,
+		password CHAR(32) NOT NULL,
+		email VARCHAR(30) NOT NULL
+		);
+EOF;
+		$res=$pdo->exec($sql);
+		var_dump($res);	
+		$sql='INSERT user(username,password,email) VALUES("king","'.md5('king').'","imooc@qq.com")';
+		//echo $sql;
+		$res=$pdo->exec($sql);
+		echo '受影响的记录的条数为：'.$res;		//<span style="color:red">受影响的记录的条数</span>
+		echo '最后插入的ID号为'.$pdo->lastInsertId();//<span style="color:red">得到新插入记录的ID号</span>
+
+		$sql='select id,username,email from user';
+		$stmt=$pdo->query($sql);	//<span style="color:red">执行SQL语句，返回PDOStatement对象</span>
+		foreach($stmt as $row){
+			//print_r($row);
+			echo '编号：'.$row['id'];
+			echo '用户名：'.$row['password'];
+			echo '邮箱：'.$row['email'];
+		}
+	}catch(PDOException $e){
+		echo $e->getMessage();
+	}
+
+	<span style="color:red">预处理：</span>
+	header('content-type:text/html;charset=utf-8');
+	try{
+		$pdo=new PDO('mysql:host=localhost;dbname=test','root','');
+		$sql='select * from test';
+		$stmt=$pdo->prepare($sql);			//准备SQL语句
+		$res=$stmt->execute();				//执行预处理语句
+		// if($res){				// 有数据,返回 true
+		// 	while($row=$stmt->fetch()){		//fetch():得到结果集中的一条记录; 
+		// 		print_r($row);
+		// 	}
+		// }
+		//参数PDO::FETCH_ASSOC(关联数组),PDO::FETCH_NUM(数字索引数组),PDO::FETCH_BOTH(两者数组形式都有,这是默认的),PDO::FETCH_OBJ(对象的形式，类似mysql_fetch_object()函数)
+		$stmt->setFetchMode(PDO::FETCH_ASSOC);		//动态设置fetch() 、fetchAll() 的参数
+		$rows=$stmt->fetchAll();	//fetchAll():得到结果集中的所有数据
+		var_dump($rows);
+	}catch(PDOException $e){
+		echo $e->getMessage();
+	}
+	</pre>
 </body>
 </html>
