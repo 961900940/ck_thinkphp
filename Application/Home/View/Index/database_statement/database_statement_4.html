@@ -37,7 +37,7 @@
 		echo $e->getMessage();
 	}
 
-	3、<span style="color:red">query主要用于select;可以返回结果集;当把select语句应用到 exec 时，总是返回 0	|| exec用来处理有返回影响行数的（int）</span>
+	2、<span style="color:red">query主要用于select;可以返回结果集;当把select语句应用到 exec 时，总是返回 0	|| exec用来处理有返回影响行数的（int）</span>
 	header('content-type:text/html;charset=utf-8');
 	try{
 		$pdo=new PDO('mysql:host=localhost;dbname=imooc','root','root');
@@ -52,7 +52,7 @@
 		);
 EOF;
 		$res=$pdo->exec($sql);
-		var_dump($res);	
+		var_dump($res);
 		$sql='INSERT user(username,password,email) VALUES("king","'.md5('king').'","imooc@qq.com")';
 		//echo $sql;
 		$res=$pdo->exec($sql);
@@ -72,6 +72,11 @@ EOF;
 	}
 
 	<span style="color:red">预处理：</span>
+    PDOStatement::bindParam — 绑定一个参数到指定的变量名。
+        绑定一个PHP变量到用作预处理的SQL语句中的对应命名占位符或问号占位符。 不同于 PDOStatement::bindValue() ，此变量作为引用被绑定，并只在 PDOStatement::execute() 被调用的时候才取其值。
+    PDOStatement::bindValue — 把一个值绑定到一个参数。
+        绑定一个值到用作预处理的 SQL 语句中的对应命名占位符或问号占位符。
+
 	header('content-type:text/html;charset=utf-8');
 	try{
 		$pdo=new PDO('mysql:host=localhost;dbname=test','root','');
@@ -79,7 +84,7 @@ EOF;
 		$stmt=$pdo->prepare($sql);			//准备SQL语句
 		$res=$stmt->execute();				//执行预处理语句
 		// if($res){				// 有数据,返回 true
-		// 	while($row=$stmt->fetch()){		//fetch():得到结果集中的一条记录; 
+		// 	while($row=$stmt->fetch()){		//fetch():得到结果集中的一条记录;
 		// 		print_r($row);
 		// 	}
 		// }
@@ -87,9 +92,58 @@ EOF;
 		$stmt->setFetchMode(PDO::FETCH_ASSOC);		//动态设置fetch() 、fetchAll() 的参数
 		$rows=$stmt->fetchAll();	//fetchAll():得到结果集中的所有数据
 		var_dump($rows);
-	}catch(PDOException $e){
+
+        $sql='SELECT id,title FROM test';
+    	$stmt=$pdo->prepare($sql);
+    	$stmt->execute();
+    	echo '结果集中的列数一共有：'.$stmt->columnCount();
+    	var_dump($stmt->getColumnMeta(0));
+    	$stmt->bindColumn(1, $id);
+    	$stmt->bindColumn('title',$title);
+    	while($row = $stmt->fetch(PDO::FETCH_BOUND)){
+    		echo '用户名：'.$id.'-密码：'.$title;
+    	}
+
+        $sql='SELECT id,title FROM test';
+    	$stmt=$pdo->query($sql);
+    	echo $stmt->fetchColumn(1);        //<span style="color:red">从结果集中的下一行返回单独的一列</span>
+    	echo $stmt->fetchColumn(0);
+
+        $pdo=new PDO('mysql:host=localhost;dbname=test', 'root', '');
+    	echo '自动提交：'.$pdo->getAttribute(PDO::ATTR_AUTOCOMMIT);
+    	echo 'PDO默认的错误处理模式：'.$pdo->getAttribute(PDO::ATTR_ERRMODE);
+    	$pdo->setAttribute(PDO::ATTR_AUTOCOMMIT, 0);
+
+        /**第一种预处理方式**/
+                $sql="INSERT user(username,password,email) VALUES(:username,:password,:email)";
+        	$stmt=$pdo->prepare($sql);
+        	$stmt->bindParam(":username",$username,PDO::PARAM_STR);
+        	$stmt->bindParam(":password",$password,PDO::PARAM_STR);
+        	$stmt->bindParam(":email",$email);
+        	$username='imooc1';
+        	$password='imooc1';
+        	$email='imooc1@imooc.com';
+        	$stmt->execute();
+                echo $stmt->rowCount();        //<span style="color:red">返回受上一个 SQL 语句影响的行数</span>
+
+        /**第二种预处理方式**/
+            $sql='INSERT user(username,password,email) VALUES(?,?,?)';
+        	$stmt=$pdo->prepare($sql);
+        	$username='imooc_king';
+        	$password='imooc_king';
+        	$stmt->bindValue(1,$username);
+        	$stmt->bindValue(2,$password);
+        	$stmt->bindValue(3,'imooc@imooc.com');
+        	$stmt->execute();
+        	echo $stmt->rowCount();
+    }catch(PDOException $e){
 		echo $e->getMessage();
 	}
 	</pre>
+
+    3、<span style="color:red">PDO事务</span>
+    <pre style='color:#000020;background:#f1f0f0;'>
+        
+    </pre>
 </body>
 </html>
