@@ -2,40 +2,42 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>×Ô¶¨Òåº¯Êı¿â</title>
+    <title>è‡ªå®šä¹‰å‡½æ•°åº“</title>
 </head>
 <body>
 
     <pre>
-    // ²»Çø·Ö´óĞ¡Ğ´µÄin_arrayÊµÏÖ
+    1ã€
+    // <span style="color:red">ä¸åŒºåˆ†å¤§å°å†™çš„in_arrayå®ç°</span>
     function in_array_case($value,$array){
         return in_array(strtolower($value),array_map('strtolower',$array));
     }
 
 
+    2ã€
     /**
-     * curl post·½Ê½Ä£ÄâÌá½»Êı¾İ
-     * @param string $url      ½Ó¿ÚURL
-     * @param array $params    postÊı×é
+     * <span style="color:red">curl postæ–¹å¼æ¨¡æ‹Ÿæäº¤æ•°æ®</span>
+     * @param string $url      æ¥å£URL
+     * @param array $params    postæ•°ç»„
      * @return mixed
      */
     private function curl_post($url,$params){
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url );
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch,CURLOPT_POST,1); //postÊı¾İ
-        curl_setopt($ch,CURLOPT_POSTFIELDS,$params);//post±äÁ¿
+        curl_setopt($ch,CURLOPT_POST,1); //postæ•°æ®
+        curl_setopt($ch,CURLOPT_POSTFIELDS,$params);//postå˜é‡
         $output = curl_exec($ch);
         curl_close($ch);
         
-        return $output;
+        return $output; 
     }
     $request = http_build_query($data);
     $output = $this->curl_post($this->RegisterCertificate ,$request);
     
     /**
-     * curl get·½Ê½Ä£ÄâÌá½»Êı¾İ
-     * @param string $url      ½Ó¿ÚURL(get²ÎÊıĞÎÊ½µÄÍêÕûURL )
+     * <span style="color:red">curl getæ–¹å¼æ¨¡æ‹Ÿæäº¤æ•°æ®</span>
+     * @param string $url      æ¥å£URL(getå‚æ•°å½¢å¼çš„å®Œæ•´URL )
      * @return mixed
      */
     private function curl_get($url){ 
