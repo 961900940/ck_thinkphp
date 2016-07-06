@@ -2,29 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>鑷畾涔夊嚱鏁板簱</title>
+    <title>自定义函数库</title>
 </head>
 <body>
 
     <pre>
-    // 涓嶅尯鍒嗗ぇ灏忓啓鐨刬n_array瀹炵幇
+    // 不区分大小写的in_array实现
     function in_array_case($value,$array){
         return in_array(strtolower($value),array_map('strtolower',$array));
     }
 
 
     /**
-     * curl post鏂瑰紡妯℃嫙鎻愪氦鏁版嵁
-     * @param string $url      鎺ュ彛URL
-     * @param array $params    post鏁扮粍
+     * curl post方式模拟提交数据
+     * @param string $url      接口URL
+     * @param array $params    post数组
      * @return mixed
      */
     private function curl_post($url,$params){
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url );
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch,CURLOPT_POST,1); //post鏁版嵁
-        curl_setopt($ch,CURLOPT_POSTFIELDS,$params);//post鍙橀噺
+        curl_setopt($ch,CURLOPT_POST,1); //post数据
+        curl_setopt($ch,CURLOPT_POSTFIELDS,$params);//post变量
         $output = curl_exec($ch);
         curl_close($ch);
         
@@ -32,6 +32,20 @@
     }
     $request = http_build_query($data);
     $output = $this->curl_post($this->RegisterCertificate ,$request);
+    
+    /**
+     * curl get方式模拟提交数据
+     * @param string $url      接口URL(get参数形式的完整URL )
+     * @return mixed
+     */
+    private function curl_get($url){ 
+        $ch = curl_init();
+        curl_setopt($ch,CURLOPT_URL,$url);
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+        curl_setopt($ch,CURLOPT_HEADER,0);
+        $output=curl_exec($ch);
+        curl_close($ch);
+    }
 
 
     </pre>
