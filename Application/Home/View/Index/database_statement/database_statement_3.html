@@ -221,6 +221,10 @@ EOF;
     $row=$mysqli_result->fetch_assoc();
     print_r($row);
 
+    while($row = $mysqli_result->fetch_assoc()){
+        print_r($row);
+    }
+
 
     '客户端的信息：'.$mysqli->client_info;
     '客户端的版本：'.$mysqli->client_version;

@@ -10,7 +10,31 @@
     <pre style='color:#d1d1d1;background:#000000;'></pre>
     <pre style='color:#000020;background:#f6f8ff;'></pre>
     <pre style='color:#000000;background:#f1f0f0;'></pre>
-
+	PDO对象的方法
+	<xmp style="color:red;">
+	exec() 		执行一条sql语句，并返回其受影响的行数
+	query() 	执行一条sql语句，返回一个 PDOStatement 对象
+	prepare() 	准备要执行的sql语句，返回 PDOStatement 对象
+	quote() 	返回一个添加引号的字符串，用于 SQL语句中
+	lastInsertId() 	返回最后插入行的ID
+	setAttribute()  设置一个语句属性
+	getAttribute() 	得到一个语句属性
+	errorCode() 	获取跟数据库句柄上一次操作相关的 SQLSTATE
+	errorInfo() 	获取跟数据库句柄上一次操作的错误信息	//返回的错误信息的数组，数组中包含3个单元,0=>SQLSTATE,1=>CODE,2=>INFO
+	execute() 		执行一条预处理语句
+	rowCount() 		返回上一个 SQL语句影响的行数
+	fetch() 		从结果集中获取一行
+	fetchAll() 		返回一个包含结果集中所有行的数组
+	fetchColumn() 	从结果集中的下一行返回单独的一列
+	fetchObject() 	获取下一行并作为一个对象返回
+	bindParam() 	绑定一个参数到指定的变量名
+	bindValue() 	把一个值绑定到一个参数
+	bindColumn() 	绑定一列到一个 php 变量
+	getColumnMeta() 返回结果集中一列的元数据
+	columnCount() 	返回结果集中的列数
+	debugDumpParams() 打印一条SQL预处理命令
+	nextRowset() 	在一个多行集语句句柄中推进到下一个行集	
+	</xmp>
 
 	1、PDO连接：
     <pre style='color:#000020;background:#f1f0f0;'>
@@ -36,8 +60,12 @@
 	}catch(PDOException $e){
 		echo $e->getMessage();
 	}
+	</pre>
 
-	2、<span style="color:red">query主要用于select;可以返回结果集;当把select语句应用到 exec 时，总是返回 0	|| exec用来处理有返回影响行数的（int）</span>
+
+	2、PDO操作数据库
+	<pre style='color:#000020;background:#f1f0f0;'>
+	<span style="color:red">query主要用于select;可以返回结果集;当把select语句应用到 exec 时，总是返回 0	|| exec用来处理有返回影响行数的（int）</span>
 	header('content-type:text/html;charset=utf-8');
 	try{
 		$pdo=new PDO('mysql:host=localhost;dbname=imooc','root','root');
@@ -71,7 +99,33 @@ EOF;
 		echo $e->getMessage();
 	}
 
-	<span style="color:red">预处理：</span>
+
+
+
+
+	header('content-type:text/html;charset=utf-8');
+	$username=$_POST['username'];
+	$password=$_POST['password'];
+	try{
+		$pdo=new PDO('mysql:host=localhost;dbname=imooc','root','root');	
+		//echo $pdo->quote($username);
+		//$sql="select * from user where username='{$username}' and password='{$password}'";
+		//echo $sql;
+		//通过quote():返回带引号的字符串，过滤字符串中的特殊字符
+		$username=$pdo->quote($username);
+		$sql="select * from user where username={$username} and password='{$password}'";
+		echo $sql;
+		$stmt=$pdo->query($sql);
+		//PDOStatement对象的方法：rowCount()：对于select操作返回的结果集中记录的条数，
+		//对于INSERT、UPDATE、DELETE返回受影响的记录的条数
+		echo $stmt->rowCount();
+	}catch(PDOException $e){
+		echo $e->getMessage();
+	}
+	</pre>
+
+	3、<span style="color:red">预处理：</span>
+	<pre style='color:#000020;background:#f1f0f0;'>
     PDOStatement::bindParam — 绑定一个参数到指定的变量名。
         绑定一个PHP变量到用作预处理的SQL语句中的对应命名占位符或问号占位符。 不同于 PDOStatement::bindValue() ，此变量作为引用被绑定，并只在 PDOStatement::execute() 被调用的时候才取其值。
     PDOStatement::bindValue — 把一个值绑定到一个参数。
@@ -141,9 +195,52 @@ EOF;
 	}
 	</pre>
 
-    3、<span style="color:red">PDO事务</span>
+    4、<span style="color:red">PDO事务</span>
     <pre style='color:#000020;background:#f1f0f0;'>
-        
+    header('content-type:text/html;charset=utf-8');
+    try{
+    	$dsn='mysql:host=localhost;dbname=test';
+    	$username='root';
+    	$passwd='';
+    	$options=array(PDO::ATTR_AUTOCOMMIT,0);
+    	$pdo=new PDO($dsn, $username, $passwd, $options);
+    	var_dump($pdo->inTransaction());			//$pdo->inTransaction() 检查当前事务是否开启
+    	//开启事务
+    	$pdo->beginTransaction();
+    	var_dump($pdo->inTransaction());
+    	
+    	$res1=$pdo->exec('UPDATE test SET title="我是第一个" WHERE id=1');
+    	if($res1==0){
+    		throw new PDOException('id 1 更新失败');
+    	}
+    	$res2=$pdo->exec('UPDATE test SET title="我是第二个" WHERE id=2');
+    	if($res2==0){
+    		throw new PDOException('id 2 更新失败');
+    	}
+    	//提交事务
+    	$pdo->commit();
+    	echo "更新成功";
+    }catch(PDOException $e){
+    	//回滚事务
+    	$pdo->rollBack();
+    	echo $e->getMessage();
+    }    
+    </pre>
+
+
+    5、<span style="color:red">打印一条 SQL 预处理命令</span>
+    <pre style='color:#000020;background:#f1f0f0;'>
+    try{
+		$pdo=new PDO('mysql:host=localhost;dbname=test','root','');
+		$sql='INSERT test(title) VALUES(?)';
+		$stmt=$pdo->prepare($sql);
+		$stmt->bindParam(1, $username,PDO::PARAM_STR);
+		$username='testParam';
+		$stmt->execute();
+		$stmt->debugDumpParams();
+	}catch(PDOException $e){
+		echo $e->getMessage();
+	}
     </pre>
 </body>
 </html>
