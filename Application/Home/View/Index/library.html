@@ -49,7 +49,29 @@
         curl_close($ch);
     }
 
+    3、
+    /**
+     * <span style="color:red">格式化输出</span>
+     */
+    <xmp>
+    function dump($data){
+        echo "<pre>";
+        var_dump($data);
+        echo "</pre>";
+    }
+    </xmp>
 
+    4、
+    /**
+     * <span style="color:red">log 记录运行日志</span>
+     * @param string $msg  记录的日志消息
+    */
+    function writeLog($msg){
+        $time       = time();
+        $msg        = date("Y-m-d H:i:s",$time)." : ".$msg."\r\n";
+        $msgPath    = './'.date("Y-m-d",$time).'.txt';
+        file_put_contents($msgPath,$msg,FILE_APPEND);
+    }
     </pre>
 </body>
 </html>
