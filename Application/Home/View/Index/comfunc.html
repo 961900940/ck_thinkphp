@@ -33,6 +33,15 @@
     array_walk(array,myfunction)        对数组中的每个元素应用用户自定义函数
         array_walk 可以没有返回值；array_map要有返回值
     </xmp>
+
+    3、加密
+    <xmp>
+    URL编码加密：urldecode可以正确解密rawurlencode加密的空格; rawurldecode不能正确解密urlencode加密的空格
+    urlencode(string $str);         //返回字符串,把空格编码为 +
+        urldecode(string $str);     //$str:要解码的URL,返回字符串
+    rawurlencode(string $str);      //返回字符串,把空格编码为 %20
+        rawurldecode(string $str);
+    </xmp>
 </pre>
 </body>
 </html>
