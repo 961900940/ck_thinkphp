@@ -1,58 +1,39 @@
 <block name="menu">
     <ul id="apiTree" class="mini-tree" showTreeIcon="true" style="width:100%;height:100%;" enableHotTrack="false" onbeforeexpand="onBeforeExpand">
-        <li>
-            <a href="{:U('Index/versioninfo')}" target="main">Overview</a>
-        </li>
-        <li>
-            <a href="{:U('Index/library')}" target="main">自定义函数库</a>
-        </li>
-        <li>
-            <a href="{:U('Index/comfunc')}" target="main">php常用函数总结</a>
-        </li>
+        <li><a href="{:U('Index/versioninfo')}" target="main">Overview</a></li>
+        <li><a href="{:U('Index/library')}" target="main">自定义函数库</a></li>
+        <li><a href="{:U('Index/comfunc')}" target="main">php常用函数总结</a></li>
         <li>
             <span expanded="true">数据库操作的三种方式<span style="color:Red;">New!</span></span>
             <ul>
-                <li>
-                    <a href="{:U('Index/database_statement_1')}" target="main">tip</a></li>
-                <li>    
-                    <a href="{:U('Index/database_statement_2')}" target="main">mysql</a></li>
-                <li>    
-                    <a href="{:U('Index/database_statement_3')}" target="main">mysqli</a></li>
-                <li>    
-                    <a href="{:U('Index/database_statement_4')}" target="main">pdo</a></li>
+                <li><a href="{:U('Index/database_statement_1')}" target="main">tip</a></li>
+                <li><a href="{:U('Index/database_statement_2')}" target="main">mysql</a></li>
+                <li><a href="{:U('Index/database_statement_3')}" target="main">mysqli</a></li>
+                <li><a href="{:U('Index/database_statement_4')}" target="main">pdo</a></li>
             </ul>
         </li>
         <li>
             <span expanded="false">Apache 配置<span style="color:Red;">New!</span></span>
             <ul>
-                <li>
-                    <a href="{:U('Index/apache_1')}" target="main">局域网下，他人访问本地文件</a></li>
-                <li>
-                    <a href="{:U('Index/apache_2')}" target="main">配置虚拟域名</a></li>
+                <li><a href="{:U('Index/apache_1')}" target="main">局域网下，他人访问本地文件</a></li>
+                <li><a href="{:U('Index/apache_2')}" target="main">配置虚拟域名</a></li>
             </ul>
         </li>
         <li>
             <span expanded="false">Thinkphp 框架</span>
             <ul>
-                <li>
-                    <a href="{:U('Index/thinkphp_1')}" target="main">URL访问</a></li>
-                <li>
-                    <a href="{:U('Index/thinkphp_2')}" target="main">thinkPHP配置文件</a></li>
-                <li>
-                    <a href="{:U('Index/thinkphp_3')}" target="main">数据库操作</a></li>
-                <li>
-                    <a href="{:U('Index/thinkphp_4')}" target="main">视图、控制器、模型交互</a></li>
+                <li><a href="{:U('Index/thinkphp_1')}" target="main">URL访问</a></li>
+                <li><a href="{:U('Index/thinkphp_2')}" target="main">thinkPHP配置文件</a></li>
+                <li><a href="{:U('Index/thinkphp_3')}" target="main">数据库操作</a></li>
+                <li><a href="{:U('Index/thinkphp_4')}" target="main">视图、控制器、模型交互</a></li>
                 <li>
                     <a href="{:U('Index/thinkphp_5')}" target="main">预定义常量、系统常量、路径常量</a></li>
                     <li>
-                        <span expanded="false">Lists</span>
+                        <span expanded="false">other</span>
                         <ul>
-                            <li>
-                                <a href="{:U('Index/versioninfo')}" target="main">DataGrid</a></li>
-                            <li>
-                                <a href="{:U('Index/versioninfo')}" target="main">Tree</a></li>
-                            <li>
-                                <a href="{:U('Index/versioninfo')}" target="main">TreeGrid</a></li>
+                            <li><a href="{:U('Index/versioninfo')}" target="main">DataGrid</a></li>
+                            <li><a href="{:U('Index/versioninfo')}" target="main">Tree</a></li>
+                            <li><a href="{:U('Index/versioninfo')}" target="main">TreeGrid</a></li>
                         </ul>
                     </li>
             </ul>
@@ -60,60 +41,33 @@
         <li>
             <span expanded="false">CodeIgniter 框架</span>
             <ul>
-                <li>
-                    <a href="{:U('Index/codeigniter_1')}" target="main">URL访问</a></li>
-                <li>
-                    <a href="{:U('Index/codeigniter_2')}" target="main">CodeIgniter配置文件</a></li>
-                <li>
-                    <a href="{:U('Index/codeigniter_3')}" target="main">数据库操作</a></li>
-                <li>
-                    <a href="{:U('Index/codeigniter_4')}" target="main">视图、控制器、模型交互</a></li>
-                <li>
-                    <a href="{:U('Index/codeigniter_5')}" target="main">预定义常量、系统常量、路径常量</a></li>
+                <li><a href="{:U('Index/codeigniter_1')}" target="main">URL访问</a></li>
+                <li><a href="{:U('Index/codeigniter_2')}" target="main">CodeIgniter配置文件</a></li>
+                <li><a href="{:U('Index/codeigniter_3')}" target="main">数据库操作</a></li>
+                <li><a href="{:U('Index/codeigniter_4')}" target="main">视图、控制器、模型交互</a></li>
+                <li><a href="{:U('Index/codeigniter_5')}" target="main">预定义常量、系统常量、路径常量</a></li>
             </ul>
         </li>
         <li>
             <span expanded="false">Yii 框架</span>
             <ul>
-                <li>
-                    <a href="{:U('Index/yii_1')}" target="main">安装及URL访问</a></li>
-                <li>
-                    <a href="{:U('Index/yii_2')}" target="main">Yii配置文件</a></li>
-                <li>
-                    <a href="{:U('Index/yii_3')}" target="main">数据库操作</a></li>
-                <li>
-                    <a href="{:U('Index/yii_4')}" target="main">视图、控制器、模型交互</a></li>
-                <li>
-                    <a href="{:U('Index/yii_5')}" target="main">预定义常量、系统常量、路径常量</a></li>
-            </ul>
-        </li>
-        <li>
-            <span expanded="false">Layouts</span>
-            <ul>
-                <li>
-                    <a href="{:U('Index/versioninfo')}" target="main">Fit</a></li>
-                <li>
-                    <a href="{:U('Index/versioninfo')}" target="main">Panel</a></li>
-                <li>
-                    <a href="{:U('Index/versioninfo')}" target="main">Window</a></li>
-                <li>
-                    <a href="{:U('Index/versioninfo')}" target="main">Splitter</a></li>
-                <li>
-                    <a href="{:U('Index/versioninfo')}" target="main">Layout</a></li>
+                <li><a href="{:U('Index/yii_1')}" target="main">安装及URL访问</a></li>
+                <li><a href="{:U('Index/yii_2')}" target="main">Yii配置文件</a></li>
+                <li><a href="{:U('Index/yii_3')}" target="main">数据库操作</a></li>
+                <li><a href="{:U('Index/yii_4')}" target="main">视图、控制器、模型交互</a></li>
+                <li><a href="{:U('Index/yii_5')}" target="main">预定义常量、系统常量、路径常量</a></li>
             </ul>
         </li>
         <li>
             <span expanded="false">js、jQuery事件</span>
             <ul>
-                <li>
-                    <a href="{:U('Index/event_1')}" target="main">js、jQuery事件</a></li>
+                <li><a href="{:U('Index/event_1')}" target="main">js、jQuery事件</a></li>
             </ul>
         </li>
         <li>
             <span expanded="false">快捷键</span>
             <ul>
-                <li>
-                    <a href="{:U('Index/Shortcut_key')}" target="main">常用工具快捷键</a></li>
+                <li><a href="{:U('Index/Shortcut_key')}" target="main">常用工具快捷键</a></li>
             </ul>
         </li>
     </ul>
