@@ -29,18 +29,18 @@
         curl_setopt($ch,CURLOPT_POSTFIELDS,$params);//post变量
         $output = curl_exec($ch);
         curl_close($ch);
-        
-        return $output; 
+
+        return $output;
     }
     $request = http_build_query($data);
     $output = $this->curl_post($this->RegisterCertificate ,$request);
-    
+
     /**
      * <span style="color:red">curl get方式模拟提交数据</span>
      * @param string $url      接口URL(get参数形式的完整URL )
      * @return mixed
      */
-    private function curl_get($url){ 
+    private function curl_get($url){
         $ch = curl_init();
         curl_setopt($ch,CURLOPT_URL,$url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
@@ -51,7 +51,9 @@
 
     3、
     /**
-     * <span style="color:red">格式化输出</span>
+     * 1)、<span style="color:red">格式化输出</span>
+     * 2)、<span style="color:red">格式化输出打印列表</span>
+     *     var_dump()  页面显示不完是使用 print_r();
      */
     <xmp>
     function dump($data){
@@ -59,7 +61,14 @@
         var_dump($data);
         echo "</pre>";
     }
+
+    function dump2(){
+        echo '<pre>';
+    	print_r(get_defined_constants());
+    	echo '</pre>';
+    }
     </xmp>
+
 
     4、
     /**

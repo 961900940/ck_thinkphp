@@ -16,13 +16,32 @@
 
     $this->display("Index/codeigniter/codeigniter_1");  //显示到指定页面
     </pre>
-    
+
     2、tp3.2.3视图页面直接访问：
     <pre style="color:#000000;background:#f1f0f0;">
     http://localhost/项目目录/Application(应用目录)/模块目录/View/Index/thinkphp/thinkphp_1.html
     </pre>
 
-    3、跨控制器调用:   A() 方法
+    3、跨控制器调用:   A() 方法  和   R()方法
+    <xmp>
+        跨控制器调用：
+        A("项目://模块/控制器")  实例化控制器对象
+        A("Home/User")    实例化User控制器对象
+        A("book://Home/User")    实例化book项目的Home模块的User控制器对象
+        
+        A（"[分组模块/]控制器标志"）           实例化控制器
+        R（"[分组模块/]控制器标志/操作方法"）  实例化控制器同时直接调用制定方法
+             R("User/number")   ====   $user =A("User"); echo $user ->number()
+        new UserController();                  直接实例化制定的控制器
+
+        A('Admin://User')  //表示实例化Admin项目的User模块
+        A('Admin/User')     //表示实例化Admin分组的User模块
+        A(‘Admin://Tool/User’) 	//表示实例化Admin项目Tool分组的User模块
+
+        R('User/info')	//表示实例化当前项目的User模块的info操作方法
+        R('Admin/User/info')	//表示实例化Admin分组的User模块的info操作方法
+        R('Admin://Tool/User/info')	//表示实例化Admin项目Tool分组的User模块的info操作方法
+    </xmp>
     <pre style="color:#000000;background:#f1f0f0;">
     // 假设当前控制器是 user, 调用 log 控制器的 logger() 方法
     $LogController = A('Log');

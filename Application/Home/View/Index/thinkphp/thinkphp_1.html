@@ -33,12 +33,15 @@
         使用以上配置的话，URL访问地址可以变成： http://localhost/?path=/home-user-login-var-value
     </xmp>
 
-    2、U方法，用于URL的动态生成
-    <xmp>
+    2、快捷函数
+    <xmp></xmp>
+    U方法，用于URL的动态生成
+    <pre style='color:#55cc66;background:#001800;'>
+
     U('地址表达式',['参数'],['伪静态后缀'],['显示域名'])
     地址表达式的格式定义如下：[模块/控制器/操作#锚点@域名]?参数1=值1&参数2=值2...
-    </xmp>
-    <pre style='color:#55cc66;background:#001800;'>
+    echo U("控制器/操作方法")；查看具体url路由解析模式
+
     U('User/add') // 生成User控制器的add操作的URL地址
     U('Blog/read?id=1') // 生成Blog控制器的read操作 并且id为1的URL地址
     U('Admin/User/select') // 生成Admin模块的User控制器的select操作的URL地址
@@ -49,20 +52,28 @@
         U('Blog/cate','cate_id=1&status=1','xml');
 
     </pre>
+    <pre style='color:#55cc66;background:#001800;'>
+    C(名称) 获得配置变量(convertion.php  config.php)信息
+    C(名称，值)  设置配置变量信息
 
-    3、跳转和重定向
+    L()  获得语言变量信息
+    E()  给页面输出错误信息
+    </pre>
+
+    3、跳转和重定向(重定向:控制器的redirect方法和redirect函数的区别在于前者是用URL规则定义跳转地址，后者是一个纯粹的URL地址。)
+    <pre style='color:#55cc66;background:#001800;'>
     <xmp>
-    重定向:控制器的redirect方法和redirect函数的区别在于前者是用URL规则定义跳转地址，后者是一个纯粹的URL地址。
+    $this -> redirect('模块/操作',参数,延迟，提示信息);
     $this->redirect('Public/login');        //快速跳转
     $this->redirect('New/category', array('cate_id' => 2), 5, '页面跳转中...');    //重定向到New模块的Category操作
-    redirect('/New/category/cate_id/2', 5, '页面跳转中...');    //重定向到指定的URL地址    
+
+    redirect('/New/category/cate_id/2', 5, '页面跳转中...');    //重定向到指定的URL地址
     页面跳转：success方法的默认跳转地址是$_SERVER["HTTP_REFERER"]，error方法的默认跳转地址是javascript:history.back(-1);
         默认的等待时间success方法是1秒，error方法是3秒
     $this->success('操作完成','/Article/index',3);    // 操作完成3秒后跳转到 /Article/index
     $this->error('操作失败','/Article/error',5);    // 操作失败5秒后跳转到 /Article/error
     </xmp>
-    <pre style='color:#55cc66;background:#001800;'>
-    默认的设置的两个方法对应的模板是：
+    默认的设置的两个方法对应的模板是(配置文件修改)：
     'TMPL_ACTION_ERROR' => THINK_PATH . 'Tpl/dispatch_jump.tpl',    //默认错误跳转对应的模板文件
     'TMPL_ACTION_SUCCESS' => THINK_PATH . 'Tpl/dispatch_jump.tpl',  //默认成功跳转对应的模板文件
     也可以使用项目内部的模板文件：

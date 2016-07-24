@@ -20,7 +20,7 @@
 
     str_replace(find,replace,string,count)  以其他字符替换字符串中的一些字符（区分大小写, count 可选-------对替换数进行计数的变量）
         str_ireplace()         函数执行不区分大小写的搜索
-	
+
 	str_repeat() 函数把字符串重复指定的次数。
 		str_repeat("Shanghai",5);	//把字符串 "Shanghai " 重复 5 次
 
@@ -28,7 +28,7 @@
 
     2、数组
     <xmp>
-    array_keys(array,[value,strict])    返回包含数组中所有键名的一个新数组  
+    array_keys(array,[value,strict])    返回包含数组中所有键名的一个新数组
     array_map(myfunction,array1)        将用户自定义函数作用到数组中的每个值上，并返回用户自定义函数作用后的带有新值的数组
     array_walk(array,myfunction)        对数组中的每个元素应用用户自定义函数
         array_walk 可以没有返回值；array_map要有返回值
@@ -47,6 +47,11 @@
     <xmp>
     number_format(3.0145,2);//3.01
     sprintf("%.2f", 3.0145); //3.01
+    </xmp>
+
+    5、其他
+    <xmp>
+    get_defined_constants([true]);//获得当前系统给我们提供的常量（系统和自定义的）【true参数会把常量进行自动分组显示】
     </xmp>
 </pre>
 </body>
