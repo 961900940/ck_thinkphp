@@ -40,6 +40,12 @@ class IndexController extends Controller {
 		$this->display();
 	}
 
+	/**前端******************************************************************/
+	public function web_1(){					//js
+		$this->display("Index/web/web_1");
+	}
+
+
 	/***mysql、mysqli、pdo操作数据库**************************************************/
 	public function database_statement_1(){		//tip
 		$this->display("Index/database_statement/database_statement_1");
