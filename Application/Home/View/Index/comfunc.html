@@ -47,6 +47,22 @@
     <xmp>
     number_format(3.0145,2);//3.01
     sprintf("%.2f", 3.0145); //3.01
+
+    js前端判断(两位小数)
+    var num = $("#txt_num").val();
+    var dot = num.indexOf(".");
+    var dotCnt = num.substring(dot+1,num.length);
+    if(!isNaN(num)){
+        if(dot != -1){
+            if(dotCnt.length > 2){
+                alert("小数位已超过2位！");
+            }else{
+                alert('正确');
+            }
+        }
+    }else{
+        alert("数字不合法！");
+    }
     </xmp>
 
     5、其他
