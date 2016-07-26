@@ -5,10 +5,8 @@
     <title>自定义函数库</title>
 </head>
 <body>
-
     <pre>
     1、<span style="color:red">js前端判断(两位小数)</span>
-
     var num = $("#txt_num").val();
     var dot = num.indexOf(".");
     var dotCnt = num.substring(dot+1,num.length);
@@ -28,7 +26,7 @@
     2、<span style="color:red">限制用户输入只能输入数字或者两位小数</span>
     /**限制用户输入只能输入数字或者两位小数**/
 	$(function(){
-		 /*JQuery 限制文本框只能输入数字*/  
+		 /*JQuery 限制文本框只能输入数字*/
 		$(".NumText").keyup(function(){
 		    $(this).val($(this).val().replace(/D|^0/g,''));
 		}).bind("paste",function(){  //CTR+V事件处理
@@ -43,5 +41,28 @@
 		}).css("ime-mode", "disabled"); //CSS设置输入法不可用
 	});
     </pre>
+
+    3、<span style="color:red">js函数定义的三种方式的实例</span>
+    <xmp>
+        function demo(a){console.log('demo:'+a);}demo('小莉莉');
+
+        var fun=function(){console.log('fun');}fun();
+        var fun1=function(a,b){console.log(a+"和"+b+'跳舞');}fun1('艳艳','萌萌');
+
+        var f2=new Function('a','b','console.log(a+"和"+b+"搞基")');f2("荣荣","萌萌");
+        var f3=new Function('c','d','console.log(c+"和"+d+"结婚")'); f3("球衣帅","邱一帅");
+    </xmp>
+
+    4、<span style="color:red">js判断类型及类型转换</span>
+    <xmp>
+        typeof()
+
+        var c="123abc";     var d="123.34abc";     var e=" ";    var f=null;
+        Number(c);        //NaN  NaN     0     0    NaN
+        parseInt(c);      //123  123     NaN   NaN  NaN
+        parseFloat(c);    //123  123.34  NaN   NaN  NaN
+
+    </xmp>
+
 </body>
 </html>

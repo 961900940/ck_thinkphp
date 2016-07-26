@@ -30,6 +30,12 @@ class IndexController extends Controller {
 		$this->display();
 	}
 
+	/***快捷键**************************************************************/
+	public function Shortcut_key(){
+		$this->display("Index/shortcut_key/shortcut_key_1");
+	}
+
+	
 	/**自定义函数库******************************************************************/
 	public function library(){
 		$this->display();
@@ -43,6 +49,14 @@ class IndexController extends Controller {
 	/**前端******************************************************************/
 	public function web_1(){					//js
 		$this->display("Index/web/web_1");
+	}
+
+	public function web_2(){					//css
+		$this->display("Index/web/web_2");
+	}
+
+	public function web_3(){					//css
+		$this->display("Index/web/web_3");
 	}
 
 
@@ -136,16 +150,6 @@ class IndexController extends Controller {
 		var_dump( $Model->getLastSql() );
 		var_dump($count);
 
-	}
-
-	/***事件**************************************************************/
-	public function event_1(){
-		$this->display("Index/event/event_1");
-	}
-
-	/***快捷键**************************************************************/
-	public function Shortcut_key(){
-		$this->display("Index/shortcut_key/shortcut_key_1");
 	}
 
 
