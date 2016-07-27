@@ -14,28 +14,23 @@
     <pre style='color:#000020;background:#f1f0f0;'>
     <span style="color:red;">mysql链接：</span>
     //1.连接
-    $link=mysqli_connect('localhost','root','root','test') or die('Connect Error:'.mysqli_connect_errno().":".mysqli_connect_error());
+    $link=mysql_connect('localhost','root','root') or die('Connect Error:'.mysql_connect_errno().":".mysql_connect_error());
+    //2.链接数据库
+    mysql_select_db('test', $link);
+    //3.设置编码方式
+    mysql_set_charset($link,'UTF8');
 
-    //2.设置编码方式
-    mysqli_set_charset($link,'UTF8');
+    //根据条件 (id) 查询
+    $sql = 'select * from `'.$this->_table.'` where `id` = \''.mysql_real_escape_string($id).'\''; 
+    $res = mysql->query($sql); 
+    //根据条件 (id) 删除
+    $ssql2 = 'delete from `'.$this->_table.'` where `id` = \''.mysql_real_escape_string($id).'\''; 
+    $res2 = mysql->query($sql2); 
 
-    //3.执行SQL查询
-    $sql="INSERT user(username,password,age) VALUES('imooc1','imooc1',22);";
-    $res=mysqli_query($link, $sql);
-    if($res){
-    	echo 'AUTO_INCREMENT:'.mysqli_insert_id($link);
-    	echo 'AFFECTED ROWS:'.mysqli_affected_rows($link);
-    }else{
-    	echo 'ERROR:';
-    	echo mysqli_errno($link).':'.mysqli_error($link);
-    }
 
-    $sql="UPDATE user SET age=age+10 WHERE id=41;";
-    $sql.="DELETE FROM user WHERE id=40";
-    $res=mysqli_multi_query($link, $sql);	//执行多条语句查询
-    var_dump($res);
-
-    //4.关闭连接
+    //4.释放结果集
+    mysqli_free_result($result);
+    //5.关闭连接
     mysqli_close($link);
     ============================================================================
     //执行SQL查询
