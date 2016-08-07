@@ -31,115 +31,49 @@
                     <div class="contentArea">
                         <div class="Item hr">
                             <div class="current">添加编辑节点</div></div>
-                        <form action="" method="post">
+                        <form action="__SELF__" method="post">
                             <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
                                 <tr>
                                     <th width="120">名称：</th>
                                     <td>
-                                        <input name="name" type="text" class="input" size="40" value="" />英文，为MODEL_NAME的时候首字母大写</td></tr>
+                                        <input name="auth_ac" type="text" class="input" size="40" value="" />英文，为MODEL_NAME的时候首字母大写
+                                    </td>
+                                </tr>
                                 <tr>
                                     <th>显示名：</th>
                                     <td>
-                                        <input class="input" name="title" type="text" size="40" value="" />中英文均可</td></tr>
+                                        <input class="input" name="auth_name" type="text" size="40" value="" />中英文均可</td></tr>
                                 <tr>
                                     <th>状态：</th>
                                     <td>
-                                        <select name="status" style="width: 80px;">
+                                        <select name="is_display" style="width: 80px;">
                                             <option value="1">启用</option>
-                                            <option value="0" selected>禁用</option></select>如果禁用那么只有超级管理员才可以访问，其他用户都无权访问</td>
+                                            <option value="0" selected>禁用</option>
+                                        </select>如果禁用那么右侧操作可以显示,左侧菜单不显示</td>
                                 </tr>
                                 <tr>
                                     <th>类型：</th>
                                     <td>
-                                        <select name="level" style="min-width: 80px;">
-                                            <option value="1" selected='selected'>项目</option>
-                                            <option value="2">模块</option>
-                                            <option value="3">操作</option></select>项目（GROUP_NAME; 模块(MODEL_NAME); 操作（ACTION_NAME）</td>
+                                        <select name="auth_level" style="min-width: 80px;">
+                                            <option value="0" >模块</option>
+                                            <option value="1" >操作</option>
+                                            <option value="2" >具体操作</option>
+                                        </select>模块(MODEL_NAME); 操作(ACTION_NAME);右侧具体操作(ACTION_NAME);若为右侧具体操作，则不显示
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>父级节点：</th>
                                     <td>
-                                        <select name="pid" style="min-width: 80px;">
-                                            <option value="0" level="-1">根节点</option>
-                                            <option value="1" level="1">后台管理</option>
-                                            <option value="2" level="2">&nbsp;&nbsp;&nbsp;&nbsp;├ 管理首页</option>
-                                            <option value="5" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 默认页</option>
-                                            <option value="6" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;└ 我的个人信息</option>
-                                            <option value="3" level="2">&nbsp;&nbsp;&nbsp;&nbsp;├ 注册会员管理</option>
-                                            <option value="7" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;└ 会员首页</option>
-                                            <option value="4" level="2">&nbsp;&nbsp;&nbsp;&nbsp;├ 系统管理</option>
-                                            <option value="10" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 系统设置首页</option>
-                                            <option value="11" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 设置系统邮件</option>
-                                            <option value="12" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 发送测试邮件</option>
-                                            <option value="13" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;└ 系统安全设置</option>
-                                            <option value="14" level="2">&nbsp;&nbsp;&nbsp;&nbsp;├ 权限管理</option>
-                                            <option value="8" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 管理员列表</option>
-                                            <option value="9" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 添加管理员</option>
-                                            <option value="15" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 查看节点</option>
-                                            <option value="16" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 角色列表查看</option>
-                                            <option value="17" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 添加角色</option>
-                                            <option value="18" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 编辑角色</option>
-                                            <option value="19" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 便捷开启禁用节点</option>
-                                            <option value="20" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 便捷开启禁用角色</option>
-                                            <option value="21" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 编辑节点</option>
-                                            <option value="22" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 添加节点</option>
-                                            <option value="23" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 添加管理员</option>
-                                            <option value="24" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 编辑管理员信息</option>
-                                            <option value="25" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;└ 权限分配</option>
-                                            <option value="26" level="2">&nbsp;&nbsp;&nbsp;&nbsp;├ 资讯管理</option>
-                                            <option value="27" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 新闻列表</option>
-                                            <option value="28" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 新闻分类管理</option>
-                                            <option value="29" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 发布新闻</option>
-                                            <option value="30" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 编辑新闻</option>
-                                            <option value="31" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 删除信息</option>
-                                            <option value="76" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 快速推荐</option>
-                                            <option value="77" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;└ 快速审核</option>
-                                            <option value="32" level="2">&nbsp;&nbsp;&nbsp;&nbsp;├ 数据库管理</option>
-                                            <option value="33" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 查看数据库表结构信息</option>
-                                            <option value="34" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 备份数据库</option>
-                                            <option value="35" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 查看已备份SQL文件</option>
-                                            <option value="36" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 执行数据库还原操作</option>
-                                            <option value="37" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 删除SQL文件</option>
-                                            <option value="38" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 邮件发送SQL文件</option>
-                                            <option value="39" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 打包SQL文件</option>
-                                            <option value="40" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 查看已打包SQL文件</option>
-                                            <option value="41" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 解压缩ZIP文件</option>
-                                            <option value="42" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 删除zip压缩文件</option>
-                                            <option value="43" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 下载备份的SQL,ZIP文件</option>
-                                            <option value="44" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;└ 数据库优化修复</option>
-                                            <option value="46" level="2">&nbsp;&nbsp;&nbsp;&nbsp;├ 网站功能</option>
-                                            <option value="47" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 菜单列表</option>
-                                            <option value="48" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 添加/编辑菜单</option>
-                                            <option value="49" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 轮播列表</option>
-                                            <option value="50" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 添加/编辑轮播</option>
-                                            <option value="51" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 单页列表</option>
-                                            <option value="52" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 添加/编辑单页</option>
-                                            <option value="53" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 标签列表</option>
-                                            <option value="54" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 添加/编辑标签</option>
-                                            <option value="55" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 模版标签生成</option>
-                                            <option value="56" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 文件管理</option>
-                                            <option value="57" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 友情链接列表</option>
-                                            <option value="58" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 添加/编辑友情链接</option>
-                                            <option value="59" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 留言信息列表</option>
-                                            <option value="61" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 删除单页</option>
-                                            <option value="62" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 删除轮播</option>
-                                            <option value="63" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 删除友情链接</option>
-                                            <option value="64" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 删除留言</option>
-                                            <option value="65" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 删除标签</option>
-                                            <option value="66" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;└ 文章分类</option>
-                                            <option value="60" level="2">&nbsp;&nbsp;&nbsp;&nbsp;├ 产品管理</option>
-                                            <option value="67" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 产品列表</option>
-                                            <option value="68" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 编辑产品</option>
-                                            <option value="69" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 添加产品</option>
-                                            <option value="70" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 分类列表</option>
-                                            <option value="71" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 删除产品</option>
-                                            <option value="72" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 快速推荐</option>
-                                            <option value="73" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 快速审核</option>
-                                            <option value="74" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├ 手机推荐</option>
-                                            <option value="75" level="3">&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;└ 标题检查</option>
-                                            <option value="78" level="2">&nbsp;&nbsp;&nbsp;&nbsp;└ 模型管理</option>
-                                            <option value="79" level="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├ 模型列表</option>
-                                            <option value="80" level="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└ 添加模型</option></select>
+                                        <select name="auth_pid" style="min-width: 80px;">
+                                            <option value="0" level="-1">根节点(后台管理)</option>
+                                            <volist name="group" id="vo">
+                                                <option value="{$vo.auth_id}" level="{$vo.auth_level}" <?php if($auth_id_info['auth_id'] ==$vo['auth_id']) echo selected;?>>
+                                                    <if condition="$vo['auth_level'] == 0 ">&nbsp;&nbsp;&nbsp;&nbsp;├ {$vo.auth_name}
+                                                        <else /> &nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;└ {$vo.auth_name}
+                                                    </if>
+                                                </option>
+                                            </volist>
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
@@ -147,16 +81,11 @@
                                     <td>
                                         <input class="input" name="sort" type="text" size="40" value="" /></td>
                                 </tr>
-                                <tr>
-                                    <th>描 述：</th>
-                                    <td>
-                                        <textarea name="remark" style="width: 400px;"></textarea>
-                                    </td>
-                                </tr>
                             </table>
-                            <input type="hidden" name="id" value="" /></form>
+                        </form>
                         <div class="commonBtnArea">
-                            <button class="btn submit">提交</button></div>
+                            <button class="btn submit">提交</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -166,7 +95,7 @@
 	    <include file="Public:footer" />
         <script type="text/javascript">$(function() {
                 $(".submit").click(function() {
-                    commonAjaxSubmit();
+                    $("form").submit();
                 });
             });
 		</script>

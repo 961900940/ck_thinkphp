@@ -71,6 +71,7 @@ class AccessController extends CommonController {
             }
         }
         $this->assign('access_list',$arr);
+        //var_dump($arr);exit;
 		$this->display();
 	}
 
@@ -87,8 +88,11 @@ class AccessController extends CommonController {
         }
         if(IS_POST){
             $res = D("Auth_access")->edit_node();
-            var_dump(M("Auth_access")->getLastSql());
-            var_dump($res);exit;
+            if ($res) {
+                $this->success("更新成功,节点列表跳转中...",U("Access/nodeList"),3);
+            }else{
+                $this->error("更新失败,请重试...");
+            }
         }else{
             $auth_id_info = D("Auth_access")->auth_id_info($auth_id);
             $this->assign('auth_id_info',$auth_id_info);//单个节点的信息
@@ -113,7 +117,31 @@ class AccessController extends CommonController {
 
 	//添加节点
 	public function addNode(){
-		$this->display();
+        if(IS_POST){
+            $res = D("Auth_access")->add_node();
+            var_dump($res);
+            if ($res) {
+                $this->success("添加成功,节点列表跳转中...",U("Access/nodeList"),3);
+            }else{
+                $this->error("添加失败,请重试...");
+            }
+        }else{
+            //模块
+            $Prole_list = D("Auth_access")->Prole_list();
+            //方法
+            $Srole_list = D("Auth_access")->Srole_list();
+            $arr = array();
+            foreach ($Prole_list as $key => $value) {
+                $arr[] = $value;
+                foreach ($Srole_list as $k => $v) {
+                    if ($value['auth_id'] == $v['auth_pid']) {
+                        $arr[] =$v;
+                    }
+                }
+            }
+            $this->assign("group",$arr);
+            $this->display();
+        }
 	}
 
 

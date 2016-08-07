@@ -8,6 +8,7 @@ class IndexController extends CommonController {
 		$this->display();
     }
 
+	/**修改账号密码**/
 	public function myInfo(){
 		$this->display();
 	}

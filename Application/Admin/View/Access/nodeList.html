@@ -42,7 +42,6 @@
 					            <td>显示名</td>
 					            <td>排序名称</td>
 					            <td>类型</td>
-					            <td>状态</td>
 					            <td width="150">操作</td></tr>
 					    </thead>
 
@@ -67,8 +66,7 @@
                                     <else />操作(ACTION_NAME)
                                     </if>
                                 </td>
-    					        <td>启用</td>
-    					        <td>[<a href="javascript:void(0);" class="opStatus" val="1">禁用</a>]
+    					        <td>
                                     [<a href="__MODULE__/Access/editNode?auth_id={$vo.auth_id}" class="edit">编辑</a>]
                                 </td>
                             </tr>
@@ -94,37 +92,22 @@
     <include file="Public:footer" />
     <script type="text/javascript">
         $(function(){
-            //快捷启用禁用操作
-            $(".opStatus").click(function(){
-                var obj=$(this);
-                var id=$(this).parents("tr").attr("id");
-                var status=$(this).attr("val");
-                $.getJSON("/Tprbac/index.php/conist/Access/opNodeStatus", { id:id, status:status }, function(json){
-                    if(json.status==1){
-                        popup.success(json.info);
-                        $(obj).attr("val",json.data.status).html(status==1?"启用":"禁用").parents("td").prev().html(status==1?"禁用":"启用");
-                    }else{
-                        popup.alert(json.info);
-                    }
-                });
-            });
-
             //快捷改变操作排序dblclick
-            $("tbody>tr>td[fd]").click(function(){
-                var inval = $(this).html();
-                var infd = $(this).attr("fd");
-                var inid =  $(this).parents("tr").attr("id");
-                if($(this).attr('edit')==0){
-                    $(this).attr('edit','1').html("<input class='input' size='5' id='edit_"+infd+"_"+inid+"' value='"+inval+"' />").find("input").select();
-                }
-                $("#edit_"+infd+"_"+inid).focus().bind("blur",function(){
-                    var editval = $(this).val();
-                    $(this).parents("td").html(editval).attr('edit','0');
-                    if(inval!=editval){
-                        $.post("/Tprbac/index.php/conist/Access/opSort",{id:inid,fd:infd,sort:editval});
-                    }
-                })
-            });
+            // $("tbody>tr>td[fd]").click(function(){
+            //     var inval = $(this).html();
+            //     var infd = $(this).attr("fd");
+            //     var inid =  $(this).parents("tr").attr("id");
+            //     if($(this).attr('edit')==0){
+            //         $(this).attr('edit','1').html("<input class='input' size='5' id='edit_"+infd+"_"+inid+"' value='"+inval+"' />").find("input").select();
+            //     }
+            //     $("#edit_"+infd+"_"+inid).focus().bind("blur",function(){
+            //         var editval = $(this).val();
+            //         $(this).parents("td").html(editval).attr('edit','0');
+            //         if(inval!=editval){
+            //             $.post("/Tprbac/index.php/conist/Access/opSort",{id:inid,fd:infd,sort:editval});
+            //         }
+            //     })
+            // });
 
             var chn=function(cid,op){
                 if(op=="show"){
