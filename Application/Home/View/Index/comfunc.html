@@ -13,27 +13,43 @@
 
     1、字符串
     <xmp>
-    strpos(string,find) 	函数查找字符串在另一字符串中第一次出现的位置(区分大小写,返回字符串在另一字符串中第一次出现的位置，如果没有找到字符串则返回 FALSE)
-    	stripos()  			查找字符串在另一字符串中第一次出现的位置（不区分大小写）
-    	strripos() 			查找字符串在另一字符串中最后一次出现的位置（不区分大小写）
-    	strrpos() 			查找字符串在另一字符串中最后一次出现的位置（区分大小写）
+	trim($str,"Hed!")				移除字符串两侧的字符（"Hello" 中的 "He" 以及 "World" 中的 "d!"）
+	explode(separator,string)		把字符串打散为数组
+	substr(string,start,length)		返回字符串的一部分
+	strlen(string)					返回字符串的长度
+	strrev(string)					反转字符串
+	strip_tags(string,allow)		返回被剥离的字符串。
+	
+    strpos(string,find) 			查找字符串首次出现的位置(区分大小写,函数查找字符串在另一字符串中第一次出现的位置如果没有找到字符串则返回 FALSE)
+    	stripos()  					查找字符串在另一字符串中第一次出现的位置（不区分大小写）
+    	strripos() 					查找字符串在另一字符串中最后一次出现的位置（不区分大小写）
+    	strrpos() 					查找字符串在另一字符串中最后一次出现的位置（区分大小写）
 
     str_replace(find,replace,string,count)  以其他字符替换字符串中的一些字符（区分大小写, count 可选-------对替换数进行计数的变量）
-        str_ireplace()         函数执行不区分大小写的搜索
+        str_ireplace()         		函数执行不区分大小写的搜索
 
-	str_repeat() 函数把字符串重复指定的次数。
+	str_repeat() 					函数把字符串重复指定的次数。
 		str_repeat("Shanghai",5);	//把字符串 "Shanghai " 重复 5 次
 
-    ucfirst(string)         把字符串中的首字符转换为大写
-        lcfirst(string)     把字符串中的首字符转换为小写
-        ucwords(string)     把每个单词的首字符转换为大写
-        strtoupper(string)  把字符串转换为大写
-        strtolower(string)  把字符串转换为小写
+    ucfirst(string)         		把字符串中的首字符转换为大写
+        lcfirst(string)     		把字符串中的首字符转换为小写
+        ucwords(string)     		把每个单词的首字符转换为大写
+        strtoupper(string)  		把字符串转换为大写
+        strtolower(string)  		把字符串转换为小写
 
     </xmp>
 
     2、数组
     <xmp>
+	in_array(search,array)				判断数组中是否有某个元素
+	implode(separator,array)			返回由数组元素组合成的字符串。
+	json_encode(array)					将数组转化成json
+	sort()
+	array_merge(array1,array2,array3...)把一个或多个数组合并为一个数组(有相同的键名，则最后的元素会覆盖其他元素)
+		array_merge_recursive() 		不会进行键名覆盖，而是将多个相同键名的值递归组成一个数组
+	array_key_exists(key,array)			检查某个数组中是否存在指定的键名
+	array_unique()						函数移除数组中的重复的值，并返回结果数组(当几个数组元素的值相等时，只保留第一个元素，其他的元素被删除)
+		
     array_shift(array)                  删除数组中的第一个元素，并返回被删除元素的值
     array_push(array,value1,value2...)  向第一个参数的数组尾部添加一个或多个元素（入栈），然后返回新数组的长度
     array_keys(array,[value,strict])    返回包含数组中所有键名的一个新数组
