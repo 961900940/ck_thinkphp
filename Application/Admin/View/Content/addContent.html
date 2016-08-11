@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>权限管理-后台管理-ck RBAC权限管理</title>
+        <!--公共头文件-->
+        <include file="Public:head" />
+    </head>
+    <body>
+        <div class="wrap">
+            <!--顶部导航菜单-->
+	        <div id="Top">
+                <include file="Public:wrap_top" />
+	        </div>
+            <!--Tags标签-->
+            <div id="Tags">
+				<include file="Public:wrap_tags" />
+                    <div class="nav">
+                        <font id="today"></font>您的位置：权限管理 > 添加管理员
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="mainBody">
+                <!--子菜单列表-->
+	            <div id="Left">
+                    <include file="Public:main_left" />
+	            </div>
+                <!--content内容主体-->
+                <div id="Right">
+                    <div class="contentArea">
+                        <div class="Item hr">
+                            <div class="current">添加内容</div></div>
+                        <form action="__SELF__" method="post">
+							<!--样式图片和样式文件-->
+							<link href="__STATIC__/umeditor1_2_2-utf8-php/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
+							<!--第三方插件-->
+							<script type="text/javascript" src="__STATIC__/umeditor1_2_2-utf8-php/third-party/jquery.min.js"></script>
+
+							<!-- 配置文件 -->
+							<script type="text/javascript" src="__STATIC__/umeditor1_2_2-utf8-php/umeditor.config.js"></script>
+							<!-- 编辑器源码文件 -->
+							<script type="text/javascript" src="__STATIC__/umeditor1_2_2-utf8-php/umeditor.min.js"></script>
+							<!-- 语言包文件 -->
+							<script type="text/javascript" charset="utf-8" src="__STATIC__/umeditor1_2_2-utf8-php/lang/zh-cn/zh-cn.js"></script>
+							<!-- 实例化编辑器 -->
+							<script type="text/javascript">
+								$(function(){
+									var um = UM.getEditor('editor');
+								});
+								 
+							</script>
+                            <!-- 加载编辑器的容器 -->
+							<script type="text/plain" id="editor" style="width:100%;height:360px;"></script>
+                        </form>
+                        <div class="commonBtnArea">
+                            <button class="btn submit" type="submit">提交</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <!--尾部js css-->
+	    <include file="Public:footer" />
+        <script type="text/javascript">
+            $(".submit").click(function() {
+                // commonAjaxSubmit();
+                $("form").submit();
+            });
+        </script>
+    </body>
+
+</html>
