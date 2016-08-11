@@ -73,7 +73,7 @@ class AuthAccessModel extends Model{
             $where['auth_name'] = $auth_name;
             $where['auth_pid'] = $auth_pid;
             $where['auth_c'] = ucfirst($Pauth_c['auth_c']);
-            $where['auth_a'] = strtolower($auth_ac);
+            $where['auth_a'] = $auth_ac;    //strtolower($auth_ac)
             $where['auth_path'] = $auth_pid.'-'.$auth_id;   //全路径 父节点id-当前节点id
             $where['auth_level'] = 1;
             $where['sort'] = $sort;
@@ -85,7 +85,7 @@ class AuthAccessModel extends Model{
             $where['auth_name'] = $auth_name;
             $where['auth_pid'] = $auth_pid;
             $where['auth_c'] = ucfirst($Pauth_c['auth_c']);
-            $where['auth_a'] = strtolower($auth_ac);
+            $where['auth_a'] = $auth_ac;  //strtolower($auth_ac)
             $where['auth_path'] = $auth_pid.'-'.$auth_id;   //全路径 父节点id-当前节点id
             $where['auth_level'] = 2;
             $where['sort'] = $sort;
@@ -126,7 +126,7 @@ class AuthAccessModel extends Model{
             $where['auth_name'] = $auth_name;
             $where['auth_pid'] = $auth_pid;
             $where['auth_c'] = ucfirst($Pauth_c['auth_c']);
-            $where['auth_a'] = strtolower($auth_ac);
+            $where['auth_a'] = $auth_ac;    //strtolower($auth_ac)
             $where['auth_level'] = 1;
             $where['sort'] = $sort;
             $where['is_display'] = 1;
@@ -144,7 +144,7 @@ class AuthAccessModel extends Model{
             $where['auth_name'] = $auth_name;
             $where['auth_pid'] = $auth_pid;
             $where['auth_c'] = ucfirst($Pauth_c['auth_c']);
-            $where['auth_a'] = strtolower($auth_ac);
+            $where['auth_a'] = $auth_ac;    //strtolower($auth_ac)
             $where['auth_level'] = 2;
             $where['sort'] = $sort;
             $where['is_display'] = 0;

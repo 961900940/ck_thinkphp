@@ -119,7 +119,6 @@ class AccessController extends CommonController {
 	public function addNode(){
         if(IS_POST){
             $res = D("Auth_access")->add_node();
-            var_dump($res);
             if ($res) {
                 $this->success("添加成功,节点列表跳转中...",U("Access/nodeList"),3);
             }else{

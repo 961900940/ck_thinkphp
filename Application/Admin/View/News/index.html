@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>权限管理-后台管理-ck RBAC权限管理</title>
+        <!--公共头文件-->
+        <include file="Public:head" />
+    </head>
+    <body>
+        <div class="wrap">
+            <!--顶部导航菜单-->
+	        <div id="Top">
+                <include file="Public:wrap_top" />
+	        </div>
+            <!--Tags标签-->
+	        <div id="Tags">
+                <include file="Public:wrap_tags" />
+                    <div class="nav">
+                        <font id="today"></font>您的位置：权限管理 > 管理员列表
+                    </div>
+                </div>
+	        </div>
+	        <div class="clear"></div>
+	        <div class="mainBody">
+                <!--子菜单列表-->
+	            <div id="Left">
+    	            <include file="Public:main_left" />
+	            </div>
+                <!--content内容主体-->
+	            <div id="Right">
+                    <div class="Item hr">
+                        <div class="current">管理员列表</div>
+                    </div>
+                    {$content.content}
+                </div>
+	    	</div>
+    	<div class="clear"></div>
+    <!--尾部js css-->
+    <include file="Public:footer" />
+    </body>
+</html>
