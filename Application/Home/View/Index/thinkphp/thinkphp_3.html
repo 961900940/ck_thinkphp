@@ -84,7 +84,7 @@
         $info = $Auth_admin ->where($data)->select();
     </pre>
 
-     3、切换数据库
+    3、切换数据库
     <xmp>
         config 添加 数据库配置
         'DB_CONFIG2' => 'mysql://root:1234@localhost:3306/thinkphp#utf8';       //数据库配置2
@@ -109,6 +109,37 @@
         3、
         $model = M("onethink_user",null,"ot");
         $info  = $model->field('name,age')->where($map)->find();
+
+    4、跨库操作数据时,在当前控制器下调用新建model(model名为不存在的表名),
+    <xmp>
+        config 添加 数据库配置
+        'onethink' => 'mysql://root:1234@localhost:3306/thinkphp#utf8';       //数据库配置2
+    </xmp>
+    <pre style='color:#000000;background:#f1f0f0;'>
+        model:
+        class PhonesetModel extends Model{
+            protected $connection = 'onethink';
+            protected $tablePrefix = 'onethink_';
+
+            public function getEnterPriseInfo($siteid, $fileds = '*'){
+                    $onethink_model = M('','','onethink');
+                    $name_tmp = $onethink_model->query(sprintf("SELECT %s FROM onethink_action WHERE id='%s'", $fileds, $siteid));
+                    return $name_tmp;
+                }
+            }
+        }
+
+        控制器：
+        namespace Admin\Controller;
+        class ArticleController extends AdminController {
+
+            public function phonebill(){
+                $id = '1';
+                $onethink_model = M('','','onethink');
+                $res = D("Phoneset")->getEnterPriseInfo($id, $fileds = 'createtime');
+                var_dump($res);exit;
+            }
+        }
     </pre>
 </body>
 </html>
