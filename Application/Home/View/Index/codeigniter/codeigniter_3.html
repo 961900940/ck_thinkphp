@@ -52,5 +52,11 @@
     $dsn = 'dbdriver://username:password@hostname/database';
     $this->load->database($dsn);
     </xmp>
+
+    4、调用其他model的方法操作数据，得到数据源
+    <pre style='color:#55cc66;background:#001800;'>
+    $this->load->model('article_model');
+    $result = $this->article_model->getAllArticle(参数);
+    </pre>
 </body>
 </html>
