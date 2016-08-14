@@ -19,7 +19,7 @@
 	strlen(string)					返回字符串的长度
 	strrev(string)					反转字符串
 	strip_tags(string,allow)		返回被剥离的字符串。
-	
+
     strpos(string,find) 			查找字符串首次出现的位置(区分大小写,函数查找字符串在另一字符串中第一次出现的位置如果没有找到字符串则返回 FALSE)
     	stripos()  					查找字符串在另一字符串中第一次出现的位置（不区分大小写）
     	strripos() 					查找字符串在另一字符串中最后一次出现的位置（不区分大小写）
@@ -42,7 +42,7 @@
     2、数组
     <xmp>
     count()和 sizeof()                  统计数组下标的个数
-    
+
 	in_array(search,array)				判断数组中是否有某个元素
 	implode(separator,array)			返回由数组元素组合成的字符串。
 	json_encode(array)					将数组转化成json
@@ -51,7 +51,7 @@
 		array_merge_recursive() 		不会进行键名覆盖，而是将多个相同键名的值递归组成一个数组
 	array_key_exists(key,array)			检查某个数组中是否存在指定的键名
 	array_unique()						函数移除数组中的重复的值，并返回结果数组(当几个数组元素的值相等时，只保留第一个元素，其他的元素被删除)
-		
+
     array_shift(array)                  删除数组中的第一个元素，并返回被删除元素的值
     array_push(array,value1,value2...)  向第一个参数的数组尾部添加一个或多个元素（入栈），然后返回新数组的长度
     array_keys(array,[value,strict])    返回包含数组中所有键名的一个新数组
@@ -87,6 +87,13 @@
     6、其他
     <xmp>
     get_defined_constants([true]);//获得当前系统给我们提供的常量（系统和自定义的）【true参数会把常量进行自动分组显示】
+
+    ENT_COMPAT - 默认。仅解码双引号。| ENT_QUOTES - 解码双引号和单引号。 | ENT_NOQUOTES - 不解码任何引号。
+    PHP htmlspecialchars() 把 & ' " < 和 > 转换成HTML 实体
+    PHP htmlspecialchars_decode() 把 & ' " < 和 > HTML 实体反转成字符
+    PHP htmlentities() 把HTML标签字符转换为 HTML 实体
+    PHP html_entity_decode() 将所有HTML 实体转成字符原型
+
     </xmp>
 </pre>
 </body>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>权限管理-后台管理-ck RBAC权限管理</title>
+        <!--公共头文件-->
+        <include file="Public:head" />
+    </head>
+    <body>
+        <div class="wrap">
+            <!--顶部导航菜单-->
+	        <div id="Top">
+                <include file="Public:wrap_top" />
+	        </div>
+            <!--Tags标签-->
+            <div id="Tags">
+				<include file="Public:wrap_tags" />
+                    <div class="nav">
+                        <font id="today"></font>您的位置：权限管理 > 添加管理员
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="mainBody">
+                <!--子菜单列表-->
+	            <div id="Left">
+                    <include file="Public:main_left" />
+	            </div>
+                <!--content内容主体-->
+                <div id="Right">
+                    <div class="contentArea">
+                        <div class="Item hr">
+                            <div class="current">添加内容</div></div>
+                        <form action="__SELF__" method="post" enctype="multipart/form-data">
+                            <link rel="stylesheet" href="__STATIC__/kindeditor-4.1.4/themes/default/default.css" />
+                    		<script charset="utf-8" src="__STATIC__/kindeditor-4.1.4/kindeditor-min.js"></script>
+                    		<script charset="utf-8" src="__STATIC__/kindeditor-4.1.4/lang/zh-CN.js"></script>
+
+                            <textarea name="content" style="width:700px;height:200px;visibility:hidden;">KindEditor</textarea>
+                            <p>
+                				<!-- 您当前输入了 <span class="word_count1">0</span> 个文字。（字数统计包含HTML代码。）<br /> -->
+                				您当前输入了 <span class="word_count2">0</span> 个文字。（字数统计包含纯文本、IMG、EMBED，不包含换行符，IMG和EMBED算一个文字。）
+                			</p>
+                            <input type="hidden" id="contents" name="contents" value=""/>
+                            <script>
+                    			var editor;
+                    			KindEditor.ready(function(K) {
+                    				editor = K.create('textarea[name="content"]', {
+                                        //filterMode : false,    //关闭HTML过滤
+                    					resizeType : 2,         //1时只能改变高度，0时不能拖动，2时可以拖动改变高度，宽度
+                                        autoHeightMode : true,    //自动调整高度
+                                        allowPreviewEmoticons : true,	//鼠标放在表情上可以预览表情。
+                    					allowImageUpload : true,
+                                        allowFileManager : true,
+                                        uploadJson : '__STATIC__/kindeditor-4.1.4/php/upload_json.php',
+                                        fileManagerJson : '__STATIC__/kindeditor-4.1.4/php/file_manager_json.php',
+                                        //minWidth:"600px",    //编辑器最小宽度
+                                        //minHeight:"270px",    //编辑器最小高度
+                                        //imageUploadJson : '__STATIC__/kindeditor-4.1.4/php/upload_json.php',
+                                        //fileManagerJson : '__STATIC__/kindeditor-4.1.4/php/file_manager_json.php',
+                                        //allowFileManager : true,
+                                        afterChange : function() {
+                    						K('.word_count1').html(this.count());
+                    						K('.word_count2').html(this.count('text'));
+                    					},
+                    					items : [
+                    						'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                    						'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                    						'insertunorderedlist', '|', 'emoticons', 'image','multiimage', 'link','code','fullscreen']
+                    				});
+                    			});
+                    		</script>
+                        </form>
+                        <div class="commonBtnArea">
+                            <button class="btn submit" type="submit">提交</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <!--尾部js css-->
+	    <include file="Public:footer" />
+        <script type="text/javascript">
+            $(".submit").click(function() {
+                $("#contents").val(editor.html());
+                $("form").submit();
+            });
+        </script>
+    </body>
+
+</html>
