@@ -54,11 +54,8 @@
                                         allowFileManager : true,
                                         uploadJson : '__STATIC__/kindeditor-4.1.4/php/upload_json.php',
                                         fileManagerJson : '__STATIC__/kindeditor-4.1.4/php/file_manager_json.php',
-                                        //minWidth:"600px",    //编辑器最小宽度
-                                        //minHeight:"270px",    //编辑器最小高度
-                                        //imageUploadJson : '__STATIC__/kindeditor-4.1.4/php/upload_json.php',
-                                        //fileManagerJson : '__STATIC__/kindeditor-4.1.4/php/file_manager_json.php',
-                                        //allowFileManager : true,
+                                        minWidth:"600px",    //编辑器最小宽度
+                                        minHeight:"500px",    //编辑器最小高度
                                         afterChange : function() {
                     						K('.word_count1').html(this.count());
                     						K('.word_count2').html(this.count('text'));

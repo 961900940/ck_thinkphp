@@ -9,7 +9,7 @@ class ProductController extends CommonController {
     public function index(){
         $Newscontent =  M('Content');
 		$content = $Newscontent->where("id=3")->find();
-        //print($content['content']);
+        // print($content['content']);
         //var_dump($content['content']);exit;
 		$this->assign('content',$content);
 		$this->display();
@@ -19,6 +19,7 @@ class ProductController extends CommonController {
 	public function addProduct(){
 		if(IS_POST){
             $content = html_entity_decode( I("contents"));//htmlspecialchars_decode
+            // $content = strip_tags(I("contents"));
             $data['content'] = $content;
 			$data['updatetime'] = date('Y-m-d H:i:s',time());
 			$Newscontent =  M('Content');
