@@ -36,18 +36,7 @@
         <!--尾部js css-->
 	    <include file="Public:footer" />
         <script type="text/javascript">
-            $(".submit").click(function() {
-                if ($.trim($("input[name='username']").val()) == '') {
-                    popup.alert("登录账号不能为空");
-                    return false;
-                }
-                if ($.trim($("input[name='pwd']").val()) == '') {
-                    popup.alert("密码不能为空");
-                    return false;
-                }
-                // commonAjaxSubmit();
-                $("form").submit();
-            });
+            
         </script>
     </body>
 
