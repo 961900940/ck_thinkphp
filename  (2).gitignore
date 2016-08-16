@@ -1,0 +1,6 @@
+﻿/.gitignore
+/Application/Admin/Conf/config.php
+/Application/Admin/Conf/db.debug.php
+/Application/Admin/Conf/db.php
+/Application/Admin/Conf/extConfig.php
+/Application/Admin/Conf/extConfig.php.bak
