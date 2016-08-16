@@ -32,26 +32,31 @@
                         <div class="Item hr">
                             <div class="current">添加内容</div>
 						</div>
-						<form action="{:U('Product/addProduct')}" method="post" enctype="multipart/form-data">
-							<script type="text/javascript" src="__STATIC__/js/jquery.js"></script>
+						<form action="{:U('Product/addProduct')}" method="post">
+							<script type="text/javascript" src="__STATIC__/js/jquery-2.0.3.min.js"></script>
 							<script type="text/javascript" src="__STATIC__/kindeditor/kindeditor-all-min.js"></script>
 							<script type="text/javascript" src="__STATIC__/kindeditor/lang/zh_CN.js"></script>
 							<!--  <script charset="utf-8" src="__PUBLIC__/editor/kindeditor/plugins/code/prettify.js"></script> -->
 							<link rel="stylesheet" type="text/css" href="__STATIC__/kindeditor/themes/default/default.css ">
-							
-							<textarea name="content" style="width:670px;height:370px"></textarea>
-							<input type="hidden" id="contents" name="contents" value=""/>
+
+							<textarea name="content" id="content" style="width:800px;height:300px"></textarea>
 							<script>
 								var editor;
 								KindEditor.ready(function(K) {
-									editor = K.create('#content');
+									editor = K.create('#content',{
+                                        cssPath : '__STATIC__/kindeditor/plugins/code/prettify.css',
+                        				uploadJson : '__STATIC__/kindeditor/php/upload_json.php',
+                        				fileManagerJson : '__STATIC__/kindeditor/php/file_manager_json.php',
+                        				allowFileManager : true,
+                                    });
 								});
 							</script>
 							</script>
+                            <div class="commonBtnArea">
+                                <button class="btn submit" type="submit">提交</button>
+                            </div>
 						</form>
-                        <div class="commonBtnArea">
-                            <button class="btn submit" type="button">提交</button>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -60,10 +65,9 @@
         <!--尾部js css-->
 	    <include file="Public:footer" />
         <script type="text/javascript">
-            $(".submit").click(function() {
-                $("form").submit();
-            });
+            // $(".submit").click(function() {
+            //     $("form").submit();
+            // });
         </script>
     </body>
-
 </html>
