@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>权限管理-后台管理-ck RBAC权限管理</title>
+        <!--公共头文件-->
+        <include file="Public:head" />
+    </head>
+    <body>
+        <div class="wrap">
+            <!--顶部导航菜单-->
+	        <div id="Top">
+                <include file="Public:wrap_top" />
+	        </div>
+            <!--Tags标签-->
+            <div id="Tags">
+				<include file="Public:wrap_tags" />
+                    <div class="nav">
+                        <font id="today"></font>您的位置：权限管理 > 添加管理员
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="mainBody">
+                <!--子菜单列表-->
+	            <div id="Left">
+                    <include file="Public:main_left" />
+	            </div>
+                <!--content内容主体-->
+                <div id="Right">
+                    <div class="contentArea">
+                        <div class="Item hr">
+                            <div class="current">添加内容</div>
+						</div>
+						<form action="{:U('Article/addArticle')}" method="post">
+							<script type="text/javascript" src="__STATIC__/js/jquery-2.0.3.min.js"></script>
+							<script type="text/javascript" src="__STATIC__/kindeditor/kindeditor-all-min.js"></script>
+							<script type="text/javascript" src="__STATIC__/kindeditor/lang/zh_CN.js"></script>
+							<!--  <script charset="utf-8" src="__PUBLIC__/editor/kindeditor/plugins/code/prettify.js"></script> -->
+							<link rel="stylesheet" type="text/css" href="__STATIC__/kindeditor/themes/default/default.css ">
+
+							<textarea name="content" id="content" style="width:800px;height:300px"></textarea>
+							<p>
+                				<!-- 您当前输入了 <span class="word_count1">0</span> 个文字。（字数统计包含HTML代码。）<br /> -->
+                				您当前输入了 <span class="word_count2">0</span> 个文字。（字数统计包含纯文本、IMG、EMBED，不包含换行符，IMG和EMBED算一个文字。）
+                			</p>
+							<script>
+								var editor;
+								KindEditor.ready(function(K) {
+									//editor = K.create('#content');
+									
+                                    editor = K.create('#content',{
+                                        afterChange : function() {
+                                            K('.word_count1').html(this.count());
+                                            K('.word_count2').html(this.count('text'));
+                                        },
+                                    });
+								});
+							</script>
+							</script>
+                            <div class="commonBtnArea">
+                                <button class="btn submit" type="submit">提交</button>
+                            </div>
+						</form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <!--尾部js css-->
+	    <include file="Public:footer" />
+        <script type="text/javascript">
+            
+        </script>
+    </body>
+</html>
