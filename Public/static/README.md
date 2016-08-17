@@ -49,4 +49,39 @@
 		$content = html_entity_decode( I("contents"));//htmlspecialchars_decode
 		
 
+###kindeditor使用方法
+		1、控制器 htmlspecialchars_decode转换一下
+		$data['content'] = htmlspecialchars_decode($content);
+    	$data['updatetime'] = date('Y-m-d H:i:s',time());
+    	$Newscontent =  M('Content');
+    	$res = $Newscontent->add($data);		
+		2、添加页面
+		<form action="{:U('Product/addProduct')}" method="post">
+			<script type="text/javascript" src="__STATIC__/js/jquery-2.0.3.min.js"></script>
+			<script type="text/javascript" src="__STATIC__/kindeditor/kindeditor-all-min.js"></script>
+			<script type="text/javascript" src="__STATIC__/kindeditor/lang/zh_CN.js"></script>
+			<!--  <script charset="utf-8" src="__PUBLIC__/editor/kindeditor/plugins/code/prettify.js"></script> -->
+			<link rel="stylesheet" type="text/css" href="__STATIC__/kindeditor/themes/default/default.css ">
+	
+			<textarea name="content" id="content" style="width:800px;height:300px"></textarea>
+			<script>
+				var editor;
+				KindEditor.ready(function(K) {
+					editor = K.create('#content');
+				});
+			</script>
+			</script>
+	        <div class="commonBtnArea">
+	            <button class="btn submit" type="submit">提交</button>
+	        </div>
+		</form>
+		3、修改文件内容(图片上传路径 ck_thinkphp\upload\image\20160815\20160815173157_69238.jpg)
+	    修改file_manager_json.php
+	    $root_path = $php_path . '../../../../upload/';
+	    $root_url = $php_url . '../../../../upload/';
+	    修改upload_json.php
+	    $save_path = $php_path . '../../../../upload/';
+	    $save_url = $php_url . '../../../../upload/';
+
+###ueditor1_ 4_ 3_3-utf8-php(推荐)
 		
