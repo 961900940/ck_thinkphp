@@ -31,25 +31,25 @@
                     <div class="Item hr">
                         <div class="current">文章管理列表</div>
                     </div>
-					<form action="" method="get">
+					<form action="__SELF__" method="post">
 						标题：
-						<input type="text" name="title" value="" size="30" style="margin-right: 20px;">
+						<input type="text" name="title" value="{$var.title}" size="30" style="margin-right: 20px;">
 						分类：
 						<select name="cid" style="margin-right: 20px;">
 							<?php if ($Article_category): ?>
                                 <option value="">--请选择--</option>
                                 <?php foreach ($Article_category as $key => $value): ?>
-                                    <option value="{$value.cid}">{$value.category_name}</option>       
-                                <?php endforeach ?>    
+                                    <option value="{$value.cid}">{$value.category_name}</option>
+                                <?php endforeach ?>
                             <?php else: ?>
                                 <option value="">---请先添加文章分类---</option>
-                            <?php endif ?>                           
+                            <?php endif ?>
 						</select>
 						状态：
 						<select name="status" style="margin-right: 20px;">
 							<option value="">--请选择--</option>
-							<option value="1" >已发布</option>
-							<option value="0" >未发布</option>
+							<option value="1">已发布</option>
+							<option value="0">未发布</option>
 						</select>
 						热门：
 						<select name="is_hot" style="margin-right: 20px;">
@@ -80,7 +80,7 @@
                         <?php foreach ($article as $k => $v): ?>
                             <tr align="center" id="34">
                                 <td align="left" style="text-align:center;">
-                                    <a href="/Tprbac/index.php/conist/Product/edit?id={$v.id}">{$v.title}</a>
+                                    <a href="__CONTROLLER__/editArticle?id={$v.id}">{$v.title}</a>
                                 </td>
                                 <td>{$v.category_name}</td>
                                 <td>{$v.update_time}</td>
@@ -102,9 +102,8 @@
 									</if>
                                 </td>
                                 <td>
-                                    [ <a href="/Tprbac/index.php/conist/Product/edit?id=34&do=copy">复制 </a> ]
-                                    [ <a href="/Tprbac/index.php/conist/Product/edit?id=34">编辑 </a> ] 
-                                    [ <a link="/Tprbac/index.php/conist/Product/del/id/34" href="javascript:void(0)" name="添加编辑产品" class="del">删除 </a> ]
+                                    [ <a href="__CONTROLLER__/editArticle?id={$v.id}" class="edit">编辑 </a> ]
+                                    [ <a href="javascript:void(0)" class="del" data="{$v.id}">删除 </a> ]
                                 </td>
                             </tr>
                         <?php endforeach ?>
@@ -116,7 +115,26 @@
         <!--尾部js css-->
 	    <include file="Public:footer" />
         <script type="text/javascript">
-
+            $(function(){
+                //删除文章
+                $(".del").click(function(){
+					var id = $(this).attr("data");
+                    $.ajax({
+						url: "<?php echo U('Admin/Article/delArticle'); ?>",
+                        data:{"id":id},
+						type: "post",
+						dataType: "json",
+						success: function (res) {
+							if(res.status == 'success' ){
+								location.href="__SELF__";
+							}else{
+								alert("删除失败!");
+                                window.location.href="__SELF__";
+							}
+						}
+					});
+				});
+            });
         </script>
     </body>
 
