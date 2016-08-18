@@ -28,50 +28,119 @@
 	            </div>
                 <!--content内容主体-->
                 <div id="Right">
-                    <div class="contentArea">
-                        <div class="Item hr">
-                            <div class="current">添加内容</div>
-						</div>
-						<form action="{:U('Article/addArticle')}" method="post">
-							<script type="text/javascript" src="__STATIC__/js/jquery-2.0.3.min.js"></script>
-							<script type="text/javascript" src="__STATIC__/kindeditor/kindeditor-all-min.js"></script>
-							<script type="text/javascript" src="__STATIC__/kindeditor/lang/zh_CN.js"></script>
-							<!--  <script charset="utf-8" src="__PUBLIC__/editor/kindeditor/plugins/code/prettify.js"></script> -->
-							<link rel="stylesheet" type="text/css" href="__STATIC__/kindeditor/themes/default/default.css ">
-
-							<textarea name="content" id="content" style="width:800px;height:300px"></textarea>
-							<p>
-                				<!-- 您当前输入了 <span class="word_count1">0</span> 个文字。（字数统计包含HTML代码。）<br /> -->
-                				您当前输入了 <span class="word_count2">0</span> 个文字。（字数统计包含纯文本、IMG、EMBED，不包含换行符，IMG和EMBED算一个文字。）
-                			</p>
-							<script>
-								var editor;
-								KindEditor.ready(function(K) {
-									//editor = K.create('#content');
-									
-                                    editor = K.create('#content',{
-                                        afterChange : function() {
-                                            K('.word_count1').html(this.count());
-                                            K('.word_count2').html(this.count('text'));
-                                        },
-                                    });
-								});
-							</script>
-							</script>
-                            <div class="commonBtnArea">
-                                <button class="btn submit" type="submit">提交</button>
-                            </div>
-						</form>
-
+                    <div class="Item hr">
+                        <div class="current">添加文章</div>
                     </div>
+                    <form action="__SELF__" method="post">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+                            <tr>
+                                <th width="100">文章标题：</th>
+                                <td>
+                                    <input id="title" type="text" class="input" size="60" name="title" value=""/> 
+                                    <a href="javascript:void(0)" id="checkContentsTitle">检测是否重复</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="100">文章状态：</th>
+                                <td>
+                                    <label><input type="radio" name="status" value="0" checked="checked" /> 未发布</label> &nbsp; 
+                                    <label><input type="radio" name="status" value="1"  /> 已发布</label> 
+                                </td>
+                            </tr>
+							<tr>
+                                <th width="100">热门is_hot：</th>
+                                <td>
+                                    <label><input type="radio" name="is_hot" value="1"  /> 热门</label> &nbsp; 
+                                    <label><input type="radio" name="is_hot" value="0"  checked="checked"/> 不热门</label> 
+                                </td>
+                            </tr>
+							<tr>
+                                <th width="100">置顶is_top：</th>
+                                <td>
+                                     <label><input type="radio" name="is_top" value="1" /> 置顶</label> &nbsp; 
+                                     <label><input type="radio" name="is_top" value="0"  checked="checked"/> 不置顶</label> 
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>文章分类：</th>
+                                    <td>
+                                        <select name="cid">
+                                            <?php if ($Article_category): ?>
+                                                <option>请选择分类</option>
+                                                <?php foreach ($Article_category as $key => $value): ?>
+                                                    <option value="{$value.cid}">{$value.category_name}</option>       
+                                                <?php endforeach ?>    
+                                            <?php else: ?>
+                                                <option>请先添加文章分类</option>
+                                            <?php endif ?>
+                                                                         
+                                        </select>
+                                    </td>
+                                </tr>
+                            <tr>
+                                <th>文章内容：</th>
+                                <td>
+                                    <!-- <textarea id="content" class="" style="height: 300px; width: 80%;" name="info[content]"></textarea> -->
+                                    <textarea id="content" name="content" style="height: 300px; width: 80%;"></textarea>
+                                    <p>
+                                        您当前输入了 <span class="word_count2">0</span> 个文字.(字数统计包含纯文本、IMG、EMBED，不包含换行符，IMG和EMBED算一个文字.)
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+						<div class="commonBtnArea" >
+							<button class="btn submit" type="submit">提交</button>
+						</div>
+                    </form>
                 </div>
             </div>
         </div>
         <div class="clear"></div>
         <!--尾部js css-->
 	    <include file="Public:footer" />
+
+        <script type="text/javascript" src="__STATIC__/jquery-2.0.3.min.js"></script>
+        <script type="text/javascript" src="__STATIC__/kindeditor/kindeditor-all-min.js"></script>
+        <script type="text/javascript" src="__STATIC__/kindeditor/lang/zh_CN.js"></script>
+        <!--<script charset="utf-8" src="__PUBLIC__/kindeditor/plugins/code/prettify.js"></script>-->
+        <link rel="stylesheet" type="text/css" href="__STATIC__/kindeditor/themes/default/default.css ">
+        <script>
+            var editor;
+            KindEditor.ready(function(K) {
+                //editor = K.create('#content');
+                
+                editor = K.create('#content',{
+                    afterChange : function() {
+                        K('.word_count1').html(this.count());
+                        K('.word_count2').html(this.count('text'));
+                    },
+                });
+            });
+        </script>
+
         <script type="text/javascript">
-            
+            $(function(){
+			
+				$("#checkContentsTitle").click(function(){
+					var title = $("#title").val();
+					if(!title){
+						alert("请填写title!");return false;
+					}
+					$.ajax({
+						url: "<?php echo U('Admin/Article/checkContentsTitle'); ?>",
+						data:{"title":title},
+						type: "POST",
+						dataType: "json",
+						success: function (res) {
+							if(res.status == 'success' ){
+								$("#checkContentsTitle").html("<span style='color: rgb(0, 255, 0);'>可以使用</span>");
+							}else{
+								$("#checkContentsTitle").html("<span style='color: rgb(255,0, 0);'>已经存在，请修改标题</span>");
+							}
+						}
+					});
+				});
+			});
         </script>
     </body>
 </html>

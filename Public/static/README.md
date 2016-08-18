@@ -139,7 +139,7 @@
 
 		2、页面添加代码
 		<form action="{:U('Product/addProduct')}" method="post">
-			<script type="text/javascript" src="__STATIC__/js/jquery-2.0.3.min.js"></script>
+			<script type="text/javascript" src="__STATIC__/jquery-2.0.3.min.js"></script>
 			<script type="text/javascript" src="__STATIC__/kindeditor/kindeditor-all-min.js"></script>
 			<script type="text/javascript" src="__STATIC__/kindeditor/lang/zh_CN.js"></script>
 			<!--  <script charset="utf-8" src="__PUBLIC__/editor/kindeditor/plugins/code/prettify.js"></script> -->

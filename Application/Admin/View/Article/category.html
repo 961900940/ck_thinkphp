@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>权限管理-后台管理-ck RBAC权限管理</title>
+        <!--公共头文件-->
+        <include file="Public:head" />
+    </head>
+    <body>
+        <div class="wrap">
+            <!--顶部导航菜单-->
+	        <div id="Top">
+                <include file="Public:wrap_top" />
+	        </div>
+            <!--Tags标签-->
+            <div id="Tags">
+				<include file="Public:wrap_tags" />
+                    <div class="nav">
+                        <font id="today"></font>您的位置：权限管理 > 添加管理员
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="mainBody">
+                <!--子菜单列表-->
+	            <div id="Left">
+                    <include file="Public:main_left" />
+	            </div>
+                <!--content内容主体-->
+                <div id="Right">
+                    <div class="Item hr">
+                        <div class="current">产品分类管理</div>
+                    </div>
+					<b>添加分类：</b>
+					<input placeholder="你要添加的分类名称" id="newName" class="input" type="text" name="category_name" value="" /> &nbsp;
+					<button class="btn quickSubmit" type="submit">确定添加</button>
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab">
+                        <tr align="center">
+                            <td width="10%">原分类CID</td>
+                            <td width="20%">分类名称</td>
+                            <td width="10%" colspan="2">操作</td>
+                        </tr>
+						<?php foreach ($Article_category as $key => $value): ?>
+                            <tr>
+                                <td width="10%" align="center">{$value.cid}</td>
+                                <td width="10%" align="center">
+                                    <input type="text" value="{$value.category_name}" name="category_name" class="input" placeholder="{$value.category_name}"/>
+                                </td>
+                                <td align="center" width="10%">
+                                    <button class="btn opCat xiugai" data="{$value.cid}">修改</button>
+                                    <button class="btn opCat shanchu" data="{$value.cid}">删除</button>
+                                </td>
+                            </tr>     
+                        <?php endforeach ?>                 
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <!--尾部js css-->
+	    <include file="Public:footer" />
+        <script type="text/javascript">
+			$(function(){
+			
+				//添加分类
+				$(".quickSubmit").click(function(){
+					var category_name = $("#newName").val();
+					if(!category_name){
+						alert("请填写分类名称");
+						return false;
+					}
+					$.ajax({
+						url: "__SELF__",
+						data:{"category_name":category_name,"act":"add"},
+						type: "POST",
+						dataType: "json",
+						success: function (res) {
+							if(res.status == 'success' ){
+								location.href="__SELF__";
+							}else{
+								alert("添加失败!");
+							}
+						}
+					});
+				});
+				
+				//修改分类
+				$(".xiugai").click(function(){
+					var cid = $(this).attr("data");
+					var category_name = $(this).parent().prev().children(0).val();
+					$.ajax({
+						url: "<?php echo U('Admin/Article/category'); ?>",
+						data:{"cid":cid,"category_name":category_name,"act":"update"},
+						type: "POST",
+						dataType: "json",
+						success: function (res) {
+							if(res.status == 'success' ){
+								location.href="__SELF__";
+							}else{
+								alert("修改失败!");
+							}
+						}
+					});
+				});
+				
+				//删除分类
+				$(".shanchu").click(function(){
+					var cid = $(this).attr("data");
+					$.ajax({
+						url: "<?php echo U('Admin/Article/category'); ?>",
+						data:{"cid":cid,"act":"del"},
+						type: "POST",
+						dataType: "json",
+						success: function (res) {
+							if(res.status == 'success' ){
+								location.href="__SELF__";
+							}else{
+								alert("删除失败!");
+							}
+						}
+					});
+				});
+			});
+        </script>
+    </body>
+</html>

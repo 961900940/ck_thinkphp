@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>权限管理-后台管理-ck RBAC权限管理</title>
+        <!--公共头文件-->
+        <include file="Public:head" />
+    </head>
+    <body>
+        <div class="wrap">
+            <!--顶部导航菜单-->
+	        <div id="Top">
+                <include file="Public:wrap_top" />
+	        </div>
+            <!--Tags标签-->
+            <div id="Tags">
+				<include file="Public:wrap_tags" />
+                    <div class="nav">
+                        <font id="today"></font>您的位置：权限管理 > 添加管理员
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="mainBody">
+                <!--子菜单列表-->
+	            <div id="Left">
+                    <include file="Public:main_left" />
+	            </div>
+                <!--content内容主体-->
+                <div id="Right">
+                    <div class="Item hr">
+                        <div class="current">文章管理列表</div>
+                    </div>
+					<form action="/Tprbac/index.php/conist/Product/index" method="get">
+						标题：
+						<input type="text" name="title" value="" size="30" style="margin-right: 20px;">
+						分类：
+						<select name="cid" style="margin-right: 20px;">
+							<?php if ($Article_category): ?>
+                                <option value="">--请选择--</option>
+                                <?php foreach ($Article_category as $key => $value): ?>
+                                    <option value="{$value.cid}">{$value.category_name}</option>       
+                                <?php endforeach ?>    
+                            <?php else: ?>
+                                <option>---请先添加文章分类---</option>
+                            <?php endif ?>                           
+						</select>
+						状态：
+						<select name="status" style="margin-right: 20px;">
+							<option value="">--请选择--</option>
+							<option value="1" >已发布</option>
+							<option value="0" >未审核</option>
+						</select>
+						推荐：
+						<select name="is_recommend" style="margin-right: 20px;">
+							<option value="">--请选择--</option>
+							<option value="1" >已推荐</option>
+							<option value="0" >未推荐</option>
+						</select>
+						<input type="submit" value="搜索">
+					</form>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab">
+                        <thead>
+                            <tr>
+                                <td>产品标题</td>
+                                <td>所在分类</td>
+                                <td>更新时间</td>
+                                <td>状态</td>
+                                <td>推荐</td>
+                                <td width="150">操作</td>
+                            </tr>
+                        </thead>
+                        <tr align="center" id="34">
+							<td align="left" style="text-align:center;">
+								<a href="/Tprbac/index.php/conist/Product/edit?id=34">添加编辑产品</a>
+							</td>
+							<td>分类2</td>
+							<td>2014-03-10 16:50:22</td>
+							<td>
+								<a href="javascript:void(0);" onclick="changeStatus(34,this)">已发布</a>
+							</td>
+							<td>
+								<a href="javascript:void(0);"  title="推荐" onclick="changeAttr(34,this)"><img src="/Tprbac/Public/Img/action_1.png" border="0"></a>
+								&nbsp;&nbsp;
+								<a href="javascript:void(0);" title="推荐到手机" onclick="changePhoneStatus(34,this)"><img src="/Tprbac/Public/Img/iphone-1.png" border="0">
+							</td>
+							<td>
+								[ <a href="/Tprbac/index.php/conist/Product/edit?id=34&do=copy">复制 </a> ]
+								[ <a href="/Tprbac/index.php/conist/Product/edit?id=34">编辑 </a> ] 
+								[ <a link="/Tprbac/index.php/conist/Product/del/id/34" href="javascript:void(0)" name="添加编辑产品" class="del">删除 </a> ]
+							</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <!--尾部js css-->
+	    <include file="Public:footer" />
+        <script type="text/javascript">
+
+        </script>
+    </body>
+
+</html>

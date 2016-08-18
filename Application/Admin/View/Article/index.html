@@ -28,10 +28,87 @@
 	            </div>
                 <!--content内容主体-->
                 <div id="Right">
-					<div class="Item hr">
+                    <div class="Item hr">
                         <div class="current">文章管理列表</div>
                     </div>
-                    {$content.content}
+					<form action="" method="get">
+						标题：
+						<input type="text" name="title" value="" size="30" style="margin-right: 20px;">
+						分类：
+						<select name="cid" style="margin-right: 20px;">
+							<?php if ($Article_category): ?>
+                                <option value="">--请选择--</option>
+                                <?php foreach ($Article_category as $key => $value): ?>
+                                    <option value="{$value.cid}">{$value.category_name}</option>       
+                                <?php endforeach ?>    
+                            <?php else: ?>
+                                <option value="">---请先添加文章分类---</option>
+                            <?php endif ?>                           
+						</select>
+						状态：
+						<select name="status" style="margin-right: 20px;">
+							<option value="">--请选择--</option>
+							<option value="1" >已发布</option>
+							<option value="0" >未发布</option>
+						</select>
+						热门：
+						<select name="is_hot" style="margin-right: 20px;">
+							<option value="">--请选择--</option>
+							<option value="1" >热门</option>
+							<option value="0" >不热门</option>
+						</select>
+						置顶：
+						<select name="is_top" style="margin-right: 20px;">
+							<option value="">--请选择--</option>
+							<option value="1" >置顶</option>
+							<option value="0" >不置顶</option>
+						</select>
+						<input type="submit" value="搜索">
+					</form>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab">
+                        <thead>
+                            <tr>
+                                <td>产品标题</td>
+                                <td>所在分类</td>
+                                <td>更新时间</td>
+                                <td>状态</td>
+                                <td>is_hot</td>
+								<td>is_top</td>
+                                <td width="150">操作</td>
+                            </tr>
+                        </thead>
+                        <?php foreach ($article as $k => $v): ?>
+                            <tr align="center" id="34">
+                                <td align="left" style="text-align:center;">
+                                    <a href="/Tprbac/index.php/conist/Product/edit?id={$v.id}">{$v.title}</a>
+                                </td>
+                                <td>{$v.category_name}</td>
+                                <td>{$v.update_time}</td>
+                                <td>
+                                    <a href="javascript:void(0);" onclick="changeStatus(34,this)">
+									<if condition="$v['status']==1">已发布
+										<else /> 未发布
+									</if>
+									</a>
+                                </td>
+                                <td>
+                                    <if condition="$v['is_hot']==1">热门
+										<else /> 不热门
+									</if>
+                                </td>
+								<td>
+                                    <if condition="$v['is_top']==1">置顶
+										<else /> 不置顶
+									</if>
+                                </td>
+                                <td>
+                                    [ <a href="/Tprbac/index.php/conist/Product/edit?id=34&do=copy">复制 </a> ]
+                                    [ <a href="/Tprbac/index.php/conist/Product/edit?id=34">编辑 </a> ] 
+                                    [ <a link="/Tprbac/index.php/conist/Product/del/id/34" href="javascript:void(0)" name="添加编辑产品" class="del">删除 </a> ]
+                                </td>
+                            </tr>
+                        <?php endforeach ?>
+                    </table>
                 </div>
             </div>
         </div>

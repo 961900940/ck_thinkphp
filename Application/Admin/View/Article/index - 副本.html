@@ -31,62 +31,7 @@
                     <div class="Item hr">
                         <div class="current">文章管理列表</div>
                     </div>
-					<form action="/Tprbac/index.php/conist/Product/index" method="get">
-						标题：
-						<input type="text" name="title" value="" size="30" style="margin-right: 20px;">
-						分类：
-						<select name="cid" style="margin-right: 20px;">
-							<option value="">--请选择--</option>
-							<option value="52" >分类1</option><option value="55" >分类2</option><option value="56" >分类3</option>                            
-						</select>
-						状态：
-						<select name="status" style="margin-right: 20px;">
-							<option value="">--请选择--</option>
-							<option value="1" >已发布</option>
-							<option value="0" >未审核</option>
-						</select>
-						推荐：
-						<select name="is_recommend" style="margin-right: 20px;">
-							<option value="">--请选择--</option>
-							<option value="1" >已推荐</option>
-							<option value="0" >未推荐</option>
-						</select>
-						<input type="submit" value="搜索">
-					</form>
-                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab">
-                        <thead>
-                            <tr>
-                                <td>产品标题</td>
-                                <td>所在分类</td>
-                                <td>发布时间</td>
-                                <td>发布人</td>
-                                <td>状态</td>
-                                <td>推荐</td>
-                                <td width="150">操作</td>
-                            </tr>
-                        </thead>
-                        <tr align="center" id="34">
-							<td align="left">
-								<img src="/Tprbac/Public/Img/zh-cn.png"><a href="/Tprbac/index.php/conist/Product/edit?id=34">添加编辑产品</a>
-							</td>
-							<td>分类2</td>
-							<td>2014-03-10 16:50:22</td>
-							<td>超级管理员</td>
-							<td>
-								<a href="javascript:void(0);" onclick="changeStatus(34,this)">已发布</a>
-							</td>
-							<td>
-								<a href="javascript:void(0);"  title="推荐" onclick="changeAttr(34,this)"><img src="/Tprbac/Public/Img/action_1.png" border="0"></a>
-								&nbsp;&nbsp;
-								<a href="javascript:void(0);" title="推荐到手机" onclick="changePhoneStatus(34,this)"><img src="/Tprbac/Public/Img/iphone-1.png" border="0">
-							</td>
-							<td>
-								[ <a href="/Tprbac/index.php/conist/Product/edit?id=34&do=copy">复制 </a> ]
-								[ <a href="/Tprbac/index.php/conist/Product/edit?id=34">编辑 </a> ] 
-								[ <a link="/Tprbac/index.php/conist/Product/del/id/34" href="javascript:void(0)" name="添加编辑产品" class="del">删除 </a> ]
-							</td>
-                        </tr>
-                    </table>
+					{$content.content}
                 </div>
             </div>
         </div>
