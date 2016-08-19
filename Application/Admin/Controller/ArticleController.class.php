@@ -69,17 +69,34 @@ class ArticleController extends CommonController {
         $Article_category = M('ArticleCategory')->select();
 		$this->assign('Article_category',$Article_category);	//选择分类
 
+		
+		// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
+		$pagenum = 3;
+		$page = $_GET['p'] ? $_GET['p'] : 1;
 		$article = M()->table(array('ks_content'=>'a','ks_article_category'=>'b'))
 			->field('a.*,b.category_name')
 			->where($where)
 			->order("update_time desc")
+			->page($page,$pagenum)
 			->select();
 		//var_dump(M()->getLastSql());
-
 		//var_dump($status);
-		$this->assign('article',$article);
+		//var_dump($article);
+		$this->assign('article',$article);	// 赋值数据集
+		
+		// 查询满足要求的总记录数
+		$count = M()->table(array('ks_content'=>'a','ks_article_category'=>'b'))
+			->field('a.*,b.category_name')
+			->where($where)
+			->order("a.update_time desc")
+			->count("a.id");
+		//var_dump(M()->getLastSql());	
+		//var_dump($count);exit;
+		//$Page = new \Think\Page($count,$pagenum);// 实例化分页类 传入总记录数和每页显示的记录数
+		$Page = new \Admin\Util\Page($count,$pagenum);// 实例化分页类
+		$show       = $Page->show();// 分页显示输出
+		$this->assign('page',$show);// 赋值分页输出
         $this->display();
-
     }
 
     //编辑文章
