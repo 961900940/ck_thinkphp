@@ -19,29 +19,51 @@ class ArticleController extends CommonController {
         // $this->assign('article',$article);
         // $this->display();
 
-        $title = I("title");
-        $cid = I("cid");
-        $status = I("status");
-        $is_hot = I("is_hot");
-        $is_top = I("is_top");
+        
 
         $where = ' a.cid=b.cid ';
 
-        if($cid !=''){
-            $where .= " and a.cid = $cid";
-        }
-        if($status !=''){
-            $where .= " and status = $status";
-        }
-        if($is_top !=''){
-            $where .= " and is_top = $is_top";
-        }
-        if($is_hot !=''){
-            $where .= " and is_hot = $is_hot";
-        }
-        if($title !=''){
-            $where .= " and title like '%".$title."%'";
-        }
+		
+		if(IS_POST){
+			$title = I("title");
+			$cid = I("cid");
+			$status = I("status");
+			$is_hot = I("is_hot");
+			$is_top = I("is_top");
+		
+			if($cid !='-1'){
+				$where .= " and a.cid = $cid";
+			}
+			if($status !='-1'){
+				$where .= " and status = $status";
+			}
+			if($is_top !='-1'){
+				$where .= " and is_top = $is_top";
+			}
+			if($is_hot !='-1'){
+				$where .= " and is_hot = $is_hot";
+			}
+			if($title !=''){
+				$where .= " and title like '%".$title."%'";
+			}
+		}
+        
+		//搜索条件
+		if(isset($cid) && $cid !='-1'){
+			$this->assign('cid',$cid);
+		}
+		if(isset($status) && $status !='-1'){
+			$this->assign('status',$status);
+		}
+		if(isset($is_top) && $is_top !='-1'){
+			$this->assign('is_top',$is_top);
+		}
+		if(isset($is_hot) && $is_hot !='-1'){
+			$this->assign('is_hot',$is_hot);
+		}
+		if(isset($title) && $title !=''){
+			$this->assign('title',$title);
+		}
 
 
         $Article_category = M('ArticleCategory')->select();
@@ -50,11 +72,12 @@ class ArticleController extends CommonController {
 		$article = M()->table(array('ks_content'=>'a','ks_article_category'=>'b'))
 			->field('a.*,b.category_name')
 			->where($where)
+			->order("update_time desc")
 			->select();
 		//var_dump(M()->getLastSql());
 
+		//var_dump($status);
 		$this->assign('article',$article);
-        $this->assign("var",I());
         $this->display();
 
     }

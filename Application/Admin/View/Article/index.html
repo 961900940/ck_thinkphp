@@ -33,35 +33,35 @@
                     </div>
 					<form action="__SELF__" method="post">
 						标题：
-						<input type="text" name="title" value="{$var.title}" size="30" style="margin-right: 20px;">
+						<input type="text" name="title" value="{$title}" size="30" style="margin-right: 20px;">
 						分类：
 						<select name="cid" style="margin-right: 20px;">
 							<?php if ($Article_category): ?>
-                                <option value="">--请选择--</option>
+                                <option value="-1">--请选择--</option>
                                 <?php foreach ($Article_category as $key => $value): ?>
-                                    <option value="{$value.cid}">{$value.category_name}</option>
+                                    <option value="{$value.cid}" <?php if (isset($cid) && $cid ==$value['cid']): ?>selected<?php endif ?>>{$value.category_name}</option>
                                 <?php endforeach ?>
                             <?php else: ?>
-                                <option value="">---请先添加文章分类---</option>
+                                <option value="-1">---请先添加文章分类---</option>
                             <?php endif ?>
 						</select>
 						状态：
 						<select name="status" style="margin-right: 20px;">
-							<option value="">--请选择--</option>
-							<option value="1">已发布</option>
-							<option value="0">未发布</option>
+							<option value="-1" >--请选择--</option>
+							<option value="1" <?php if (isset($status) && $status ==1): ?>selected<?php endif ?>>已发布</option>
+							<option value="0" <?php if (isset($status) && $status ==0): ?>selected<?php endif ?>>未发布</option>
 						</select>
 						热门：
 						<select name="is_hot" style="margin-right: 20px;">
-							<option value="">--请选择--</option>
-							<option value="1" >热门</option>
-							<option value="0" >不热门</option>
+							<option value="-1">--请选择--</option>
+							<option value="1" <?php if (isset($is_hot) && $is_hot ==1): ?>selected<?php endif ?>>热门</option>
+							<option value="0" <?php if (isset($is_hot) && $is_hot ==0): ?>selected<?php endif ?>>不热门</option>
 						</select>
 						置顶：
 						<select name="is_top" style="margin-right: 20px;">
-							<option value="">--请选择--</option>
-							<option value="1" >置顶</option>
-							<option value="0" >不置顶</option>
+							<option value="-1">--请选择--</option>
+							<option value="1" <?php if (isset($is_top) && $is_top ==1): ?>selected<?php endif ?>>置顶</option>
+							<option value="0" <?php if (isset($is_top) && $is_top ==0): ?>selected<?php endif ?>>不置顶</option>
 						</select>
 						<input type="submit" value="搜索">
 					</form>
