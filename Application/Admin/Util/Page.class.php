@@ -31,7 +31,7 @@ class Page {
     // 分页的栏的总页数
     protected $coolPages   ;
     // 分页显示定制
-    protected $config  =    array('header'=>'条记录','prev'=>'上一页','next'=>'下一页','first'=>'第一页','last'=>'<span id="lastspan">最后一页</span>','theme'=>'<ul><li><span> %totalRow% %header% %nowPage%/%totalPage% 页</span></li> %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%</ul>');
+    protected $config  =    array('header'=>'条记录','prev'=>'上一页','next'=>'下一页','first'=>'第一页','last'=>'<span id="lastspan">最后一页</span>','theme'=>'<ul><li><span> %totalRow% %header% %nowPage%/%totalPage% 页</span></li> %upPage%  %first%  %prePage%  %linkPage%  %nextPage% %end% %downPage%</ul>');
     // 默认分页变量名
     protected $varPage;
 
