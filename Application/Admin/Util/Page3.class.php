@@ -9,10 +9,11 @@
 // | Author: liu21st <liu21st@gmail.com>
 // |         lanfengye <zibin_5257@163.com>
 // +----------------------------------------------------------------------
+
 namespace Admin\Util;
 class Page {
     
-    // 分页栏每页显示的页数
+    // 分页栏每页显示的页数 [1] [2] ... [5] 页码数
     public $rollPage = 5;
     // 页数跳转时要带的参数
     public $parameter  ;
@@ -31,7 +32,7 @@ class Page {
     // 分页的栏的总页数
     protected $coolPages   ;
     // 分页显示定制
-    protected $config  =    array('header'=>'条记录','prev'=>'上一页','next'=>'下一页','first'=>'第一页','last'=>'<span id="lastspan">最后一页</span>','theme'=>'<ul><li><span> %totalRow% %header% %nowPage%/%totalPage% 页</span></li> %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%</ul>');
+    protected $config  =    array('header'=>'条记录','prev'=>'上一页','next'=>'下一页','first'=>'首页','last'=>'末页','theme'=>' %totalRow% %header% %nowPage%/%totalPage% 页 %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
     // 默认分页变量名
     protected $varPage;
 
@@ -58,7 +59,6 @@ class Page {
             $this->nowPage  =   $this->totalPages;
         }
         $this->firstRow     =   $this->listRows*($this->nowPage-1);
-        if(!empty($url))    $this->url  =   $url; 
     }
 
     public function setConfig($name,$value) {
@@ -72,7 +72,6 @@ class Page {
      * @access public
      */
     public function show() {
-
         if(0 == $this->totalRows) return '';
         $p              =   $this->varPage;
         $nowCoolPage    =   ceil($this->nowPage/$this->rollPage);
@@ -102,13 +101,13 @@ class Page {
         $upRow          =   $this->nowPage-1;
         $downRow        =   $this->nowPage+1;
         if ($upRow>0){
-            $upPage     =    "<li><a href='".str_replace('__PAGE__',$upRow,$url)."'>".$this->config['prev']."</a></li>";
+            $upPage     =   "<a href='".str_replace('__PAGE__',$upRow,$url)."'>".$this->config['prev']."</a>";
         }else{
-            $upPage     =    '';
+            $upPage     =   '';
         }
 
         if ($downRow <= $this->totalPages){
-            $downPage   =   "<li><a href='".str_replace('__PAGE__',$downRow,$url)."'>".$this->config['next']."</a></li>";
+            $downPage   =   "<a href='".str_replace('__PAGE__',$downRow,$url)."'>".$this->config['next']."</a>";
         }else{
             $downPage   =   '';
         }
@@ -118,8 +117,8 @@ class Page {
             $prePage    =   '';
         }else{
             $preRow     =   $this->nowPage-$this->rollPage;
-            $prePage    =   "<li><a href='".str_replace('__PAGE__',$preRow,$url)."' >上".$this->rollPage."页</a></li>";
-            $theFirst   =   "<li><a href='".str_replace('__PAGE__',1,$url)."' >".$this->config['first']."</a></li>";
+            $prePage    =   "<a href='".str_replace('__PAGE__',$preRow,$url)."' >&lt;&lt;</a>"; //上5页改成了 <<
+            $theFirst   =   "<a href='".str_replace('__PAGE__',1,$url)."' >".$this->config['first']."</a>";
         }
         if($nowCoolPage == $this->coolPages){
             $nextPage   =   '';
@@ -127,8 +126,8 @@ class Page {
         }else{
             $nextRow    =   $this->nowPage+$this->rollPage;
             $theEndRow  =   $this->totalPages;
-            $nextPage   =   "<li><a href='".str_replace('__PAGE__',$nextRow,$url)."' >下".$this->rollPage."页</a></li>";
-            $theEnd     =   "</li><a href='".str_replace('__PAGE__',$theEndRow,$url)."' >".$this->config['last']."</a></li>";
+            $nextPage   =   "<a href='".str_replace('__PAGE__',$nextRow,$url)."' >&gt;&gt;</a>";	// 下5页 改成了 >>
+            $theEnd     =   "<a href='".str_replace('__PAGE__',$theEndRow,$url)."' >".$this->config['last']."</a>";
         }
         // 1 2 3 4 5
         $linkPage = "";
@@ -136,13 +135,14 @@ class Page {
             $page       =   ($nowCoolPage-1)*$this->rollPage+$i;
             if($page!=$this->nowPage){
                 if($page<=$this->totalPages){
-                    $linkPage .= "<li><a href='".str_replace('__PAGE__',$page,$url)."'>".$page."</a></li>";
+                    $linkPage .= "<a href='".str_replace('__PAGE__',$page,$url)."'>".$page."</a>"; //去掉了此处的空格
                 }else{
                     break;
                 }
             }else{
                 if($this->totalPages != 1){
-                    $linkPage .= "<li><span class='current'>".$page."</span></li>";
+					// 当前页
+                    $linkPage .= "&nbsp;<span class='current'>".$page."</span>";
                 }
             }
         }

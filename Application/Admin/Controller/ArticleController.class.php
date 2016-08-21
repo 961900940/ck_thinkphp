@@ -19,18 +19,18 @@ class ArticleController extends CommonController {
         // $this->assign('article',$article);
         // $this->display();
 
-        
+
 
         $where = ' a.cid=b.cid ';
+		$page = $_GET['p'] ? $_GET['p'] : 1;
 
-		
 		if(IS_POST){
 			$title = I("title");
 			$cid = I("cid");
 			$status = I("status");
 			$is_hot = I("is_hot");
 			$is_top = I("is_top");
-		
+
 			if($cid !='-1'){
 				$where .= " and a.cid = $cid";
 			}
@@ -46,8 +46,10 @@ class ArticleController extends CommonController {
 			if($title !=''){
 				$where .= " and title like '%".$title."%'";
 			}
+
+			$page = 1;
 		}
-        
+
 		//搜索条件
 		if(isset($cid) && $cid !='-1'){
 			$this->assign('cid',$cid);
@@ -69,10 +71,10 @@ class ArticleController extends CommonController {
         $Article_category = M('ArticleCategory')->select();
 		$this->assign('Article_category',$Article_category);	//选择分类
 
-		
+
 		// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
 		$pagenum = 3;
-		$page = $_GET['p'] ? $_GET['p'] : 1;
+
 		$article = M()->table(array('ks_content'=>'a','ks_article_category'=>'b'))
 			->field('a.*,b.category_name')
 			->where($where)
@@ -83,14 +85,14 @@ class ArticleController extends CommonController {
 		//var_dump($status);
 		//var_dump($article);
 		$this->assign('article',$article);	// 赋值数据集
-		
+
 		// 查询满足要求的总记录数
 		$count = M()->table(array('ks_content'=>'a','ks_article_category'=>'b'))
 			->field('a.*,b.category_name')
 			->where($where)
 			->order("a.update_time desc")
 			->count("a.id");
-		//var_dump(M()->getLastSql());	
+		//var_dump(M()->getLastSql());
 		//var_dump($count);exit;
 		//$Page = new \Think\Page($count,$pagenum);// 实例化分页类 传入总记录数和每页显示的记录数
 		$Page = new \Admin\Util\Page($count,$pagenum);// 实例化分页类

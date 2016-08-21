@@ -77,37 +77,46 @@
                                 <td width="150">操作</td>
                             </tr>
                         </thead>
-                        <?php foreach ($article as $k => $v): ?>
-                            <tr align="center" id="34">
-                                <td align="left" style="text-align:center;">
-                                    <a href="__CONTROLLER__/editArticle?id={$v.id}">{$v.title}</a>
-                                </td>
-                                <td>{$v.category_name}</td>
-                                <td>{$v.update_time}</td>
-                                <td>
-                                    <a href="javascript:void(0);" onclick="changeStatus(34,this)">
-									<if condition="$v['status']==1">已发布
-										<else /> 未发布
-									</if>
-									</a>
-                                </td>
-                                <td>
-                                    <if condition="$v['is_hot']==1">热门
-										<else /> 不热门
-									</if>
-                                </td>
-								<td>
-                                    <if condition="$v['is_top']==1">置顶
-										<else /> 不置顶
-									</if>
-                                </td>
-                                <td>
-                                    [ <a href="__CONTROLLER__/editArticle?id={$v.id}" class="edit">编辑 </a> ]
-                                    [ <a href="javascript:void(0)" class="del" data="{$v.id}">删除 </a> ]
-                                </td>
+                        <?php if (!empty($article)): ?>
+	                        <?php foreach ($article as $k => $v): ?>
+	                            <tr align="center" id="34">
+	                                <td align="left" style="text-align:center;">
+	                                    <a href="__CONTROLLER__/editArticle?id={$v.id}">{$v.title}</a>
+	                                </td>
+	                                <td>{$v.category_name}</td>
+	                                <td>{$v.update_time}</td>
+	                                <td>
+	                                    <a href="javascript:void(0);" onclick="changeStatus(34,this)">
+										<if condition="$v['status']==1">已发布
+											<else /> 未发布
+										</if>
+										</a>
+	                                </td>
+	                                <td>
+	                                    <if condition="$v['is_hot']==1">热门
+											<else /> 不热门
+										</if>
+	                                </td>
+									<td>
+	                                    <if condition="$v['is_top']==1">置顶
+											<else /> 不置顶
+										</if>
+	                                </td>
+	                                <td>
+	                                    [ <a href="__CONTROLLER__/editArticle?id={$v.id}" class="edit">编辑 </a> ]
+	                                    [ <a href="javascript:void(0)" class="del" data="{$v.id}">删除 </a> ]
+	                                </td>
+	                            </tr>
+	                        <?php endforeach ?>
+                        <?php else: ?>
+                            <tr align="center">
+                                <td colspan="7">暂无数据</td>
                             </tr>
-                        <?php endforeach ?>
+                        <?php endif ?>
                     </table>
+                    <!--分页内容显示-->
+
+                    <load href="__PUBLIC__/static/bootstrap/css/bootstrap.css"/>
 					<load href="__Admin_CSS__/page_index.css"/>
 					<div class="pagination" style="width:100%">{$page}</div>
                 </div>
