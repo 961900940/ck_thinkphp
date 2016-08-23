@@ -25,8 +25,7 @@
  * @version    1.8.0, 2014-03-02
  */
 
-namespace Org\Util;
-use Think\Db;
+
 /** PHPExcel root directory */
 if (!defined('PHPEXCEL_ROOT')) {
     define('PHPEXCEL_ROOT', dirname(__FILE__) . '/');

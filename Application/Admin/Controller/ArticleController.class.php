@@ -103,14 +103,14 @@ class ArticleController extends CommonController {
 
 	//导出记录
 	public function down_excel(){
+		$where = ' a.cid=b.cid ';
 		$article = M()->table(array('ks_content'=>'a','ks_article_category'=>'b'))
 			->field('a.*,b.category_name')
 			->where($where)
 			->order("update_time desc")
-			->page($page,$pagenum)
 			->select();
 		//var_dump($article);exit;
-		$excel_header = array('id'=>'id', 'title'=>'title','status'=>'状态','is_hot'=>'热门与否','category_name'=>'分类');
+		$excel_header = array('id'=>'id', 'title'=>'title','status'=>'状态','is_hot'=>'热门与否','category_name'=>'分类','content'=>'内容');
 		$excel_name = "文章管理";
 		$this->download_excel($article,$excel_header,$excel_name);
 	}

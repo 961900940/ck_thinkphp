@@ -65,7 +65,9 @@
 						</select>
 						<input type="submit" value="搜索">
 					</form>
-                    <button type="button" class="btn btn-default record">导出记录</button>
+					<a href="{:U('Admin/Article/down_excel')}">
+						<button type="submit" class="btn btn-default record">导出记录</button>
+					</a>
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab">
                         <thead>
                             <tr>
@@ -146,22 +148,7 @@
 						}
 					});
 				});
-
-                //导出记录
-                $(".record").click(function(){
-                    $.ajax({
-						url: "<?php echo U('Admin/Article/down_excel'); ?>",
-						type: "get",
-						dataType: "json",
-						success: function (res) {
-							if(res.status == 'success' ){
-								alert(1111);
-							}else{
-								alert("222222");
-							}
-						}
-					});
-                });
+				
             });
         </script>
     </body>
