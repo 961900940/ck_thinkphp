@@ -35,6 +35,7 @@ class Page {
     //                        'theme'=>'<ul><li><span> %totalRow% %header% %nowPage%/%totalPage% 页</span></li> %upPage%  %first%  %prePage%  %linkPage% %downPage% %nextPage% %end% </ul>');
 
     protected $config  =    array('header'=>'条记录','prev'=>'上一页','next'=>'下一页','first'=>'首页','last'=>'<span id="lastspan">尾页</span>','theme'=>'<ul><li><span> %totalRow% %header% %nowPage%/%totalPage% 页</span></li> %first%  %upPage% %prePage%  %linkPage% %downPage%  %nextPage% %end%</ul>');
+	
 
 
     // 默认分页变量名

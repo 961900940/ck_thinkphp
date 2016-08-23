@@ -73,7 +73,7 @@ class ArticleController extends CommonController {
 
 
 		// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
-		$pagenum = 3;
+		$pagenum = 2;
 
 		$article = M()->table(array('ks_content'=>'a','ks_article_category'=>'b'))
 			->field('a.*,b.category_name')
