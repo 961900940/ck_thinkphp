@@ -65,17 +65,48 @@
 						</select>
 						<input type="submit" value="搜索">
 					</form>
+					<div class="row">
+						<div class="col-sm-6" style="margin:0 0 8px 0;float:left;">
+							<label>
+								每页显示
+								<select  name="dataTables_length" onchange="changePagesNum(this)">
+									<option value="2" <?php if ($pagenum == "2"): ?>selected<?php endif ?>>2</option>
+									<option value="3" <?php if ($pagenum == "3"): ?>selected<?php endif ?>>3</option>
+									<option value="4" <?php if ($pagenum == "4"): ?>selected<?php endif ?>>4</option>
+								</select>
+								条记录
+							</label>
+							<label>
+								<input type="text" id="pagenum" placeholder="快捷输入页面显示个数" onkeyup="synchronization(this)"><span id="page_num"></span>
+							</label>
+						</div>
+						<div class="col-sm-6" style="margin:0 0 8px 0;float:left;">
+							<div class="btn-group pull-right">
+								<div class="dropdown">
+									<button class="btn btn-default dropdown-toggle" onclick="javascript:$('#checkMenu').toggle();" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										请选择显示内容
+										<span class="caret"></span>
+									</button>
+									<ul id="checkMenu" class="dropdown-menu" >
+										<li style="vertical-align:middle;"><label ><input id="" type="checkbox" onchange="changeCheckMenu(this)" name="is_hot">&nbsp;&nbsp;&nbsp;&nbsp;热门</label></li>
+										<li style="vertical-align:middle;"><label ><input id="" type="checkbox" onchange="changeCheckMenu(this)" name="status">&nbsp;&nbsp;&nbsp;&nbsp;状态</label></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<br/>
 					<a href="{:U('Admin/Article/down_excel')}">
-						<button type="submit" class="btn btn-default record">导出记录</button>
+						<button type="submit" class="btn btn-default record">导出全部记录</button>
 					</a>
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab">
                         <thead>
                             <tr>
-                                <td>产品标题</td>
+                                <td >产品标题</td>
                                 <td>所在分类</td>
                                 <td>更新时间</td>
-                                <td>状态</td>
-                                <td>is_hot</td>
+                                <td class="status">状态</td>
+                                <td class="is_hot">is_hot</td>
 								<td>is_top</td>
                                 <td width="150">操作</td>
                             </tr>
@@ -88,14 +119,14 @@
 	                                </td>
 	                                <td>{$v.category_name}</td>
 	                                <td>{$v.update_time}</td>
-	                                <td>
+	                                <td class="status">
 	                                    <a href="javascript:void(0);" onclick="changeStatus(34,this)">
 										<if condition="$v['status']==1">已发布
 											<else /> 未发布
 										</if>
 										</a>
 	                                </td>
-	                                <td>
+	                                <td class="is_hot">
 	                                    <if condition="$v['is_hot']==1">热门
 											<else /> 不热门
 										</if>
@@ -149,8 +180,55 @@
 					});
 				});
 				
+				//快捷输入页面显示个数
+				$("#pagenum").keydown(function(e){
+					if(e.keyCode==13){
+						var search = $(this).val();
+						var url =  "<?php echo U("Admin/Article/index"); ?>";
+						//var url =  location.href.replace(/&pagenum[\S]*|&p[\S]*|&search[\S]*/,'');
+						location.href = url + "?pagenum="+search;
+					}
+				});
+				
             });
+						
         </script>
+		<script>
+			//每页显示多少条数据
+			function changePagesNum(_this){
+				var pagenum = $(_this).val();
+				var url =  "<?php echo U("Admin/Article/index"); ?>";
+
+				window.location.href = url+"?pagenum="+pagenum;
+
+			}
+			
+			//同步显示输入显示的个数
+			function synchronization(_this){
+				var pwd = $(_this).val();
+				$('#page_num').html("快捷输入页面显示个数:"+pwd);
+			}
+			
+			//是否显示内容
+			function changeCheckMenu(_this){
+				$('#checkMenu').show();
+				var checkedStatus = $(_this).prop('checked');
+				var checkedName   = _this.name;
+				if( checkedStatus ){
+					$('.'+checkedName).show();
+				}else{
+					$('.'+checkedName).hide();
+				}
+			}
+			
+			$(document).click(function(e){
+				$(document).find('[autohide=yes]').each(function(){
+					if(e.target != this && !$.contains(this, e.target) && e.target!=$(this).prev().get(0)){
+						$(this).hide();	
+					};
+				});
+			});
+		</script>
     </body>
 
 </html>

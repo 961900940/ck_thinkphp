@@ -73,7 +73,8 @@ class ArticleController extends CommonController {
 
 
 		// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
-		$pagenum = 2;
+		//$pagenum = 2;
+		$pagenum = $_GET['pagenum'] ? $_GET['pagenum'] : 2;
 
 		$article = M()->table(array('ks_content'=>'a','ks_article_category'=>'b'))
 			->field('a.*,b.category_name')
@@ -98,6 +99,8 @@ class ArticleController extends CommonController {
 		$Page = new \Admin\Util\Page($count,$pagenum);// 实例化分页类
 		$show       = $Page->show();// 分页显示输出
 		$this->assign('page',$show);// 赋值分页输出
+		
+		$this->assign('pagenum',$pagenum);
         $this->display();
     }
 
