@@ -10,15 +10,24 @@ class SysDataController extends CommonController {
 		$M = M();
         $tabs = $M->query('SHOW TABLE STATUS');
         $total = 0;
+		/**
+		*	Name表的名称
+		*	Engine表的存储引擎
+		*	Rows这个表的行数
+		*	Create_time表第一次创建的时间
+		*	Comment表的额外信息
+		*	Index_length索引所消耗的硬盘空间,
+		*	Data_length整个表包含的字节
+		**/
         foreach ($tabs as $k => $v) {
-            $tabs[$k]['size'] = byteFormat($v['Data_length'] + $v['Index_length']);
-            $total+=$v['Data_length'] + $v['Index_length'];
+            $tabs[$k]['size'] = byteFormat($v['data_length'] + $v['index_length']);
+            $total+=$v['data_length'] + $v['index_length'];
         }
         $this->assign("list", $tabs);
         $this->assign("total", byteFormat($total));
         $this->assign("tables", count($tabs));
         $this->display();
-		
+
     }
 
 	//导出记录
