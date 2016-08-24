@@ -88,8 +88,9 @@
 										<span class="caret"></span>
 									</button>
 									<ul id="checkMenu" class="dropdown-menu" >
-										<li style="vertical-align:middle;"><label ><input id="" type="checkbox" onchange="changeCheckMenu(this)" name="is_hot">&nbsp;&nbsp;&nbsp;&nbsp;热门</label></li>
 										<li style="vertical-align:middle;"><label ><input id="" type="checkbox" onchange="changeCheckMenu(this)" name="status">&nbsp;&nbsp;&nbsp;&nbsp;状态</label></li>
+										<li style="vertical-align:middle;"><label ><input id="" type="checkbox" onchange="changeCheckMenu(this)" name="is_hot">&nbsp;&nbsp;&nbsp;&nbsp;热门</label></li>
+										<li style="vertical-align:middle;"><label ><input id="" type="checkbox" onchange="changeCheckMenu(this)" name="is_top">&nbsp;&nbsp;&nbsp;&nbsp;置顶</label></li>
 									</ul>
 								</div>
 							</div>
@@ -105,9 +106,9 @@
                                 <td >产品标题</td>
                                 <td>所在分类</td>
                                 <td>更新时间</td>
-                                <td class="status">状态</td>
-                                <td class="is_hot">is_hot</td>
-								<td>is_top</td>
+                                <td class="status" style="display:none;">状态</td>
+                                <td class="is_hot" style="display:none;">is_hot</td>
+								<td class="is_top" style="display:none;">is_top</td>
                                 <td width="150">操作</td>
                             </tr>
                         </thead>
@@ -119,19 +120,19 @@
 	                                </td>
 	                                <td>{$v.category_name}</td>
 	                                <td>{$v.update_time}</td>
-	                                <td class="status">
+	                                <td class="status" style="display:none;">
 	                                    <a href="javascript:void(0);" onclick="changeStatus(34,this)">
 										<if condition="$v['status']==1">已发布
 											<else /> 未发布
 										</if>
 										</a>
 	                                </td>
-	                                <td class="is_hot">
+	                                <td class="is_hot" style="display:none;">
 	                                    <if condition="$v['is_hot']==1">热门
 											<else /> 不热门
 										</if>
 	                                </td>
-									<td>
+									<td class="is_top" style="display:none;">
 	                                    <if condition="$v['is_top']==1">置顶
 											<else /> 不置顶
 										</if>

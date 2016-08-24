@@ -7,9 +7,18 @@ class SysDataController extends CommonController {
 
 	//数据管理
 	public function index(){
-
-		$this->assign('pagenum',$pagenum);
+		$M = M();
+        $tabs = $M->query('SHOW TABLE STATUS');
+        $total = 0;
+        foreach ($tabs as $k => $v) {
+            $tabs[$k]['size'] = byteFormat($v['Data_length'] + $v['Index_length']);
+            $total+=$v['Data_length'] + $v['Index_length'];
+        }
+        $this->assign("list", $tabs);
+        $this->assign("total", byteFormat($total));
+        $this->assign("tables", count($tabs));
         $this->display();
+		
     }
 
 	//导出记录

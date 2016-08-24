@@ -46,15 +46,18 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php foreach ($list as $key => $value): ?>
                                 <tr align="center">
-									<td><input type="checkbox" name="table[]" value="pa_access"/></td>
-									<td align="left">pa_access</td>
-									<td>权限分配表</td>
-									<td>144</td>
-									<td>MyISAM</td>
-									<td>utf8_general_ci</td>
-									<td>9.81 KB</td>
-								</tr>
+                                    <td><input type="checkbox" name="table[]" value="{$value.Name}"/></td>
+                                    <td align="left">{$value.Name}</td>
+                                    <td>{$value.Comment}</td>
+                                    <td>{$value.Rows}</td>
+                                    <td>{$value.Engine}</td>
+                                    <td>{$value.Collation}</td>
+                                    <td>{$value.size}</td>
+                                </tr>
+                                <?php endforeach ?>
+                                
 								<tr align="center">
 									<td><input type="checkbox" name="table[]" value="pa_ad"/></td>
 									<td align="left">pa_ad</td>
