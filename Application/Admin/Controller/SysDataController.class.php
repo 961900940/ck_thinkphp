@@ -30,6 +30,114 @@ class SysDataController extends CommonController {
 
     }
 
+	//数据库备份
+	public function backup(){
+		if(!IS_POST){
+			$this->error("访问出错！");
+		}
+		
+		$tables = I("data");
+		$Arrtable = array();
+		$Arrtable = explode(',',$tables);
+
+		$M = M();
+		$time = time();
+		$date = date('Y-m-d H:i:s',$time);
+        function_exists('set_time_limit') && set_time_limit(0); //防止备份数据过程超时
+
+        if (count($Arrtable) == 0 && !isset($_POST['data'])) {
+            echo json_encode(array("status" => 0, "info" => "请先选择要备份的表"));exit;
+        }
+
+		$type = "管理员后台手动备份";
+		
+        $path = "./Database/" ;
+		$file_name = "CUSTOM_" . date("Ymd") . "_" . randCode(5).".sql";
+		$filename = $path.$file_name;
+		if(!file_exists($path)){
+			mkdir($path);
+		}
+		//var_dump($path);exit;
+		$pre = "# -----------------------------------------------------------\n" .
+               "# database backup files\n" .
+               "# 日期:  {$date} \n" .
+               "# Type: {$type}\n";
+
+		//$bdTable = D("SysData")->bakupTable($Arrtable); //取得表结构信息
+		$bdTable = $this->bakupTable($Arrtable); //取得表结构信息
+		$pernum = 10000;
+		foreach($Arrtable as $table){
+			$tableInfo = $M->query("SHOW TABLE STATUS LIKE '{$table}'");
+			$page = ceil($tableInfo[0]['rows'] / $pernum ) - 1;
+			for($i=0;$i<=$page;$i++){
+				$query = $M->query("SELECT * FROM {$table} LIMIT " . ($i * $pernum ) . ", $pernum ");
+				//var_dump($query);exit;
+				foreach($query as $key=>$value){
+					$temSql = '';
+					$count = count($value);
+					foreach ($value as $v) {
+                        if($count == 1){
+							$temSql .= "'".$v."'";
+						}else{
+							$temSql .= " '".$v."',";
+						}
+                    }
+					$temSql = rtrim(rtrim($temSql,','));
+					$temSql = "INSERT INTO `{$table}` VALUES ({$temSql});";
+					$arr[$table][$key] = $temSql;
+				}
+			}
+		}
+
+		foreach($arr as $key=>$value){
+			foreach($Arrtable as $v){
+				if($key == $v){
+					$bdTable[$key][2] = $value;
+				}
+			}
+		}
+		unset($arr);
+		unset($Arrtable);
+		//var_dump($path);
+		//var_dump($bdTable);exit;
+		//表依次的相关数据数组  key[ 0  1  2 ]
+		file_put_contents($filename, $pre."\n\n\n", FILE_APPEND);
+		foreach($bdTable as $key=>$value){
+			foreach($value as $k=>$v){
+				if($k == 0){
+					file_put_contents($filename, $v."\n", FILE_APPEND);
+				}elseif($k ==1){
+					file_put_contents($filename, $v.";\n", FILE_APPEND);
+				}else{
+					foreach($v as $k1=>$v2){
+						file_put_contents($filename, $v2."\n", FILE_APPEND);
+					}	
+				}
+			}
+			file_put_contents($filename, "\n\n\n", FILE_APPEND);
+		}
+		unset($bdTable);
+		$time = time()-$time;	
+		echo json_encode(array("status" => 1, "info" => "成功备份所选数据库表结构和数据,  耗时：{$time} 秒", "url" => U('SysData/restore')));
+	}
+	
+	public function bakupTable($table_list) {	
+
+		$arr =array();
+        if (!is_array($table_list) || empty($table_list)) {
+            return false;
+        }
+        foreach ($table_list as $table) {
+			$outPut = '';
+            $outPut .="# 数据库表：{$table} 结构信息\n";
+            $outPut .= "DROP TABLE IF EXISTS `{$table}`;\n";
+            $tmp = M()->query("SHOW CREATE TABLE {$table}");
+			$arr[$table][0] = $outPut;
+			$arr[$table][1] = $tmp[0]['create table'];
+        }
+        return $arr;
+    }
+	
 	//导出记录
 	public function down_excel(){
 		$where = ' a.cid=b.cid ';

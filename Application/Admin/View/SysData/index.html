@@ -32,7 +32,7 @@
                         <span class="fr">数据库中共有{$tables}张表，共计{$total}</span>
                         <div class="current">数据库表结构列表</div>
                     </div>
-                    <form>
+                    <form action="__URL__/backup" method="post">
                         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab">
                             <thead>
                                 <tr>
@@ -48,7 +48,7 @@
                             <tbody>
                                 <?php foreach ($list as $key => $value): ?>
                                 <tr align="center">
-                                    <td><input type="checkbox" name="table[]" value="{$value.name}"/></td>
+                                    <td><input type="checkbox" class="checkbox" name="table[]" value="{$value.name}"/></td>
                                     <td align="left">{$value.name}</td>
                                     <td>{$value.comment}</td>
                                     <td>{$value.rows}</td>
@@ -98,12 +98,41 @@
                     if($(this).attr("disabledSubmit")){
                         popup.alert("已提交，系统在处理中...");
                     }else{
+						var data = '';
                         $(this).attr("disabledSubmit",true).html("提交处理中...");
-                        commonAjaxSubmit("__URL__/backup");
-//                        popup.alert("系统处理中，如果数据库中数据较多可能需要较长时间，请稍候....");
-                        setTimeout(function(){
-                            popup.close("asyncbox_alert");
-                        },2000);
+						$(".checkbox:checked").each(function(i,item){
+							if(i==0){
+								data = $(this).val();
+							}else{
+								data =data + "," + $(this).val();
+							}
+						});
+
+						$.ajax({
+							type:"POST",
+							data:{"data":data},
+							url:"__URL__/backup",
+							dataType:"json",
+							success:function(res){
+								if(res.status==1){
+									popup.alert(res.info);
+									setTimeout(function(){
+										popup.close("asyncbox_alert");
+									    window.location.href = res.url;
+									},2000);
+									
+									if(res.url&&res.url!=''){
+										setTimeout(function(){
+											top.window.location.href=res.url;
+										},2000);
+									}
+								}
+								
+							}
+						});
+
+                      //popup.alert("系统处理中，如果数据库中数据较多可能需要较长时间，请稍候....");
+
                     }
                 });
             });
