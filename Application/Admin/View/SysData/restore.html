@@ -1,20 +1,32 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>数据还原-数据管理-{$site.SITE_INFO.name}</title>
-        <php>
-            $addCss="";
-            $addJs="";
-            $currentNav ='数据管理 > 数据还原';
-        </php>
-        <css href="{$site.WEB_ROOT}Public/Min/?f=__CSS__/base.css|__CSS__/layout.css|--PUBLIC--/Js/asyncbox/skins/default.css{$addCss}"/>
+        <meta charset="UTF-8" />
+        <title>权限管理-后台管理-ck RBAC权限管理</title>
+        <!--公共头文件-->
+        <include file="Public:head" />
     </head>
     <body>
         <div class="wrap">
-            <include file="Common:head" />
+            <!--顶部导航菜单-->
+	        <div id="Top">
+                <include file="Public:wrap_top" />
+	        </div>
+			<!--Tags标签-->
+            <div id="Tags">
+				<include file="Public:wrap_tags" />
+                    <div class="nav">
+                        <font id="today"></font>您的位置：权限管理 > 添加管理员
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
             <div class="mainBody">
-                <include file="Common:left" />
+                <!--子菜单列表-->
+	            <div id="Left">
+                    <include file="Public:main_left" />
+	            </div>
+				<!--content内容主体-->
                 <div id="Right">
                     <div class="Item hr">
                         <span class="fr">系统数据库备份目录下共有{$files}个SQL备份文件，共计{$total}</span>
@@ -24,37 +36,45 @@
                         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab">
                             <thead>
                                 <tr>
-                                    <td width="90"><label><input name="" class="chooseAll" type="checkbox"/> 全选</label> <label><input name="" class="unsetAll" type="checkbox"/> 反选</label></td>
+                                    <td width="90">
+										<label><input name="" class="chooseAll" type="checkbox"/> 全选</label> 
+										<label><input name="" class="unsetAll" type="checkbox"/> 反选</label>
+									</td>
                                     <td>SQL文件名</td>
                                     <td>备份时间</td>
                                     <td>类型</td>
                                     <td>文件大小</td>
                                     <td>文件备注</td>
-                                    <td>导入</td>
+                                    <td>操作</td>
                                 </tr>
                             </thead>
                             <tbody>
-                                <volist name="list" id="sql">
-                                    <tr align="center">
-                                        <td><input pre="{$sql.pre}" type="checkbox" name="sqlFiles[]" value="{$sql.name}"/></td>
-                                        <td align="left"><a href="{:U('SysData/downFile',array('file'=>$sql['name'],'type'=>'sql'))}" target="_blank">{$sql.name}</a></td>
-                                        <td>{$sql.time}</td>
-                                        <td>{$sql.type}</td>
-                                        <td>{$sql.size}</td>
-                                        <td class="description" title="{$sql.description}">查看备注信息</td>
-                                        <td><button class="btn restore" sqlPre="{$sql.pre}">导入</button></td>
-                                    </tr>
-                                </volist>
+                                <?php foreach ($list as $key => $value): ?>
+                                <tr align="center">
+                                    <td><input type="checkbox" class="checkbox" name="sqlFiles[]" value="{$value.name}"/></td>
+                                    <td align="left">
+                                       <a href="{:U('SysData/downFile',array('file'=>$value['name'],'type'=>'sql'))}" target="_blank">{$value.name}</a>
+                                    </td>
+                                    <td>{$value.time}</td>
+                                    <td>{$value.type}</td>
+                                    <td>{$value.size}</td>
+                                    <td class="description" title="{$value.description}">查看备注信息</td>
+                                    <td><button class="btn restore" sqlPre="{$value.pre}">导入</button></td>
+                                </tr>   
+                                <?php endforeach ?>
                             </tbody>
                             <tfoot align="center">
                                 <tr>
-                                    <td width="90"><label><input name="" class="chooseAll" type="checkbox"/> 全选</label> <label><input name="" class="unsetAll" type="checkbox"/> 反选</label></td>
+                                    <td width="90">
+										<label><input name="" class="chooseAll" type="checkbox"/> 全选</label> 
+										<label><input name="" class="unsetAll" type="checkbox"/> 反选</label>
+									</td>
                                     <td>SQL文件名</td>
                                     <td>备份时间</td>
                                     <td>类型</td>
                                     <td>总计：{$total}</td>
                                     <td>文件备注</td>
-                                    <td>导入</td>
+                                    <td>操作</td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -63,53 +83,48 @@
                     <div class="commonBtnArea" >
                         <span class="fr" id="opStatus" style="width:450px; display: none; margin: -8px; line-height: 16px;"></span>
                         <button class="btn delSqlFiles">删除所选</button>
-                        <button class="btn sendSql">发送SQL到邮箱</button>
+                        <button class="btn sendtoemail">发送SQL到邮箱</button>
                         <button class="btn zip">压缩SQL为ZIP</button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="clear"></div>
-        <css href="{$site.WEB_ROOT}Public/Min/?f=--PUBLIC--/Js/poshytip/tip-yellow/tip-yellow.css|--PUBLIC--/Js/poshytip/tip-yellowsimple/tip-yellowsimple.css"/>
-        <js href="{$site.WEB_ROOT}Public/Min/?f=--PUBLIC--/Js/jquery-1.7.2.min.js|--PUBLIC--/Js/jquery.lazyload.js|--PUBLIC--/Js/functions.js|__JS__/base.js|--PUBLIC--/Js/jquery.form.js|--PUBLIC--/Js/asyncbox/asyncbox.js|--PUBLIC--/Js/poshytip/jquery.poshytip.min.js"/>
-        <include file="Common:foot" />
-        <script type="text/javascript">
-            $(function(){
-                //刷新操作
-                var repeat=function(url,type){
-                    $.post(url, function(json){
-//                        var json = eval("(" + json + ")");
-                        if(json.status==1){
-                            if(json.url){
-                                $("#opStatus").html(json.info);
-                                repeat(json.url,type);
-                            }else{
-                                popup.success(json.info,'oh yeah',function(action){
-                                    if(action == 'ok'){
-                                        $("#opStatus").hide('solw');
-                                        $("."+type).html(type=="sendSql"?"发送SQL到邮箱":"导入");
-                                    }
-                                });
-                                $(".btn").removeAttr("disabledSubmit");
-                            }
-                        }else{
-                            popup.error(json.info);
-                        }
-                    });
-                }
-                $(".sendSql").click(function(){
+        <!--尾部js css-->
+	    <include file="Public:footer" />
+		<css href="__STATIC__/poshytip/tip-yellow/tip-yellow.css" />
+		<css href="__STATIC__/poshytip/tip-yellowsimple/tip-yellowsimple.css" />
+		<js href="__STATIC__/poshytip/jquery.poshytip.js" />
+
+		<script type="text/javascript">
+			clickCheckbox();//全新反选
+			
+			
+			$(function(){
+				
+				//发送SQL到邮箱
+				$(".sendtoemail").click(function(){
+				
+					var length = $("tbody input[type='checkbox']:checked").length;
+					if(length == 0){
+						popup.alert("请先选择你要发送到邮件中的数据库表吧");
+                        return false;
+					}
+
                     if($(this).attr("disabledSubmit")){
                         popup.alert("已提交，系统在处理中...");
                         return false;
                     }
-                    if($("tbody input[type='checkbox']:checked").size()==0){
-                        popup.alert("请先选择你要发送到邮件中的数据库表吧");
-                        return false;
-                    }
-                    popup.open({id:"ifrSendSql", url : "__URL__/sendSql", width : 400, height : 100, buttons : [{ value : '确定发送邮件',result : 'submit'},{ value : '取消',result : 'cancel'}],callback : function(btnRes,cntWin,reVal){
+                    popup.open({
+						id:"ifrSendSql", 
+						url : "__URL__/sendSql", 
+						width : 400, 
+						height : 100, 
+						buttons : [{ value : '确定发送邮件',result : 'submit'},{ value : '取消',result : 'cancel'}],
+						callback : function(btnRes,cntWin,reVal){
                             if(btnRes == "submit"){
                                 var email=cntWin.getEmail();
-                                var Reg =/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+                                var Reg ="/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/";
                                 if (Reg.test(email)) {
                                     $("#to").val(email);
                                     $(".btn").attr("disabledSubmit",true);
@@ -138,12 +153,97 @@
                     });
                     return false;
                 });
-                //显示SQL文件说明信息
-                $('.description').poshytip({className: 'tip-yellowsimple', showTimeout: 0.5,alignX: 'center',offsetY: 0,allowTipHover: true});
-                clickCheckbox();//全新反选
+			});
+        </script>
+        <script type="text/javascript">
+            $(function(){
+				
+
+				//显示SQL文件说明信息
+                $('.description').poshytip({
+					className: 'tip-yellowsimple', 
+					showTimeout: 0,
+					alignX: 'center',
+					offsetY: 0,
+					allowTipHover: true
+				});
+				
+				
+                /*//刷新操作
+                var repeat=function(url,type){
+                    $.post(url, function(json){
+//                        var json = eval("(" + json + ")");
+                        if(json.status==1){
+                            if(json.url){
+                                $("#opStatus").html(json.info);
+                                repeat(json.url,type);
+                            }else{
+                                popup.success(json.info,'oh yeah',function(action){
+                                    if(action == 'ok'){
+                                        $("#opStatus").hide('solw');
+                                        $("."+type).html(type=="sendSql"?"发送SQL到邮箱":"导入");
+                                    }
+                                });
+                                $(".btn").removeAttr("disabledSubmit");
+                            }
+                        }else{
+                            popup.error(json.info);
+                        }
+                    });
+                }
+
+
+                $(".sendSql2").click(function(){
+					alert(111);
+					return false;
+                    if($(this).attr("disabledSubmit")){
+                        popup.alert("已提交，系统在处理中...");
+                        return false;
+                    }
+                    if($("tbody input[type='checkbox']:checked").size()==0){
+                        popup.alert("请先选择你要发送到邮件中的数据库表吧");
+                        return false;
+                    }
+                    popup.open({id:"ifrSendSql", url : "/ck_thinkphp/index.php/Admin/SysData/sendSql", width : 400, height : 100, buttons : [{ value : '确定发送邮件',result : 'submit'},{ value : '取消',result : 'cancel'}],callback : function(btnRes,cntWin,reVal){
+                            if(btnRes == "submit"){
+                                var email=cntWin.getEmail();
+                                var Reg =/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+                                if (Reg.test(email)) {
+                                    $("#to").val(email);
+                                    $(".btn").attr("disabledSubmit",true);
+                                    $("form").ajaxSubmit({url:"/ck_thinkphp/index.php/Admin/SysData/sendSql",type:"POST",success:function(json, st) {
+//                                            var json = eval("(" + json + ")");
+                                            if(json.status==1){
+                                                if(json.url){
+                                                    $("#opStatus").show().html(json.info);
+                                                    repeat(json.url,"sendSql");
+                                                }else{
+                                                    popup.success(json.info);
+                                                }
+                                                popup.close("asyncbox_alert");
+                                            }else{
+                                                popup.error(json.info);
+                                            }
+                                        }
+                                    });
+                                    popup.close("ifrSendSql");
+                                }else{
+                                    popup.error("你输入的电子邮件地址格式错误");
+                                }
+                                return false;
+                            }
+                        }
+                    });
+                    return false;
+                });
+                
+                
                 //同一备份版本任意一个卷选中则选中该卷所有文件
                 $("tbody input[type='checkbox']").click(function(){$("tbody input[type='checkbox'][pre='"+$(this).attr("pre")+"']").prop("checked",$(this).prop('checked'));});
-                //提交数据恢复操作
+                
+				
+				
+				//提交数据恢复操作
                 $(".restore").click(function(){
                     if($(this).attr("disabledSubmit")){
                         popup.alert("已提交，系统在处理中...");
@@ -152,7 +252,7 @@
                     var sqlPre=$(this).attr("sqlPre");
                     $(".restore[sqlPre='"+sqlPre+"']").attr("disabledSubmit",true).html("导入中...");
                     $(".btn").attr("disabledSubmit",true);
-                    $.getJSON("__URL__/restoreData", {sqlPre:sqlPre}, function(json){
+                    $.getJSON("/ck_thinkphp/index.php/Admin/SysData/restoreData", {sqlPre:sqlPre}, function(json){
                         if(json.status==1){
                             if(json.url){
                                 $("#opStatus").show().html(json.info);
@@ -168,6 +268,8 @@
                     popup.alert("系统处理中，如果导入文件较大可能需要较长时间，请稍候....");
                     return false;
                 });
+
+
                 //删除备份文件
                 $(".delSqlFiles").click(function(){
                     if($(this).attr("disabledSubmit")){
@@ -182,11 +284,12 @@
                         if(action == 'ok'){
                             $(".btn").attr("disabledSubmit",true);
                             $(this).html("提交处理中...");
-                            commonAjaxSubmit("__URL__/delSqlFiles");
+                            commonAjaxSubmit("/ck_thinkphp/index.php/Admin/SysData/delSqlFiles");
                         }
                     });
                     return false;
                 });
+
 
                 //删除备份文件
                 $(".zip").click(function(){
@@ -198,11 +301,11 @@
                         popup.alert("请先选择你要压缩的数据库表吧");
                         return false;
                     }
-                    commonAjaxSubmit("__URL__/zipSql");
+                    commonAjaxSubmit("/ck_thinkphp/index.php/Admin/SysData/zipSql");
                     $(".btn").attr("disabledSubmit",true);
                     $(this).html("压缩中...");
                     return false;
-                });
+                });*/
             });
         </script>
     </body>

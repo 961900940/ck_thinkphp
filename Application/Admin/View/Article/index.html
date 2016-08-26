@@ -195,6 +195,7 @@
 						
         </script>
 		<script>
+		
 			//每页显示多少条数据
 			function changePagesNum(_this){
 				var pagenum = $(_this).val();
@@ -210,6 +211,32 @@
 				$('#page_num').html("快捷输入页面显示个数:"+pwd);
 			}
 			
+			
+			//针对 选择内容下拉框 选中之后 ,点击其他地方不隐藏的问题解决
+			$(document).click(function(e){
+				$(document).find('.dropdown-menu').each(function(){
+					if(e.target != this && !$.contains(this, e.target) && e.target!=$(this).prev().get(0)){
+						$(this).hide();	
+					};
+				});
+			});
+			
+			
+			//选中已经被选中的显示项
+			var checkedArr = [];
+			window.onload = function(){
+				if(localStorage.checkedArr){
+					checkedArr = localStorage.checkedArr.split(",");
+					for(var i=0, l=checkedArr.length; i<l; i++) {
+						var checkbox = $(':checkbox[name='+checkedArr[i]+']')
+						if(checkbox.length > 0){
+							checkbox.get(0).checked = true;
+							$('.'+checkedArr[i]).show();
+						}
+					}
+				}
+			}
+			
 			//是否显示内容
 			function changeCheckMenu(_this){
 				$('#checkMenu').show();
@@ -217,18 +244,43 @@
 				var checkedName   = _this.name;
 				if( checkedStatus ){
 					$('.'+checkedName).show();
+					checkedArr.push(checkedName);
 				}else{
 					$('.'+checkedName).hide();
+					 checkedArr.splice($.inArray(checkedName,checkedArr),1);
 				}
+				localStorage.checkedArr = checkedArr.join(",");
 			}
 			
-			$(document).click(function(e){
-				$(document).find('[autohide=yes]').each(function(){
-					if(e.target != this && !$.contains(this, e.target) && e.target!=$(this).prev().get(0)){
-						$(this).hide();	
-					};
-				});
-			});
+			
+			
+			//添加cookie
+			function addCookie(objName, objValue, objHours) {  
+				//添加cookie
+				var str = objName + "=" + encodeURIComponent(objValue);
+				if (objHours > 0) {                               //为时不设定过期时间，浏览器关闭时cookie自动消失
+					var date = new Date();
+					var ms = objHours * 3600 * 1000;
+					date.setTime(date.getTime() + ms);
+					str += "; expires=" + date.toGMTString();
+				}
+				document.cookie = str;
+			}
+			//得到cookie
+			function getCookie(name){
+				var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+
+				if (arr = document.cookie.match(reg))
+					return unescape(arr[2]);
+				else
+					return null;
+			}
+
+			//删除cookie
+			function delCookie(name){
+				document.cookie = name + "=;expires=" + (new Date(0)).toGMTString();
+			}
+
 		</script>
     </body>
 
