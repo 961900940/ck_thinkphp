@@ -1,6 +1,7 @@
 <?php
 namespace Admin\Controller;
 use Think\Controller;
+use ZipArchive;
 //内容管理模块
 class SysDataController extends CommonController {
 
@@ -401,6 +402,52 @@ class SysDataController extends CommonController {
 		exit;
 	}
 
+	//删除备份文件
+	public function delSqlFiles(){
+		$path = "./Database/" ;
+		$datafile = explode(',',I('data'));
+		foreach ($datafile as $file) {
+			unlink($path.$file);
+		}
+		$xdata['status'] = 'success';
+		$xdata['info'] = count($datafile).'个备份文件,删除成功';
+		echo json_encode($xdata);exit;
+	}
+
+	//打包压缩备份文件
+	public function zipSql(){
+		$path = "./Database/" ;
+		$ZipBackDir = './ZipBackDir/';
+		$toZip = explode(',',I('data'));
+		foreach ($toZip as $zipOut => $files) {
+			$arrfiles =  explode('.',$files);
+            if ($this->zip($files, $arrfiles[0] . ".zip", $ZipBackDir,$path)) {
+                unlink($path.$files);
+            }
+        }
+		$xdata['status'] = 'success';
+		$xdata['info'] = "打包的sql文件成功，本次打包" . count($toZip) . "个zip文件";
+		echo json_encode($xdata);exit;
+	}
+
+	/**
+     * 功能：生成zip压缩文件，存放都 WEB_CACHE_PATH 中
+     * @param $files        array   需要压缩的文件
+     * @param $filename     string  压缩后的zip文件名  包括zip后缀
+     * @param $path         string  文件所在目录
+     * @param $outDir       string  输出目录
+     * @return array
+     */
+    public function zip($files, $filename, $outDir , $path ) {
+        $zip = new ZipArchive();
+        mkdirs($outDir);
+        if ($zip->open($outDir  . $filename, ZipArchive::CREATE) === TRUE) {
+            $zip->addFile($path . $files, str_replace('/', '', $files));
+			$zip->close();
+            return TRUE;
+        }
+        return FALSE;
+    }
 
 
 
