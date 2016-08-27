@@ -37,7 +37,7 @@
                             <thead>
                                 <tr>
                                     <td width="90">
-										<label><input name="" class="chooseAll" type="checkbox"/> 全选</label> 
+										<label><input name="" class="chooseAll" type="checkbox"/> 全选</label>
 										<label><input name="" class="unsetAll" type="checkbox"/> 反选</label>
 									</td>
                                     <td>SQL文件名</td>
@@ -60,13 +60,13 @@
                                     <td>{$value.size}</td>
                                     <td class="description" title="{$value.description}">查看备注信息</td>
                                     <td><button class="btn restore" sqlPre="{$value.pre}">导入</button></td>
-                                </tr>   
+                                </tr>
                                 <?php endforeach ?>
                             </tbody>
                             <tfoot align="center">
                                 <tr>
                                     <td width="90">
-										<label><input name="" class="chooseAll" type="checkbox"/> 全选</label> 
+										<label><input name="" class="chooseAll" type="checkbox"/> 全选</label>
 										<label><input name="" class="unsetAll" type="checkbox"/> 反选</label>
 									</td>
                                     <td>SQL文件名</td>
@@ -97,14 +97,20 @@
 		<js href="__STATIC__/poshytip/jquery.poshytip.js" />
 
 		<script type="text/javascript">
-			clickCheckbox();//全新反选
-			
-			
+			clickCheckbox();//全选反选
+
+            //显示SQL文件说明信息
+            $('.description').poshytip({
+                className: 'tip-yellowsimple',
+                showTimeout: 0,
+                alignX: 'center',
+                offsetY: 0,
+                allowTipHover: true
+            });
+
 			$(function(){
-				
 				//发送SQL到邮箱
 				$(".sendtoemail").click(function(){
-				
 					var length = $("tbody input[type='checkbox']:checked").length;
 					if(length == 0){
 						popup.alert("请先选择你要发送到邮件中的数据库表吧");
@@ -115,60 +121,45 @@
                         popup.alert("已提交，系统在处理中...");
                         return false;
                     }
-                    popup.open({
-						id:"ifrSendSql", 
-						url : "__URL__/sendSql", 
-						width : 400, 
-						height : 100, 
-						buttons : [{ value : '确定发送邮件',result : 'submit'},{ value : '取消',result : 'cancel'}],
-						callback : function(btnRes,cntWin,reVal){
-                            if(btnRes == "submit"){
-                                var email=cntWin.getEmail();
-                                var Reg ="/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/";
-                                if (Reg.test(email)) {
-                                    $("#to").val(email);
-                                    $(".btn").attr("disabledSubmit",true);
-                                    $("form").ajaxSubmit({url:"__URL__/sendSql",type:"POST",success:function(json, st) {
-//                                            var json = eval("(" + json + ")");
-                                            if(json.status==1){
-                                                if(json.url){
-                                                    $("#opStatus").show().html(json.info);
-                                                    repeat(json.url,"sendSql");
-                                                }else{
-                                                    popup.success(json.info);
-                                                }
-                                                popup.close("asyncbox_alert");
-                                            }else{
-                                                popup.error(json.info);
-                                            }
-                                        }
-                                    });
-                                    popup.close("ifrSendSql");
-                                }else{
-                                    popup.error("你输入的电子邮件地址格式错误");
-                                }
-                                return false;
-                            }
+                    var email=prompt("请输入您的邮箱","");//将输入的内容赋给变量 name
+                    //这里需要注意的是，prompt有两个参数，前面是提示的话，后面是当对话框出来后，在对话框里的默认值
+                    if(email) { //如果返回的有内容
+                        var regs =/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+                        if(!regs.test(email)){
+                            popup.alert("请输入正确的邮箱");
+                        }else{
+                            $(this).attr("disabledSubmit",true).html("提交处理中...");
+                            var data = '';
+    						$(".checkbox:checked").each(function(i,item){
+    							if(i==0){
+    								data = $(this).val();
+    							}else{
+    								data =data + "," + $(this).val();
+    							}
+    						});
+
+                            $.ajax({
+    							type:"POST",
+    							data:{"data":data,"email":email},
+    							url:"__URL__/sendSql",
+    							dataType:"json",
+    							success:function(res){
+    								if(res.status=='success'){
+    									popup.alert(res.info);
+    									setTimeout(function(){location.href = "__URL__/restore"},2000);
+    								}else{
+                                        popup.alert(res.info);
+    									setTimeout(function(){location.href = "__URL__/restore"},2000);
+                                    }
+    							}
+    						});
                         }
-                    });
-                    return false;
+                    }
                 });
 			});
         </script>
         <script type="text/javascript">
             $(function(){
-				
-
-				//显示SQL文件说明信息
-                $('.description').poshytip({
-					className: 'tip-yellowsimple', 
-					showTimeout: 0,
-					alignX: 'center',
-					offsetY: 0,
-					allowTipHover: true
-				});
-				
-				
                 /*//刷新操作
                 var repeat=function(url,type){
                     $.post(url, function(json){
@@ -236,13 +227,13 @@
                     });
                     return false;
                 });
-                
-                
+
+
                 //同一备份版本任意一个卷选中则选中该卷所有文件
                 $("tbody input[type='checkbox']").click(function(){$("tbody input[type='checkbox'][pre='"+$(this).attr("pre")+"']").prop("checked",$(this).prop('checked'));});
-                
-				
-				
+
+
+
 				//提交数据恢复操作
                 $(".restore").click(function(){
                     if($(this).attr("disabledSubmit")){
