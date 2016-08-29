@@ -1,20 +1,32 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>数据压缩包管理-数据管理-后台管理-{$site.SITE_INFO.name}</title>
-        <php>
-            $addCss="";
-            $addJs="";
-            $currentNav ='数据管理 > 数据压缩包管理';
-        </php>
-        <css href="{$site.WEB_ROOT}Public/Min/?f=__CSS__/base.css|__CSS__/layout.css|--PUBLIC--/Js/asyncbox/skins/default.css{$addCss}"/>
+        <meta charset="UTF-8" />
+        <title>权限管理-后台管理-ck RBAC权限管理</title>
+        <!--公共头文件-->
+        <include file="Public:head" />
     </head>
     <body>
         <div class="wrap">
-            <include file="Common:head" />
+            <!--顶部导航菜单-->
+	        <div id="Top">
+                <include file="Public:wrap_top" />
+	        </div>
+			<!--Tags标签-->
+            <div id="Tags">
+				<include file="Public:wrap_tags" />
+                    <div class="nav">
+                        <font id="today"></font>您的位置：数据管理 > 数据压缩包管理
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
             <div class="mainBody">
-                <include file="Common:left" />
+                <!--子菜单列表-->
+	            <div id="Left">
+                    <include file="Public:main_left" />
+	            </div>
+				<!--content内容主体-->
                 <div id="Right">
                     <div class="Item hr">
                         <span class="fr">共有{$files}个压缩包文件，共计{$total}</span>
@@ -34,7 +46,7 @@
                             <tbody>
                                 <volist name="list" id="zip">
                                     <tr align="center">
-                                        <td><input type="checkbox" name="zipFiles[]" value="{$zip.file}"/></td>
+                                        <td><input type="checkbox" class="checkbox" name="zipFiles[]" value="{$zip.file}"/></td>
                                         <td align="left"><a href="{:U('SysData/downFile',array('file'=>$zip['file'],'type'=>'zip'))}" target="_blank">{$zip.file}</a></td>
                                         <td>{$zip.time}</td>
                                         <td>{$zip.size}</td>
@@ -62,95 +74,72 @@
             </div>
         </div>
         <div class="clear"></div>
-        <js href="{$site.WEB_ROOT}Public/Min/?f=--PUBLIC--/Js/jquery-1.7.2.min.js|--PUBLIC--/Js/jquery.lazyload.js|--PUBLIC--/Js/functions.js|__JS__/base.js|--PUBLIC--/Js/jquery.form.js|--PUBLIC--/Js/asyncbox/asyncbox.js"/>
-        <include file="Common:foot" />
+        <!--尾部js css-->
+	    <include file="Public:footer" />
         <script type="text/javascript">
             $(function(){
                 //全新反选
                 clickCheckbox();
 
-                var repeat=function(url){
-                    $.post(url, function(json){
-//                        var json = eval("(" + json + ")");
-                        if(json.status==1){
-                            if(json.url){
-                                $("#opStatus").html(json.info);
-                                repeat(json.url);
-                            }else{
-                                popup.success(json.info,'oh yeah',function(action){
-                                    if(action == 'ok'){
-                                        $("#opStatus").hide('solw');
-                                        $(".unzipSelect").html('解压缩所选');
-                                    }
-                                });
-                                $(".btn").removeAttr("disabledSubmit");
-                            }
-                        }else{
-                            popup.error(json.info);
-                        }
-                    });
-                }
-
-                $(".unzipSelect").click(function(){
-                    if($(this).attr("disabledSubmit")){
-                        popup.alert("已提交，系统在处理中...");
-                        return false;
-                    }
-                    if($("tbody input[type='checkbox']:checked").size()==0){
-                        popup.alert("请先选择你要删除的数据库表吧");
-                        return false;
-                    }
-                    var files=[];
-                    $("tbody input[type='checkbox'][name='zipFiles[]']:checked").each(function(i){
-                        files[i]=$(this).val();
-                    });
-                    $.post("__URL__/unzipSqlfile", {'zipFiles':files}, function(json){
-//                        var json = eval("(" + json + ")");
-                        if(json.status==1){
-                            if(json.url){
-                                $("#opStatus").show().html(json.info);
-                                repeat(json.url);
-                            }else{
-                                popup.success(json.info);
-                            }
-                            popup.close("asyncbox_alert");
-                        }else{
-                            popup.error(json.info);
-                        }
-                    });
-
-                    return false;
-                });
-
-
+                //解压缩所选
                 $(".unzip").click(function(){
-                    $.post("__URL__/unzipSqlfile",{'zipFiles[]':$(this).attr("file")},function(json){
-//                        var json = eval("(" + json + ")");
-                        json.status==1?popup.success(json.info):popup.error(json.info);
-                        $(".btn").removeAttr("disabledSubmit");
-                        if(json.url&&json.url!=''){
-                            setTimeout(function(){
-                                top.window.location.href=json.url;
-                            },2000);
+                    $(this).attr("disabledSubmit",true).html("提交处理中...");
+                    var data = $(this).attr("file");
+                    $.ajax({
+                        type:"POST",
+                        data:{"data":data},
+                        url:"__URL__/unzipSqlfile",
+                        dataType:"json",
+                        success:function(res){
+                            alert(res);return false;
+                            if(res.status=='success'){
+                                popup.alert(res.info);
+                                setTimeout(function(){location.href = "__URL__/zipList"},2000);
+                            }else{
+                                popup.alert(res.info);
+                                setTimeout(function(){location.href = "__URL__/zipList"},2000);
+                            }
                         }
                     });
-                    return false;
                 });
+
                 //删除备份文件
                 $(".delZipFiles").click(function(){
-                    if($(this).attr("disabledSubmit")){
-                        popup.alert("已提交，系统在处理中...");
-
-                    }
                     if($("tbody input[type='checkbox']:checked").size()==0){
                         popup.alert("请先选择你要删除的zip文件吧");
                         return false;
                     }
+                    if($(this).attr("disabledSubmit")){
+                        popup.alert("已提交，系统在处理中...");
+
+                    }
                     popup.confirm('你确定要删除备份文件吗？','温馨提示',function(action){
                         if(action == 'ok'){
-                            $(".btn").attr("disabledSubmit",true);
-                            $(this).html("提交处理中...");
-                            commonAjaxSubmit("__URL__/delZipFiles");
+                            $(this).attr("disabledSubmit",true).html("提交处理中...");
+                            var data = '';
+    						$(".checkbox:checked").each(function(i,item){
+    							if(i==0){
+    								data = $(this).val();
+    							}else{
+    								data =data + "," + $(this).val();
+    							}
+    						});
+
+                            $.ajax({
+    							type:"POST",
+    							data:{"data":data},
+    							url:"__URL__/delZipFiles",
+    							dataType:"json",
+    							success:function(res){
+    								if(res.status=='success'){
+    									popup.alert(res.info);
+    									setTimeout(function(){location.href = "__URL__/zipList"},2000);
+    								}else{
+                                        popup.alert(res.info);
+    									setTimeout(function(){location.href = "__URL__/zipList"},2000);
+                                    }
+    							}
+    						});
                         }
                     });
                     return false;

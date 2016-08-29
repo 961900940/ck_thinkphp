@@ -16,7 +16,7 @@
             <div id="Tags">
 				<include file="Public:wrap_tags" />
                     <div class="nav">
-                        <font id="today"></font>您的位置：权限管理 > 添加管理员
+                        <font id="today"></font>您的位置：数据管理 > 数据库表信息
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                             <thead>
                                 <tr>
                                     <td width="90">
-										<label><input name="" class="chooseAll" type="checkbox"/> 全选</label> 
+										<label><input name="" class="chooseAll" type="checkbox"/> 全选</label>
 										<label><input name="" class="unsetAll" type="checkbox"/> 反选</label>
 									</td>
                                     <td>表名</td>
@@ -123,14 +123,14 @@
 										popup.close("asyncbox_alert");
 									    window.location.href = res.url;
 									},2000);
-									
+
 									if(res.url&&res.url!=''){
 										setTimeout(function(){
 											top.window.location.href=res.url;
 										},2000);
 									}
 								}
-								
+
 							}
 						});
 

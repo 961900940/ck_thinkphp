@@ -16,7 +16,7 @@
             <div id="Tags">
 				<include file="Public:wrap_tags" />
                     <div class="nav">
-                        <font id="today"></font>您的位置：权限管理 > 添加管理员
+                        <font id="today"></font>您的位置：数据管理 > 数据备份列表
                     </div>
                 </div>
             </div>
@@ -45,7 +45,6 @@
                                     <td>类型</td>
                                     <td>文件大小</td>
                                     <td>文件备注</td>
-                                    <td>操作</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -59,7 +58,6 @@
                                     <td>{$value.type}</td>
                                     <td>{$value.size}</td>
                                     <td class="description" title="{$value.description}">查看备注信息</td>
-                                    <td><button class="btn restore" sqlPre="{$value.pre}">导入</button></td>
                                 </tr>
                                 <?php endforeach ?>
                             </tbody>
@@ -74,7 +72,6 @@
                                     <td>类型</td>
                                     <td>总计：{$total}</td>
                                     <td>文件备注</td>
-                                    <td>操作</td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -221,73 +218,15 @@
                         success:function(res){
                             if(res.status=='success'){
                                 popup.alert(res.info);
-                                setTimeout(function(){location.href = "__URL__/restore"},2000);
+                                setTimeout(function(){location.href = "__URL__/zipList"},2000);
                             }else{
                                 popup.alert(res.info);
-                                setTimeout(function(){location.href = "__URL__/restore"},2000);
+                                setTimeout(function(){location.href = "__URL__/zipList"},2000);
                             }
                         }
                     });
                 });
 			});
-        </script>
-        <script type="text/javascript">
-            $(function(){
-                /*//刷新操作
-                var repeat=function(url,type){
-                    $.post(url, function(json){
-//                        var json = eval("(" + json + ")");
-                        if(json.status==1){
-                            if(json.url){
-                                $("#opStatus").html(json.info);
-                                repeat(json.url,type);
-                            }else{
-                                popup.success(json.info,'oh yeah',function(action){
-                                    if(action == 'ok'){
-                                        $("#opStatus").hide('solw');
-                                        $("."+type).html(type=="sendSql"?"发送SQL到邮箱":"导入");
-                                    }
-                                });
-                                $(".btn").removeAttr("disabledSubmit");
-                            }
-                        }else{
-                            popup.error(json.info);
-                        }
-                    });
-                }
-
-                //同一备份版本任意一个卷选中则选中该卷所有文件
-                $("tbody input[type='checkbox']").click(function(){$("tbody input[type='checkbox'][pre='"+$(this).attr("pre")+"']").prop("checked",$(this).prop('checked'));});
-
-
-
-				//提交数据恢复操作
-                $(".restore").click(function(){
-                    if($(this).attr("disabledSubmit")){
-                        popup.alert("已提交，系统在处理中...");
-                        return false;
-                    }
-                    var sqlPre=$(this).attr("sqlPre");
-                    $(".restore[sqlPre='"+sqlPre+"']").attr("disabledSubmit",true).html("导入中...");
-                    $(".btn").attr("disabledSubmit",true);
-                    $.getJSON("/ck_thinkphp/index.php/Admin/SysData/restoreData", {sqlPre:sqlPre}, function(json){
-                        if(json.status==1){
-                            if(json.url){
-                                $("#opStatus").show().html(json.info);
-                                repeat(json.url,"restore");
-                            }else{
-                                popup.success(json.info);
-                            }
-                            popup.close("asyncbox_alert");
-                        }else{
-                            popup.error(json.info);
-                        }
-                    });
-                    popup.alert("系统处理中，如果导入文件较大可能需要较长时间，请稍候....");
-                    return false;
-                });
-                */
-            });
         </script>
     </body>
 </html>

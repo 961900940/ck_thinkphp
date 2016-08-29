@@ -196,7 +196,7 @@ class SysDataController extends CommonController {
         unset($list);
         return array("list" => $newArr, "size" => byteFormat($size));
     }
-	
+
 	public function sendSql(){
 		$path = "./Database/" ;
 		$datafile = explode(',',I('data'));
@@ -226,7 +226,7 @@ class SysDataController extends CommonController {
 			}else{
 				$mail->AddAddress($address);
 			}
-			
+
 			$mail->AddReplyTo("505704504@qq.com","ck");//回复地址
 			if(is_array($datafile)){
 				foreach($datafile as $file){
@@ -303,9 +303,79 @@ class SysDataController extends CommonController {
     }
 
 
+    /*
+    *列出以打包sql文件
+    */
+    public function zipList(){
+        $data = $this->getZipFilesList();
+        $this->assign("list", $data['list']);
+        $this->assign("total", $data['size']);
+        $this->assign("files", count($data['list']));
+        $this->display();
+    }
 
+    public function getZipFilesList(){
+        $list = array();
+        $size = 0;
+        $ZipBackDir = './ZipBackDir/';
+        $handle = opendir($ZipBackDir);
 
+        while ($file = readdir($handle)) {
+            if ($file != "." && $file != "..") {
+                $tem = array();
+                $tem['file'] = $file; //  checkCharset($file);
+                $_size = filesize($ZipBackDir . "$file");
+                $tem['size'] = byteFormat($_size);
+                $tem['time'] = date("Y-m-d H:i:s", filectime($ZipBackDir . "$file"));
+                $size+=$_size;
+                $list[] = $tem;
+            }
+        }
+        return array("list" => $list, "size" => byteFormat($size));
+    }
 
+    //删除压缩包
+    public function delZipFiles(){
+        $ZipBackDir = './ZipBackDir/';
+		$datafile = explode(',',I('data'));
+		foreach ($datafile as $file) {
+			unlink($ZipBackDir.$file);
+		}
+		$xdata['status'] = 'success';
+		$xdata['info'] = count($datafile).'个备份文件,删除成功';
+		echo json_encode($xdata);exit;
+    }
+
+    /**
+     * 功能：解压缩zip文件，存放都 DatabaseBackDir 中
+     * @param $file         string   需要压缩的文件
+     * @return array
+     */
+    public function unzip($file) {
+        $zip = new ZipArchive();
+        $ZipBackDir = './ZipBackDir/';
+        if ($zip->open($ZipBackDir. $file) === TRUE){
+            $zip->extractTo($ZipBackDir);
+            $zip->close();
+            return TRUE;
+        }
+        return FALSE;
+
+    }
+
+    public function unzipSqlfile(){
+        $datafile = explode(',',I('data'));
+        var_dump($datafile);exit;
+        $i = 0;
+		foreach ($datafile as $file) {
+            if($this->unzip($file)){
+                var_dump('111111111');exit;
+                unlink($ZipBackDir.$file);
+                $i++;
+            }
+		}
+        var_dump($i);exit;
+    }
 
 
 
