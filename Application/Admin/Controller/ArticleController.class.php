@@ -161,18 +161,18 @@ class ArticleController extends CommonController {
 
     }
 
-	//从excel导入数据
 	public function import_excel(){
 		header('Content-type:text/html;charset=utf-8');//php代码里面设置编码
-		//导入PHPExcel类库，因为PHPExcel没有用命名空间，只能inport导入
-		import("Org.Util.PHPExcel");
 		//要导入的xls文件，位于根目录下的Public文件夹
 		$filename="./Public/1.xls";
+
+		//导入PHPExcel类库，因为PHPExcel没有用命名空间，只能inport导入
+		import("Org.Util.PHPExcel");
 		//创建PHPExcel对象，注意，不能少了\
 		$PHPExcel=new \PHPExcel();
 		//如果excel文件后缀名为.xls，导入这个类
 		import("Org.Util.PHPExcel.Reader.Excel5");
-		//如果excel文件后缀名为.xlsx，导入这下类
+		//如果excel文件后缀名为.xlsx，导入这个类
 		//import("Org.Util.PHPExcel.Reader.Excel2007");
 		//$PHPReader=new \PHPExcel_Reader_Excel2007();
 

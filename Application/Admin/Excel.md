@@ -84,10 +84,53 @@
 	//从excel导入数据
 	public function import_excel(){
 		header('Content-type:text/html;charset=utf-8');//php代码里面设置编码
-		//导入PHPExcel类库，因为PHPExcel没有用命名空间，只能inport导入
+		$filename="./Public/1.xls";
+		
 		import("Org.Util.PHPExcel");
+		import("Org.Util.PHPExcel.Reader.Excel5");
+		$reader=new \PHPExcel_Reader_Excel5();
+
+		$PHPExcel = $reader->load($filename); // 载入excel文件
+		$sheet = $PHPExcel->getSheet(0); // 读取第一個工作表
+		$highestRow = $sheet->getHighestRow(); // 取得总行数
+		$highestColumm = $sheet->getHighestColumn(); // 取得总列数
+		 
+		/** 循环读取每个单元格的数据 */
+		for ($row = 1; $row <= $highestRow; $row++){//行数是以第1行开始
+			for ($column = 'A'; $column <= $highestColumm; $column++) {//列数是以A列开始
+				$arr[$row][] = $sheet->getCell($column.$row)->getValue();
+			}
+		}
+		var_dump($arr);exit;
+	}
+
+	结果：
+		array (size=4)
+		  1 => 
+		    array (size=2)
+		      0 => string '姓名' (length=6)
+		      1 => string '成绩' (length=6)
+		  2 => 
+		    array (size=2)
+		      0 => string '崔凯' (length=6)
+		      1 => float 100
+		  3 => 
+		    array (size=2)
+		      0 => string '王腾飞' (length=9)
+		      1 => float 90
+		  4 => 
+		    array (size=2)
+		      0 => string '陈亚丁' (length=9)
+		      1 => float 80
+	
+
+	public function import_excel2(){
+		header('Content-type:text/html;charset=utf-8');//php代码里面设置编码
 		//要导入的xls文件，位于根目录下的Public文件夹
 		$filename="./Public/1.xls";
+
+		//导入PHPExcel类库，因为PHPExcel没有用命名空间，只能inport导入
+		import("Org.Util.PHPExcel");
 		//创建PHPExcel对象，注意，不能少了\
 		$PHPExcel=new \PHPExcel();
 		//如果excel文件后缀名为.xls，导入这个类
@@ -118,3 +161,23 @@
 		}
 		var_dump($arr);
 	}
+
+	结果：
+		array (size=4)
+		  1 => 
+		    array (size=2)
+		      'A' => string '姓名' (length=6)
+		      'B' => string '成绩' (length=6)
+		  2 => 
+		    array (size=2)
+		      'A' => string '崔凯' (length=6)
+		      'B' => float 100
+		  3 => 
+		    array (size=2)
+		      'A' => string '王腾飞' (length=9)
+		      'B' => float 90
+		  4 => 
+		    array (size=2)
+		      'A' => string '陈亚丁' (length=9)
+		      'B' => float 80
+	
