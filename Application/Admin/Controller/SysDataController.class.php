@@ -364,6 +364,7 @@ class SysDataController extends CommonController {
 
     }
 
+	//解压缩所选
     public function unzipSqlfile(){
 		$ZipBackDir = './ZipBackDir/';
         $datafile = explode(',',I('data'));
@@ -377,92 +378,63 @@ class SysDataController extends CommonController {
 		$xdata['info'] = count($datafile).'个备份文件,解压缩成功';
 		echo json_encode($xdata);exit;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	//导出记录
-	public function down_excel(){
-		$where = ' a.cid=b.cid ';
-		$article = M()->table(array('ks_content'=>'a','ks_article_category'=>'b'))
-			->field('a.*,b.category_name')
-			->where($where)
-			->order("update_time desc")
-			->select();
-		//var_dump($article);exit;
-		$excel_header = array('id'=>'id', 'title'=>'title','status'=>'状态','is_hot'=>'热门与否','category_name'=>'分类','content'=>'内容');
-		$excel_name = "文章管理";
-		$this->download_excel($article,$excel_header,$excel_name);
-	}
-
-	/**
-     * 导出数据到excel表格(浏览器弹出选择要保存的路径)
-     * @param array $data_list        数据
-     * @param array $downloadexcel_title     title
-     * @param string $file_name        文件名
-     */
-    public function download_excel($data_list,$downloadexcel_title,$file_name){
-        header('Content-type:text/html;charset=utf-8');//php代码里面设置编码
-        import("Org.Util.PHPExcel");
-        import("Org.Util.PHPExcel.IOFactory");
-
-        $objPHPExcel = new \PHPExcel;
-        //$sheetExcel = $objPHPExcel->getActiveSheet();//获得当前活动sheet的操作对象
-
-        //var_dump($data_list);
-        foreach($downloadexcel_title as $k=>$y){
-				$fields[]=$k;
-				$title_new[]=$y;
-		}
-
-		//var_dump($fields);
-		//var_dump($title_new);exit;
-		$col = 0;
-        foreach ($title_new as $title_t) {
-            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, 1, $title_t); //excel第一行
-            $col++;
+	
+	//下载压缩包或sql文件
+	public function downFile() {
+		$path = "./Database/" ;
+        $ZipBackDir = './ZipBackDir/';
+        if (empty($_GET['file']) || empty($_GET['type']) || !in_array($_GET['type'], array("zip", "sql"))) {
+            $this->error("下载地址不存在");
         }
+        $path = array("zip" => $ZipBackDir, "sql" => $path);
+        $filePath = $path[$_GET['type']] . $_GET['file'];
+        if (!file_exists($filePath)) {
+            $this->error("该文件不存在，可能是被删除");
+        }
+        $filename = basename($filePath);
+        header("Content-type: application/octet-stream");
+        header('Content-Disposition: attachment; filename="' . $filename . '"');
+        header("Content-Length: " . filesize($filePath));
+        readfile($filePath);
+		exit;
+    }
 
-        $row = 2;
-        foreach ($data_list as $data_k) {
-            $col = 0;
-            foreach ($fields as $field) {
-                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $row, $data_k[$field]);
-                $col++;
+	//数据库优化修复
+	public function repair() {
+        $M = M("Auth_admin");
+        if (IS_POST) {
+			$tables = I("data");
+			$act = I("act");
+            if (empty($tables)) {
+                echo json_encode(array("status" => 0, "info" => "请选择要处理的表"));exit;
             }
-            $row++;
-        }
-
-        ob_end_clean();
-        $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
-        header('Content-Type: application/vnd.ms-excel;charset=utf-8;');
-        $ua = $_SERVER["HTTP_USER_AGENT"];
-        $encoded_filename = urlencode($file_name);
-        $encoded_filename = str_replace("+", "%20", $encoded_filename);
-        header('Content-Type: application/octet-stream');
-        if (preg_match("/MSIE/", $ua)) {
-            header('Content-Disposition: attachment; filename="' . $encoded_filename . date('Ymd') . '.xls"');
-        } else if (preg_match("/Firefox/", $ua)) {
-            header('Content-Disposition: attachment; filename*="utf8\'\'' . $file_name . date('Ymd') . '.xls"');
+            if ($act == 'repair') {
+                if ($M->query("REPAIR TABLE {$tables} "))
+                    echo json_encode(array("status" => 1, "info" => "修复表成功", 'url' => U('SysData/repair')));exit;
+            } elseif ($act == 'optimize') {
+                if ($M->query("OPTIMIZE TABLE $tables"))
+                    echo json_encode(array("status" => 1, "info" => "优化表成功", 'url' => U('SysData/repair')));exit;
+            }
+            echo json_encode(array("status" => 0, "info" => "请选择操作"));exit;
         } else {
-            header('Content-Disposition: attachment; filename="' . $file_name . date('Ymd') . '.xls"');
+            $tabs = $M->query('SHOW TABLE STATUS');
+            $totalsize = array('table' => 0, 'index' => 0, 'data' => 0, 'free' => 0);
+            $tables = array();
+            foreach ($tabs as $k => $table) {
+                $table['size'] = byteFormat($table['data_length'] + $table['index_length']);
+                $totalsize['table'] += $table['data_length'] + $table['index_length'];
+                $totalsize['data']+=$table['data_length'];
+                $table['data_length'] = byteFormat($table['data_length']);
+                $totalsize['index']+=$table['index_length'];
+                $table['index_length'] = byteFormat($table['index_length']);
+                $totalsize['free']+=$table['data_free'];
+                $table['data_free'] = byteFormat($table['data_free']);
+                $tables[] = $table;
+            }
+            $this->assign("list", $tables);
+            $this->assign("totalsize", $totalsize);
+            $this->display();
         }
-        header('Cache-Control: max-age=0');
-        $objWriter->save('php://output');
-        exit;
-
     }
 
 }

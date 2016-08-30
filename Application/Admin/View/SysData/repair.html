@@ -1,20 +1,31 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>数据库优化修复-数据管理-{$site.SITE_INFO.name}</title>
-        <php>
-            $addCss="";
-            $addJs="";
-            $currentNav='数据管理 > 数据库优化修复';
-        </php>
-        <include file="Common:intoHead" />
+        <meta charset="UTF-8" />
+        <title>权限管理-后台管理-ck RBAC权限管理</title>
+        <!--公共头文件-->
+        <include file="Public:head" />
     </head>
     <body>
         <div class="wrap">
-            <include file="Common:head" />
+            <!--顶部导航菜单-->
+	        <div id="Top">
+                <include file="Public:wrap_top" />
+	        </div>
+			<!--Tags标签-->
+            <div id="Tags">
+				<include file="Public:wrap_tags" />
+                    <div class="nav">
+                        <font id="today"></font>您的位置：数据管理 > 数据库优化修复
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
             <div class="mainBody">
-                <include file="Common:left" />
+                <!--子菜单列表-->
+	            <div id="Left">
+                    <include file="Public:main_left" />
+	            </div>
                 <div id="Right">
                     <div class="Item hr">
                         <span class="fr">数据库中共有{$list|count}张表，共计{$totalsize.table|byteFormat}</span>
@@ -39,16 +50,16 @@
                             <tbody>
                                 <volist name="list" id="tab">
                                     <tr align="center">
-                                        <td><input type="checkbox" name="table[]" value="{$tab.Name}"/></td>
-                                        <td align="left">{$tab.Name}</td>
-                                        <td>{$tab.Comment}</td>
-                                        <td>{$tab.Rows}</td>
-                                        <td>{$tab.Engine}</td>
-                                        <td>{$tab.Collation}</td>
-                                        <td>{$tab.Data_free}</td>
+                                        <td><input type="checkbox" class="checkbox" name="table[]" value="{$tab.name}"/></td>
+                                        <td align="left">{$tab.name}</td>
+                                        <td>{$tab.comment}</td>
+                                        <td>{$tab.rows}</td>
+                                        <td>{$tab.engine}</td>
+                                        <td>{$tab.collation}</td>
+                                        <td>{$tab.data_free}</td>
                                         <td>{$tab.size}</td>
-                                        <td>{$tab.Data_length}</td>
-                                        <td>{$tab.Index_length}</td>
+                                        <td>{$tab.data_length}</td>
+                                        <td>{$tab.index_length}</td>
                                     </tr>
                                 </volist>
                             </tbody>
@@ -77,17 +88,48 @@
             </div>
         </div>
         <div class="clear"></div>
-        <include file="Common:foot" />
+        <!--尾部js css-->
+	    <include file="Public:footer" />
         <script type="text/javascript">
             $(function(){
                 clickCheckbox();
+				
                 var handle=function(act){
                     if($("tbody input[type='checkbox']:checked").size()==0){
                         popup.alert("请先选择你要优化的数据库表吧");
                         return false;
                     }
-                    $("#act").val(act);
-                    commonAjaxSubmit();
+					var data = '';
+					$(".checkbox:checked").each(function(i,item){
+						if(i==0){
+							data = $(this).val();
+						}else{
+							data =data + "," + $(this).val();
+						}
+					});
+
+                    //$("#act").val(act);
+                    $.ajax({
+						type:"POST",
+						data:{"data":data,"act":act},
+						url:"__URL__/repair",
+						dataType:"json",
+						success:function(res){
+							if(res.status==1){
+								popup.alert(res.info);
+								setTimeout(function(){
+									popup.close("asyncbox_alert");
+									window.location.href = res.url;
+								},2000);
+							}else{
+								popup.alert(res.info);
+								setTimeout(function(){
+									popup.close("asyncbox_alert");
+									window.location.href = res.url;
+								},2000);
+							}
+						}
+					});
                 }
                 $(".optimize").click(function(){ handle("optimize"); });
                 $(".repair").click(function(){  handle("repair"); });
