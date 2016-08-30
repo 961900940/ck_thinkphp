@@ -353,9 +353,10 @@ class SysDataController extends CommonController {
      */
     public function unzip($file) {
         $zip = new ZipArchive();
+		$path = "./Database/" ;
         $ZipBackDir = './ZipBackDir/';
         if ($zip->open($ZipBackDir. $file) === TRUE){
-            $zip->extractTo($ZipBackDir);
+            $zip->extractTo($path);
             $zip->close();
             return TRUE;
         }
@@ -364,17 +365,17 @@ class SysDataController extends CommonController {
     }
 
     public function unzipSqlfile(){
+		$ZipBackDir = './ZipBackDir/';
         $datafile = explode(',',I('data'));
-        var_dump($datafile);exit;
-        $i = 0;
+
 		foreach ($datafile as $file) {
             if($this->unzip($file)){
-                var_dump('111111111');exit;
                 unlink($ZipBackDir.$file);
-                $i++;
             }
 		}
-        var_dump($i);exit;
+		$xdata['status'] = 'success';
+		$xdata['info'] = count($datafile).'个备份文件,解压缩成功';
+		echo json_encode($xdata);exit;
     }
 
 
