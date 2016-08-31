@@ -1,6 +1,54 @@
 ###csv导入、导出(ajax导入文件)
 注意:导出时，输出到浏览器直接给个URL;隐式保存到指定目录时，用ajax即可
 
+数据库sql:
+
+		-- ----------------------------
+		-- Table structure for ks_student
+		-- ----------------------------
+		DROP TABLE IF EXISTS `ks_student`;
+		CREATE TABLE `ks_student` (
+		  `id` int(11) NOT NULL AUTO_INCREMENT,
+		  `name` varchar(32) DEFAULT NULL,
+		  `sex` char(2) DEFAULT NULL,
+		  `age` tinyint(3) DEFAULT NULL,
+		  PRIMARY KEY (`id`)
+		) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+		
+		-- ----------------------------
+		-- Records of ks_student
+		-- ----------------------------
+		INSERT INTO `ks_student` VALUES ('1', '张三', '男', '20');
+		INSERT INTO `ks_student` VALUES ('2', '李四', '女', '21');
+		INSERT INTO `ks_student` VALUES ('3', '小王', '男', '18');
+		INSERT INTO `ks_student` VALUES ('4', '小李', '男', '20');
+		INSERT INTO `ks_student` VALUES ('5', '小红', '女', '21');
+		INSERT INTO `ks_student` VALUES ('6', '王朝', '男', '18');
+
+导出简单方式：
+
+		//1、title
+		$str = "姓名,性别,年龄\n";
+		$str = iconv('utf-8','gb2312',$str); 
+		//$str = mb_convert_encoding($str, "GBK", "UTF-8");
+		
+		//2、内容
+		$result = M("Student")->select();   
+		foreach($result as $key=>$value){
+			
+			$name = iconv('utf-8','gb2312',$value['name']); //中文转码
+			//$name = mb_convert_encoding($value['name'], "GBK", "UTF-8");				
+			$sex  = iconv('utf-8','gb2312',$value['sex']);
+			//$sex = mb_convert_encoding($value['sex'], "GBK", "UTF-8");	
+			$sex  = $value['age']; 
+			$str .= $name.",".$sex.",".$sex."\n"; 			//用引文逗号分开   
+		}   
+		
+		$filename = date('Y-m-d').'.csv'; 					//设置文件名   
+		file_put_contents($filename, $str);
+
+具体代码：
+
 		1、添加HTML代码		
 		<form id="uploadForm" action="__URL__/action?act=import" method="post" enctype="multipart/form-data"> 
 		    <input type="text" name="username" class="username"> <br/>

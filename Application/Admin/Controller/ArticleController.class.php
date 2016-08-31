@@ -161,6 +161,7 @@ class ArticleController extends CommonController {
 
     }
 
+	//excel导入
 	public function import_excel(){
 		header('Content-type:text/html;charset=utf-8');//php代码里面设置编码
 		//要导入的xls文件，位于根目录下的Public文件夹
