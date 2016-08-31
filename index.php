@@ -11,6 +11,6 @@ define('APP_DEBUG',true);
 define('APP_NAME','Application');
 // 定义应用目录
 define('APP_PATH','./Application/');
-define('DIR_SECURE_FILENAME', 'index.html');
+define('DIR_SECURE_FILENAME', 'index.html');	//目录安全文件
 // 引入ThinkPHP入口文件
 require './ThinkPHP/ThinkPHP.php';
