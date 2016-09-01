@@ -294,7 +294,15 @@
 	$excel_name = "话费月帐单(" . $startTime . '----' . $endTime . ")";
 	$this->download_excel($list,$excel_header,$excel_name);
 	
-	
+	11、xml转换成array
+	header("Content-type: text/html; charset=utf-8"); 
+	function xmlToarray($xml){
+		$obj  = simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA);
+		$json = json_encode($obj);
+		$arr  = json_decode($json, true);
+		return $arr;
+	}
+	var_dump(xmlToarray($xml));
 	
 	
     </pre>
