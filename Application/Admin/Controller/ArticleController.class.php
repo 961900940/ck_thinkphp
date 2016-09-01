@@ -216,7 +216,7 @@ class ArticleController extends CommonController {
 
     		$Article =  M('Content');
     		$res = $Article->save($data);
-    		if($res){
+    		if($res){			
     			$this->success('修改成功,即将跳转...', U('Article/index'),3);
     		}else{
     			$this->error('修改失败，请重试...');
