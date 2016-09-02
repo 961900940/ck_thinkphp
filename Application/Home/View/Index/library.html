@@ -304,7 +304,31 @@
 	}
 	var_dump(xmlToarray($xml));
 	
-	
+	12、验证字符串是否为6-16位数字字母下划线组成的
+		/**
+		 * 验证字符串是否为6-16位数字字母下划线组成的
+		 * @param string $str 要验证的字符串
+		 * @return bool 成功返回true 失败返回false
+		 */
+		function is_char_num($str=''){
+			$res = preg_match('/^[_0-9a-z]{6,16}$/i',$str);
+			if(!$res){
+				return false;
+			}
+			return true;
+		}
+	13、验证邮件
+		/**
+		 * @param $email 验证邮件
+		 * @return bool 成功返回true
+		 */
+		function is_email($email){
+			$pattern = "/^([0-9A-Za-z\\-_\\.]+)@([0-9a-z]+\\.[a-z]{2,3}(\\.[a-z]{2})?)$/i";
+			if (!preg_match( $pattern, $email ) ) {
+			   return false;
+			}
+			return true;
+		}
     </pre>
 </body>
 </html>
