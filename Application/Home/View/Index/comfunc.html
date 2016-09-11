@@ -76,13 +76,17 @@ number_format(3.0145,2);//3.01
 sprintf("%.2f", 3.0145); //3.01
     </pre>
 
-    5、...
+    5、文件处理
     <pre>
 file_exists(path)   //file_exists() 函数检查文件或目录是否存在。返回true | false
     </pre>
 
     6、其他
     <pre>
+func_num_args() 这个函数返回的是当前函数的参数数量 返回的是数字
+func_get_arg()函数返回的是指定位置的参数的值
+func_get_args() — 返回一个包含函数参数列表的数组
+
 get_defined_constants([true]);//获得当前系统给我们提供的常量（系统和自定义的）【true参数会把常量进行自动分组显示】
 
 ENT_COMPAT - 默认。仅解码双引号。| ENT_QUOTES - 解码双引号和单引号。 | ENT_NOQUOTES - 不解码任何引号。
