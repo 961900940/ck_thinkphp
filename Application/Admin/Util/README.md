@@ -1,5 +1,5 @@
-###分页类的使用1: 	     12 条记录 1/6 页 1 2 3 4 5 下一页 尾页
-		1、控制器添加方法：ck_thinkphp\Application\Admin\Util\Page.class - 副本.php
+###分页类的使用1: 	     12 条记录 2/6 页 上一页 12345 下一页 下5页 尾页
+		1、控制器添加方法：ck_thinkphp\Application\Admin\Util\Page.class.php
 		// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
 		$pagenum = 3;
 		$page = $_GET['p'] ? $_GET['p'] : 1;
@@ -31,23 +31,35 @@
 		<div class="pagination">{$page}</div> //基本样式
 		<div class="pagination pagination-large">{$page}</div>//大号数字样式
 
-###分页类的使用2:		首页 前一页 上5页 1 2 3 4 5 后一页 下5页 尾页
+###分页类的使用2: 	首页 上一页 123456 下一页 末页 共 12 条记录
+		1、控制器添加方法：ck_thinkphp\Application\Admin\Util\Page5.class.php
+		
+		2、页面引用
+		<load href="__STATIC__/bootstrap/css/bootstrap.min.css"/>
+		<div class="pagination" style="width:100%">{$page}</div>
+
+
+###分页类的使用3:		首页 前一页 上5页 1 2 3 4 5 后一页 下5页 尾页
 		1、控制器添加方法：ck_thinkphp\Application\Admin\Util\Page4.class.php
 		2、页面引用
 		<load href="__PUBLIC__/static/bootstrap/css/bootstrap.css"/>
 		<div class="row" id="page">{$page}</div>
 
-###分页类的使用3: 	< 12 条记录 1/6 页 下一页  12345 >> 末页>
+###分页类的使用4: 	< 12 条记录 1/6 页 下一页  12345 >> 末页>
 		注意：修改相应样式，只需取 page.css 里面的class即可
 		1、控制器添加方法：ck_thinkphp\Application\Admin\Util\Page3.class.php
 		2、页面引用
 		<load href="__Admin_CSS__/page.css" / >
         <div class="manu"><{$page}><div/>
 
-###分页类的使用4: 	<< 1 2 3 4
+###分页类的使用5: 	<< 1 2 3 4
 		1、控制器添加方法：ck_thinkphp\Application\Admin\Util\Page2.class.php
 		
 		2、页面引用
 		<load href="__STATIC__/bootstrap/css/bootstrap.min.css"/>
 		<div class="pagination" style="width:100%">{$page}</div>
+
+
+
+
 		

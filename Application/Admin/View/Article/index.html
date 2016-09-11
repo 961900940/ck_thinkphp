@@ -180,7 +180,7 @@
 						}
 					});
 				});
-				
+
 				//快捷输入页面显示个数
 				$("#pagenum").keydown(function(e){
 					if(e.keyCode==13){
@@ -190,12 +190,12 @@
 						location.href = url + "?pagenum="+search;
 					}
 				});
-				
+
             });
-						
+
         </script>
 		<script>
-		
+
 			//每页显示多少条数据
 			function changePagesNum(_this){
 				var pagenum = $(_this).val();
@@ -204,24 +204,24 @@
 				window.location.href = url+"?pagenum="+pagenum;
 
 			}
-			
+
 			//同步显示输入显示的个数
 			function synchronization(_this){
 				var pwd = $(_this).val();
 				$('#page_num').html("快捷输入页面显示个数:"+pwd);
 			}
-			
-			
+
+
 			//针对 选择内容下拉框 选中之后 ,点击其他地方不隐藏的问题解决
 			$(document).click(function(e){
 				$(document).find('.dropdown-menu').each(function(){
 					if(e.target != this && !$.contains(this, e.target) && e.target!=$(this).prev().get(0)){
-						$(this).hide();	
+						$(this).hide();
 					};
 				});
 			});
-			
-			
+
+
 			//选中已经被选中的显示项
 			var checkedArr = [];
 			window.onload = function(){
@@ -236,7 +236,7 @@
 					}
 				}
 			}
-			
+
 			//是否显示内容
 			function changeCheckMenu(_this){
 				$('#checkMenu').show();
@@ -251,11 +251,11 @@
 				}
 				localStorage.checkedArr = checkedArr.join(",");
 			}
-			
-			
-			
+
+
+
 			//添加cookie
-			function addCookie(objName, objValue, objHours) {  
+			function addCookie(objName, objValue, objHours) {
 				//添加cookie
 				var str = objName + "=" + encodeURIComponent(objValue);
 				if (objHours > 0) {                               //为时不设定过期时间，浏览器关闭时cookie自动消失
