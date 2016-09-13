@@ -6,7 +6,14 @@
 </head>
 <body>
     预定义常量、系统常量、路径常量
-    <pre style='color:#000000;background:#f1f0f0;'>
+    <xmp style='color:#000000;background:#f1f0f0;'>
+    U() 制作url地址的快捷函数    echo U("控制器/操作方法");
+    C(名称) 获得配置变量(convertion.php  config.php)信息
+    C(名称，值)  设置配置变量信息
+
+    L()  获得语言变量信息
+    E()  给页面输出错误信息
+    
     THINK_VERSION 框架版本号  
 
     __ROOT__ 网站根目录地址
@@ -40,6 +47,6 @@
     TEMP_PATH 应用缓存目录（默认为 RUNTIME_PATH.'Temp/'）
     DATA_PATH 应用数据目录 （默认为 RUNTIME_PATH.'Data/'）
     ADDON_PATH 插件控制器目录 （默认为 APP_PATH.'Addon'） 3.2.3新增
-    </pre>
+    </xmp>
 </body>
 </html>

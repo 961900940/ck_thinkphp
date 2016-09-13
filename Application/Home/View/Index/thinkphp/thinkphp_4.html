@@ -34,8 +34,11 @@
              R("User/number")   ====   $user =A("User"); echo $user ->number()
         new UserController();                  直接实例化制定的控制器
 
-        A('Admin://User')  //表示实例化Admin项目的User模块
-        A('Admin/User')     //表示实例化Admin分组的User模块
+
+        【跨模块调度】
+        $User = A('User');     //表示实例化当前项目的User模块 
+        A('Admin://User')       //表示实例化Admin项目的User模块
+        A('Admin/User')         //表示实例化Admin分组的User模块
         A(‘Admin://Tool/User’) 	//表示实例化Admin项目Tool分组的User模块
 
         R('User/info')	//表示实例化当前项目的User模块的info操作方法
