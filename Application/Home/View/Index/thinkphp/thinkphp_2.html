@@ -25,8 +25,8 @@
     2、thinkphp配置文件：
     项目目录\应用目录\模块\Conf\config.php、
     项目目录\应用目录\Common公共目录\Conf\config.php
-    </xmp>
-    <pre style=''>
+    
+
     /* 模块分组 */
     'MODULE_ALLOW_LIST'     =>  array('Home','Admin'), // 允许访问的模块列表
     'DEFAULT_MODULE'        =>  'Home', // 默认模块
@@ -65,7 +65,7 @@
     /* 日志设置 */
 	'LOG_RECORD' => true,		// 开启日志记录
     'LOG_LEVEL'  =>'INFO,EMERG,ALERT,CRIT,ERR', // 只记录EMERG ALERT CRIT ERR 错误
-    </pre>
+
     <xmp>
     3、自定义函数库文件：
     项目目录\应用目录\模块\Common\function.php
@@ -89,6 +89,33 @@
     'DB_PWD'    => 'SAE_MYSQL_PASS', // 密码
     'DB_PORT'   => 'SAE_MYSQL_PORT' , // 端口
     'DB_PREFIX' => 'tb_', // 数据库表前缀
+
+    </xmp>
+
+
+    <xmp>
+    6、也可在入口文件中定义css、img、js常量
+    // 应用入口文件 
+    header("content-type:text/html;charset=utf-8");
+
+    //定义前台css、img、js常量
+        define("SITE_URL","http://localhost");
+        define("CSS_URL",SITE_URL."/TP3.2/TXL/Public/Home/css/");     //css
+        define("IMG_URL",SITE_URL."/TP3.2/TXL/Public/Home/images/");    //images
+        define("JS_URL",SITE_URL."/TP3.2/TXL/Public/Home/js/");      //js
+    //定义后台css、img、js常量
+        define("ADMIN_CSS_URL",SITE_URL."/TP3.2/TXL/Public/Admin/css/");     //css
+        define("ADMIN_IMG_URL",SITE_URL."/TP3.2/TXL/Public/Admin/images/");    //images
+        define("ADMIN_JS_URL",SITE_URL."/TP3.2/TXL/Public/Admin/js/");      //js
+      
+    // 开启调试模式 建议开发阶段开启 部署阶段注释或者设为false
+    define('APP_DEBUG',True);
+
+    // 定义应用目录
+    //define('APP_PATH','./Application/');
+
+    // 引入ThinkPHP入口文件
+    require './ThinkPHP/ThinkPHP.php';
 
     </xmp>
 </body>
