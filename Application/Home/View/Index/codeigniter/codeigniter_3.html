@@ -22,21 +22,31 @@
             $this->db->select('*'); */
             $res2=$this-> db->get( 'action');       //action为onethink_action表名
             var_dump($res2->result());
-      多数据库操作：(切换数据库)
-            $db2 = $this->load->database('default', TRUE);
-            $res3 = $db2->query( 'select * from onethink_action where id=2');
-            var_dump($res3->result());
       查询绑定(防注入)：
             $sql = "SELECT * FROM some_table WHERE id = ? AND status = ? AND author = ?";
             $this->db->query($sql, array(3, 'live', 'Rick'));
-
+	  多数据库操作：(切换数据库)
+            $db2 = $this->load->database('default', TRUE);
+            $res3 = $db2->query( 'select * from onethink_action where id=2');
+            var_dump($res3->result());
+      sprintf占位符的使用
+			$id = $this->input->get_post('id') ? trim($this->input->get_post('id')) : '';
+			$sql = sprintf('select * from onethink_action where id = %d', $id);
+			$info = $this->db->query($sql);
+			$info = $info->row_array();
+			
+			$title = $this->input->get_post('title') ? trim($this->input->get_post('title')) : '';
+			$title=mysql_real_escape_string($title);
+			$sql = sprintf('update onethink_action set title=\'%s\' where id=%d',$title,$id);
+			$result = $this->db->query($sql);
+	  
        如果你的查询可能不返回结果，我们建议你先使用 num_rows()函数
            单结果标准查询（对象形式）, row()函数返回一个 对象
                                   （数组形式）， row_array()函数返回一个 数组
            快速插入： echo $this->db->affected_rows();
     </xmp>
     2、数据库快捷操作语句
-    <pre style='color:#55cc66;background:#001800;'>
+    <pre>
     查询辅助函数
     关于执行查询的信息:
     $this->db->last_query();          //最后执行的sql语句
@@ -54,7 +64,7 @@
     </xmp>
 
     4、调用其他model的方法操作数据，得到数据源
-    <pre style='color:#55cc66;background:#001800;'>
+    <pre>
     $this->load->model('article_model');
     $result = $this->article_model->getAllArticle(参数);
     </pre>
