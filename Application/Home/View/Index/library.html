@@ -318,17 +318,43 @@
 			return true;
 		}
 	13、验证邮件
-		/**
-		 * @param $email 验证邮件
-		 * @return bool 成功返回true
-		 */
-		function is_email($email){
-			$pattern = "/^([0-9A-Za-z\\-_\\.]+)@([0-9a-z]+\\.[a-z]{2,3}(\\.[a-z]{2})?)$/i";
-			if (!preg_match( $pattern, $email ) ) {
-			   return false;
+		if (!function_exists('CheckPhone')) {
+			/**
+			 * @param String $email 验证邮件
+			 * @return String bool 成功返回true
+			 */
+			function is_email($email){
+				$pattern = "/^([0-9A-Za-z\\-_\\.]+)@([0-9a-z]+\\.[a-z]{2,3}(\\.[a-z]{2})?)$/i";
+				if(!$email){
+					return false;
+				}
+				if (!preg_match( $pattern, $email ) ) {
+				   return false;
+				}
+				return true;
 			}
-			return true;
 		}
+		
+	14、验证手机号码
+		if (!function_exists('CheckPhone')) {
+			/**
+			 * 校验手机号码
+			 * @param String $num  待验证的号码
+			 * @param String true/false
+			 */
+			function CheckPhone($num) {
+				$pattern = "/^1[34578]\d{9}$/";
+				if (!$num)
+					return false;
+				if (!preg_match($pattern, $num)) {
+					return false;
+				}
+				return true;
+			}
+		}
+		var_dump( CheckPhone('11'));exit;
+		
+		
     </pre>
 </body>
 </html>
