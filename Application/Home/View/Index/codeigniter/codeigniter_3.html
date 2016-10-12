@@ -10,41 +10,76 @@
     <pre style='color:#d1d1d1;background:#000000;'></pre>
     <pre style='color:#000020;background:#f6f8ff;'></pre>
     <pre style='color:#000000;background:#f1f0f0;'></pre>
-    1、数据库操作
-    <xmp>
+    1、数据库操作	http://codeigniter.org.cn/user_guide/database/examples.html
+    <pre>
     $this->load->database();
-      原生sql:
-            $query = $this->db->query('select * from onethink_action');
-            $res = $query-> result_array();         // 返回一个带下标的数组
-            结果：二维数组   $query->result();       //返回一个对象的数组
-      框架执行:
-            /* $this->db->where('id',1);
-            $this->db->select('*'); */
-            $res2=$this-> db->get( 'action');       //action为onethink_action表名
-            var_dump($res2->result());
-      查询绑定(防注入)：
-            $sql = "SELECT * FROM some_table WHERE id = ? AND status = ? AND author = ?";
-            $this->db->query($sql, array(3, 'live', 'Rick'));
-	  多数据库操作：(切换数据库)
-            $db2 = $this->load->database('default', TRUE);
-            $res3 = $db2->query( 'select * from onethink_action where id=2');
-            var_dump($res3->result());
-      sprintf占位符的使用
-			$id = $this->input->get_post('id') ? trim($this->input->get_post('id')) : '';
-			$sql = sprintf('select * from onethink_action where id = %d', $id);
-			$info = $this->db->query($sql);
-			$info = $info->row_array();
+    原生sql:
+	$query = $this->db->query('select * from onethink_action');
+	$res = $query->result();				//返回一个多结果标准查询（对象形式）
+	
+	$query = $this->db->query('select * from onethink_action');
+	$res = $query-> result_array();         //返回一个多结果标准查询（数组形式）
+
+	$query = $this->db->query('select * from onethink_action LIMIT 1');
+	$row = $query->row();					//返回一个单结果标准查询（对象形式）
+	echo $row->name;
+
+	$query = $this->db->query('select * from onethink_action LIMIT 1');
+	$row = $query->row_array();				//返回一个单结果标准查询（数组形式）
+	echo $row->name;
+	
+	
+	$sql = "INSERT INTO onethink_action (title, name) VALUES (".$this->db->escape($title).", ".$this->db->escape($name).")";
+	$this->db->query($sql);					//标准插入
+	echo $this->db->affected_rows();
+    框架执行:
+	//查找数据
+	$this->db->where('id',1);
+	$this->db->select('*');		
+	
+	$query=$this-> db->get( 'action');       //action为onethink_action表名
+	$res = $query->result();
+	
+	//插入数据
+	$data = array(
+		'title' => $title,
+		'name' => $name,
+		'date' => $date
+	);
+	$this->db->insert('mytable', $data);
+	
+	//更新数据
+	$this->db->where(uid,$id); //uid 数据库中自增id ，$id 控制器中传入id
+	$this->db->update(t_name,$arr);//表名字 传入数组
+	
+	//删除数据
+	$this->db->where(uid,$id);
+	$this->db->delete(t_name);
+    查询绑定(防注入)：
+	$sql = "SELECT * FROM some_table WHERE id = ? AND status = ? AND author = ?";
+	$this->db->query($sql, array(3, 'live', 'Rick'));
 			
-			$title = $this->input->get_post('title') ? trim($this->input->get_post('title')) : '';
-			$title=mysql_real_escape_string($title);
-			$sql = sprintf('update onethink_action set title=\'%s\' where id=%d',$title,$id);
-			$result = $this->db->query($sql);
+	多数据库操作：(切换数据库)
+	$db2 = $this->load->database('default', TRUE);
+	$res3 = $db2->query( 'select * from onethink_action where id=2');
+	var_dump($res3->result());
+			
+    sprintf占位符的使用
+	$id = $this->input->get_post('id') ? trim($this->input->get_post('id')) : '';
+	$sql = sprintf('select * from onethink_action where id = %d', $id);
+	$info = $this->db->query($sql);
+	$info = $info->row_array();
+	
+	$title = $this->input->get_post('title') ? trim($this->input->get_post('title')) : '';
+	$title=mysql_real_escape_string($title);
+	$sql = sprintf('update onethink_action set title=\'%s\' where id=%d',$title,$id);
+	$result = $this->db->query($sql);
 	  
-       如果你的查询可能不返回结果，我们建议你先使用 num_rows()函数
-           单结果标准查询（对象形式）, row()函数返回一个 对象
-                                  （数组形式）， row_array()函数返回一个 数组
-           快速插入： echo $this->db->affected_rows();
-    </xmp>
+    如果你的查询可能不返回结果，我们建议你先使用 num_rows()函数
+    单结果标准查询（对象形式）, row()函数返回一个 对象
+						  （数组形式）， row_array()函数返回一个 数组
+    快速插入： echo $this->db->affected_rows();
+    </pre>
     2、数据库快捷操作语句
     <pre>
     查询辅助函数
