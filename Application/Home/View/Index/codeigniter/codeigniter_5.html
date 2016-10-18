@@ -6,13 +6,22 @@
 </head>
 <body>
     几个定义的常量（PATH结尾的常量表示目录路径，DIR结尾的变量表示目录名）：
-    <pre>
+    <xmp>
     APPPATH（应用程序路径）               F:\software\wamp\www\CodeIgniter-3.0.6\application\
     SYSDIR（系统system目录名）         system
     FCPATH（前端控制器的路径）         F:\software\wamp\www\CodeIgniter-3.0.6\
     BASEPATH（system文件夹的路径）F:\software\wamp\www\CodeIgniter-3.0.6\system\
     SELF（这里指index.php文件）           index.php
     查看所有定义的常量的方法：            Print_r(get_defined_constants());
-</pre>
+	
+	
+	
+	
+	入口文件index.php定义: define('ROOTPATH',  dirname('http://'.$_SERVER['SERVER_NAME'].$_SERVER["SCRIPT_NAME"]));
+	view加载js、css文件  : <link rel="stylesheet" href="<?PHP echo ROOTPATH; ?>/application/static/css/styles.css"/>
+	<script src="<?PHP echo ROOTPATH;?>/application/static/js/menu.js" type="text/javascript"></script>
+	
+	
+	</xmp>
 </body>
 </html>
