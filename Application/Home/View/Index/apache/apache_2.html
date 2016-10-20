@@ -5,6 +5,46 @@
 	<title>Document</title>
 </head>
 <body>
-	1111111111111
+	<xmp>
+	原网址：http://www.imooc.com/video/8361 
+	1、开启Apache的mod_rewrite功能模块
+	2、引入http-vhosts.conf文件
+	3、添加VirtualHost配置
+
+
+	a:wamp/bin/apache/apache2.4.9/conf/httpd.conf
+		开启LoadModule rewrite_module modules/mod_rewrite.so
+		开启Include conf/extra/httpd-vhosts.conf【引入vhosts.conf配置】
+	b:wamp/bin/apache/apache2.4.9/conf/extra/httpd-vhosts.conf
+		NameVirtualHost *:80
+		<VirtualHost *:80>
+			ServerAdmin phpexcel@php.com
+			DocumentRoot "D:/wamp/www/coder1234"
+			ServerName www.phpexcel.com
+		</VirtualHost>
+
+		<VirtualHost *:80>
+			ServerAdmin webmaster@dummy-host2.example.com
+			DocumentRoot "c:/Apache24/docs/dummy-host2.example.com"
+			ServerName dummy-host2.example.com
+			ErrorLog "logs/dummy-host2.example.com-error.log"
+			CustomLog "logs/dummy-host2.example.com-access.log" common
+		</VirtualHost>
+
+	c:为指定的工作目录开启访问权限 
+		<Directory "D:/wamp/www/coder1234">
+			Options FollowSymLinks
+			AllowOverride none
+			Order deny,allow
+			Allow from all 
+		</Directory>
+		加到b末尾
+
+	d：修改hosts文件
+		C:/Window/System32/drivers/etc/hosts
+		把虚拟域名制定到本地IP下
+		127.0.0.1 www.phpexcel.com 
+
+	</xmp>
 </body>
 </html>
