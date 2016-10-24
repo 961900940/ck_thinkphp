@@ -109,6 +109,12 @@
         3、
         $model = M("onethink_user",null,"ot");
         $info  = $model->field('name,age')->where($map)->find();
+		
+		注意:跨库操作打印最后执行的sql方法：
+		$onethink_model = M('','','onethink');
+		$rs = $onethink_model->execute("update onethink_acyion set name = '123' where id= '1'");
+		var_dump($rs);
+		var_dump($onethink_model->getLastSql());
 
     4、跨库操作数据时,在当前控制器下调用新建model(model名为不存在的表名),
     <xmp>
