@@ -112,9 +112,19 @@
 		
 		注意:跨库操作打印最后执行的sql方法：
 		$onethink_model = M('','','onethink');
-		$rs = $onethink_model->execute("update onethink_acyion set name = '123' where id= '1'");
-		var_dump($rs);
-		var_dump($onethink_model->getLastSql());
+		$rs = $onethink_model->execute("update onethink_action set name = '123' where id= '1'");
+		var_dump($rs);								//返回 1
+		var_dump($onethink_model->getLastSql());	//返回 update onethink_action set linkman = '123' where Uid = 'XXXX'
+		
+		$m1 = M("onethink.Action","onethink_");		//onthink库  onethink_action表
+		$rs1 = $m1->where("uid = 'XXXX'")->save(array("linkman"=>'1111'));
+		var_dump($rs1);					// 返回 1
+		var_dump($m1->getLastSql());	// 返回 UPDATE onthink.onethink_action SET `linkman`='1111' WHERE ( uid = 'XXXX' )
+		
+		$m1 = M("onethink_action",null,"onethink");
+		$rs1 = $m1->where("Uid = 'XXXX'")->save(array("linkman"=>'222'));
+		var_dump($rs1);								// 返回 1
+		var_dump($m1->getLastSql());exit;			// 返回 null，执行成功，但是不能打印最后执行的sql语句
 
     4、跨库操作数据时,在当前控制器下调用新建model(model名为不存在的表名),
     <xmp>
