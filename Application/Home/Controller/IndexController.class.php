@@ -35,7 +35,6 @@ class IndexController extends Controller {
 		$this->display("Index/shortcut_key/shortcut_key_1");
 	}
 
-	
 	/**自定义函数库******************************************************************/
 	public function library(){
 		$this->display();
