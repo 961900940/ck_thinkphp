@@ -21,31 +21,31 @@
     mysql_set_charset($link,'UTF8');
 
     //根据条件 (id) 查询
-    $sql = 'select * from `'.$this->_table.'` where `id` = \''.mysql_real_escape_string($id).'\''; 
-    $res = mysql->query($sql); 
+    $sql = 'select * from `'.$this->_table.'` where `id` = \''.mysql_real_escape_string($id).'\'';
+    $res = mysql->query($sql);
     //根据条件 (id) 删除
-    $ssql2 = 'delete from `'.$this->_table.'` where `id` = \''.mysql_real_escape_string($id).'\''; 
-    $res2 = mysql->query($sql2); 
+    $ssql2 = 'delete from `'.$this->_table.'` where `id` = \''.mysql_real_escape_string($id).'\'';
+    $res2 = mysql->query($sql2);
 
 
     //4.释放结果集
-    mysqli_free_result($result);
+    mysql_free_result($result);
     //5.关闭连接
-    mysqli_close($link);
+    mysql_close($link);
     ============================================================================
     //执行SQL查询
     $sql="SELECT id,username,password,age FROM user";
-    $result=mysqli_query($link,$sql);
-    if($result && mysqli_num_rows($result)>0){
-    	while($row=mysqli_fetch_array($result, MYSQLI_ASSOC)){
-    		//print_r($row);
-    		$rows[]=$row;
-    	}
+    $result=mysql_query($link,$sql);
+    if($result && mysql_num_rows($result)>0){
+        while($row=mysql_fetch_array($result, MYSQLI_ASSOC)){
+            //print_r($row);
+            $rows[]=$row;
+        }
     }
     //print_r($rows);
     //释放结果集
-    mysqli_free_result($result);
-    mysqli_close($link);
+    mysql_free_result($result);
+    mysql_close($link);
 </pre>
 </body>
 </html>

@@ -126,11 +126,7 @@
 		var_dump($rs1);								// 返回 1
 		var_dump($m1->getLastSql());exit;			// 返回 null，执行成功，但是不能打印最后执行的sql语句
 
-    4、跨库操作数据时,在当前控制器下调用新建model(model名为不存在的表名),
-    <xmp>
-        config 添加 数据库配置
-        'onethink' => 'mysql://root:1234@localhost:3306/thinkphp#utf8';       //数据库配置2
-    </xmp>
+    4、跨库操作数据时,在当前控制器下调用新建model(model名为不存在的表名)
     <pre style='color:#000000;background:#f1f0f0;'>
         model:
         class PhonesetModel extends Model{
