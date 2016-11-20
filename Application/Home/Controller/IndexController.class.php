@@ -4,8 +4,51 @@ use Think\Controller;
 class IndexController extends Controller {
 	/**首页**/
     public function index(){
+
+		// menu菜单
+
+		$Article_Category = D("ArticleCategory")->article_category_list();
+
+		//菜单下面子菜单
+		$Article_datalist = D("Content")->article_datalist();
+
+
+
+		foreach ($Article_Category as $key => $value) {
+			foreach ($Article_datalist as $k => $v) {
+				if($value['cid'] == $v['cid']){
+					$Article_Category[$key]['data'][] = $v;
+				}
+			}
+		}
+
+		$this->assign('content',$Article_Category);
 		$this->display();
     }
+
+	//详情页
+	public function detail(){
+		$id = I('id','','trim');
+		if ($id == 'Overview') {			//默认页
+			$this->versioninfo();die;
+		} else if(is_numeric($id)) {		//数字内容页
+			$id = (int)$id;
+			if($id >0 && $id <=100){
+
+			}else{							//超出范围
+				echo '暂无数据。。。';die;
+			}
+		}else{								//非法输入
+			echo '非法输入';die;
+		}
+
+		//内容详情
+		$content = D("Content")->article_detail($id);
+
+		$this->assign('id',$id);
+		$this->assign('content',$content);
+		$this->display();
+	}
 
     /**默认显示页面**/
 	public function versioninfo(){
@@ -27,7 +70,7 @@ class IndexController extends Controller {
 			echo 'MySQL版本:'.$system_info[0]['v']."<br>";
 		}
 		echo "<br>"."本地测试采用wamp集成环境：php(5.5.12) + apache(2.4.9) + mysql(5.6.17)"."<br>";
-		$this->display();
+		$this->display('Index/versioninfo');
 	}
 
 	/***快捷键**************************************************************/
@@ -155,7 +198,10 @@ class IndexController extends Controller {
 	/**
 	*空操作单独处理
 	*/
+	// public function _empty(){
+    //     return $this->error('亲，您访问的页面不存在 :(');
+    // }
 	public function _empty(){
-        return $this->error('亲，您访问的页面不存在 :(');
+        $this->versioninfo();die;
     }
 }
