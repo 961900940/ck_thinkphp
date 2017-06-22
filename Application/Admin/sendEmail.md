@@ -73,7 +73,7 @@
 		}
 
 
-####qq邮箱发送：本人qq、个人qq、企业qq、126、163均可
+ ####qq邮箱发送：本人qq、个人qq、企业qq、126、163均可
 		第二种引用方式：
 		1、下载 PHPMailer ，
 			把 class.phpmailer.php 文件放在 ck_thinkphp\ThinkPHP\Library\Org\Util\class.phpmailer.php
